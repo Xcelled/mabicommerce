@@ -1,0 +1,105 @@
+﻿<Window x:Class="WaypointViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:waypointViewer="clr-namespace:WaypointViewer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignInstance Type=waypointViewer:Region, IsDesignTimeCreatable=False}">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+				<Grid>
+					<Grid.LayoutTransform>
+						<TransformGroup>
+							<ScaleTransform ScaleX="{ Binding ElementName=Zoom, Path=Text, Converter={waypointViewer:StringPercentToDoubleConverter}}"
+											ScaleY="{ Binding ElementName=Zoom, Path=Text, Converter={waypointViewer:StringPercentToDoubleConverter}}"
+											CenterX="0" CenterY="0"/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>						
+					</Grid.LayoutTransform>
+					<Image x:Name="MapImg" Source="{Binding Image}" />
+					<ItemsControl ItemsSource="{Binding Waypoints}">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<Canvas Background="Transparent" Width="{Binding ElementName=MapImg, Path=Width}"
+										Height="{Binding ElementName=MapImg, Path=Height}" RenderTransformOrigin="0.5,0.5">
+									<Canvas.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleY="-1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Canvas.RenderTransform>
+								</Canvas>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Path Data="{Binding Converter={waypointViewer:WaypointToGeometryConverter}}" Fill="Blue" />
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+						<ItemsControl.Style>
+							<Style>
+								<Setter Property="Canvas.Top" Value="0" />
+								<Setter Property="Canvas.Left" Value="0" />
+							</Style>
+						</ItemsControl.Style>
+					</ItemsControl>
+					<ItemsControl ItemsSource="{Binding Connections}">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<Canvas Background="Transparent" Width="{Binding ElementName=MapImg, Path=Width}"
+										Height="{Binding ElementName=MapImg, Path=Height}" RenderTransformOrigin="0.5,0.5">
+									<Canvas.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleY="-1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Canvas.RenderTransform>
+								</Canvas>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Path Data="{Binding Converter={waypointViewer:ConnectionToGeometryConverter}}"  Stroke="Blue" StrokeThickness="2" />
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+						<ItemsControl.Style>
+							<Style>
+								<Setter Property="Canvas.Top" Value="0" />
+								<Setter Property="Canvas.Left" Value="0" />
+							</Style>
+						</ItemsControl.Style>
+					</ItemsControl>
+				</Grid>
+			</ScrollViewer>
+			<DockPanel Grid.Row="1" LastChildFill="False">
+				<Slider Maximum="100" DockPanel.Dock="Right" MinWidth="70" Value="{Binding ElementName=Zoom, Path=Text, Mode=TwoWay}"/>
+				<TextBox DockPanel.Dock="Right" MinWidth="30" x:Name="Zoom" Text="100" />
+				<Label DockPanel.Dock="Right">Zoom Percent:</Label>
+			</DockPanel>
+		</Grid>
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<ListView ItemsSource="{Binding Waypoints}" />
+			<ListView Grid.Row="1" ItemsSource="{Binding Connections}" />
+		</Grid>
+	</Grid>
+</Window>

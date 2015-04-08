@@ -1,0 +1,83 @@
+﻿<Window x:Class="MabiCommerce.UI.MiniMapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="clr-namespace:MabiCommerce.UI"
+        mc:Ignorable="d"
+        Title="MiniMap" Height="433" Width="700" d:DataContext="{d:DesignInstance ui:MiniMapWindow, IsDesignTimeCreatable=False}">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<Grid x:Name="Map">
+				<Grid.LayoutTransform>
+					<TransformGroup>
+						<ScaleTransform ScaleX="{Binding ElementName=Zoom, Path=Value}" ScaleY="{Binding ElementName=Zoom, Path=Value}" CenterX="0" CenterY="0"/>
+					</TransformGroup>
+				</Grid.LayoutTransform>
+
+				<Image x:Name="MapImg" Source="{Binding Region.MiniMap, Converter={ui:RelativeToAbsolutePathConverter}}" Stretch="None" />
+				<ItemsControl ItemsSource="{Binding Connections}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Canvas />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Line Stroke="{Binding ElementName=StrokeColor, Path=Text}" StrokeThickness="2">
+								<Line.X1>
+									<MultiBinding Converter="{ui:TranslateAndScaleWidthConverter}">
+										<Binding Path="Source.Location.X" />
+										<Binding Path="Source.Region.MiniMapOffset.X" />
+										<Binding ElementName="MapImg" Path="Source.Width" />
+										<Binding Path="Source.Region.Size.Width" />
+									</MultiBinding>
+								</Line.X1>
+								<Line.Y1>
+									<MultiBinding Converter="{ui:TranslateAndScaleHeightConverter}">
+										<Binding Path="Source.Location.Y" />
+										<Binding Path="Source.Region.MiniMapOffset.Y" />
+										<Binding ElementName="MapImg" Path="Source.Height" />
+										<Binding Path="Source.Region.Size.Height" />
+									</MultiBinding>
+								</Line.Y1>
+								<Line.X2>
+									<MultiBinding Converter="{ui:TranslateAndScaleWidthConverter}">
+										<Binding Path="Target.Location.X" />
+										<Binding Path="Target.Region.MiniMapOffset.X" />
+										<Binding ElementName="MapImg" Path="Source.Width" />
+										<Binding Path="Target.Region.Size.Width" />
+									</MultiBinding>
+								</Line.X2>
+								<Line.Y2>
+									<MultiBinding Converter="{ui:TranslateAndScaleHeightConverter}">
+										<Binding Path="Target.Location.Y" />
+										<Binding Path="Target.Region.MiniMapOffset.Y" />
+										<Binding ElementName="MapImg" Path="Source.Height" />
+										<Binding Path="Target.Region.Size.Height" />
+									</MultiBinding>
+								</Line.Y2>
+							</Line>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</Grid>
+		</ScrollViewer>
+		<DockPanel Grid.Row="1" LastChildFill="False">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock VerticalAlignment="Center">Color:</TextBlock>
+				<TextBox Name="StrokeColor" Text="#0000FF" VerticalAlignment="Top" Margin="3,0" />
+				<Border Background="{Binding ElementName=StrokeColor, Path=Text}" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" />
+			</StackPanel>
+			<StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+				<TextBlock VerticalAlignment="Center">Zoom Percent:</TextBlock>
+				<TextBox Text="{Binding ElementName=Zoom, Path=Value, Mode=TwoWay, Converter={ui:PercentToStringConverter}, UpdateSourceTrigger=PropertyChanged}" Margin="3,0" Width="30" />
+				<Slider Name="Zoom" Maximum="2" Minimum=".25" Value=".5" MinWidth="100" />
+			</StackPanel>
+		</DockPanel>
+	</Grid>
+</Window>

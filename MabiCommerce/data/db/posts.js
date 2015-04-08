@@ -1,0 +1,570 @@
+[
+  {
+    "Id": 1,
+    "Name": "Tir Chonaill",
+    "Image": "data/img/town/tir.png",
+    "WaypointRegion" : "tir",
+    "WaypointId" : "tir_commerce_post",
+    "NoProfits" : [
+
+    ],
+    "Weights" : {
+       2 : 1.01 , // Dun
+       3 : 1.08 , // Bangor
+       4 : 1.03 , // Emain
+       5 : 1 , // Taill
+       6 : 1.1 , // Tara
+       7 : 1.01 , // Cobh
+       8 : 1.09 , // Belvast
+    },
+    "Items": [
+      {
+        "Id": 101,
+        "Name": "Baby Potion",
+        "Image": "data/img/item/baby_potion.png",
+        "Weight": 1,
+        "QuantityPerSlot": 80,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 1.6,
+      },
+      {
+        "Id": 102,
+        "Name": "Diet Potion",
+        "Image": "data/img/item/diet_potion.png",
+        "Weight": 1,
+        "QuantityPerSlot": 100,
+        "MerchantRating": 2,
+        "MultiFactor": 1.15,
+        "AddFactor": 2.1,
+      },
+      {
+        "Id": 103,
+        "Name": "Snore Prevention Potion",
+        "Image": "data/img/item/snore_prevention_potion.png",
+        "Weight": 2,
+        "QuantityPerSlot": 100,
+        "MerchantRating": 3,
+        "MultiFactor": 1.05,
+        "AddFactor": 2,
+      },
+      {
+       "Id": 104,
+       "Name": "Wild Ginseng Potion",
+        "Image": "data/img/item/wild_ginseng_potion.png",
+        "Weight": 3,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 5,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 105,
+        "Name": "Lovely Potion",
+        "Image": "data/img/item/lovely_potion.png",
+        "Weight": 3,
+        "QuantityPerSlot": 100,
+        "MerchantRating": 7,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Name": "Dunbarton",
+    "Image": "data/img/town/dun.png",
+    "WaypointRegion" : "dunby",
+    "WaypointId" : "dunby_commerce_post",
+    "NoProfits" : [
+    
+    ],
+    "Weights" : {
+       1 : 1.01 , // Tir
+       3 : 1.01 , // Bangor
+       4 : 0.98 , // Emain
+       5 : 1.06 , // Taill
+       6 : 1.11 , // Tara
+       7 : 0.65 , // Cobh
+       8 : 0.7 , // Belvast
+    },
+    "Items": [
+      {
+        "Id": 201,
+        "Name": "Spider Gloves",
+        "Image": "data/img/item/spider_gloves.png",
+        "Weight": 5,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 8,
+      },
+      {
+        "Id": 202,
+        "Name": "Wool Boots",
+        "Image": "data/img/item/wool_boots.png",
+        "Weight": 8,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 2,
+        "MultiFactor": 1.15,
+        "AddFactor": 18.05,
+      },
+      {
+        "Id": 203,
+        "Name": "Ogre Executioner Mask",
+        "Image": "data/img/item/ogre_executioner_mask.png",
+        "Weight": 4,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 3,
+        "MultiFactor": 1.05,
+        "AddFactor": 5.02,
+      },
+      {
+        "Id": 204,
+        "Name": "Incubus Suit",
+        "Image": "data/img/item/incubus_suit.png",
+        "Weight": 25,
+        "QuantityPerSlot": 5,
+        "MerchantRating": 6,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 205,
+        "Name": "Succubus Swimsuit",
+        "Image": "data/img/item/succubus_swimsuit.png",
+        "Weight": 6,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 7,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Name": "Bangor",
+    "Image": "data/img/town/bangor.png",
+    "WaypointRegion" : "bangor",
+    "WaypointId" : "bangor_commerce_post",
+    "NoProfits" : [
+    
+    ],
+    "Weights" : {
+       1 : 1.08 , // Tir
+       2 : 1.01 , // Dun
+       4 : 1.02 , // Emain
+       5 : 1.13 , // Taill
+       6 : 1.16 , // Tara
+       7 : 1.01 , // Cobh
+       8 : 1.09 , // Belvast
+    },
+    "Items": [
+      {
+        "Id": 301,
+        "Name": "Bangor Coal",
+        "Image": "data/img/item/bangor_coal.png",
+        "Weight": 8,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 9.6,
+      },
+      {
+        "Id": 302,
+        "Name": "Marble",
+        "Image": "data/img/item/marble.png",
+        "Weight": 20,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 1,
+        "MultiFactor": 1.15,
+        "AddFactor": 35.05,
+      },
+      {
+        "Id": 303,
+        "Name": "Topaz",
+        "Image": "data/img/item/topaz.png",
+        "Weight": 25,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 4,
+        "MultiFactor": 1.05,
+        "AddFactor": 30,
+      },
+      {
+        "Id": 304,
+        "Name": "Highlander Ore",
+        "Image": "data/img/item/highlander_ore.png",
+        "Weight": 30,
+        "QuantityPerSlot": 8,
+        "MerchantRating": 5,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 305,
+        "Name": "Lead",
+        "Image": "data/img/item/lead.png",
+        "Weight": 30,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 6,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Name": "Emain Macha",
+    "Image": "data/img/town/emain.png",
+    "WaypointRegion" : "emain",
+    "WaypointId" : "emain_commerce_post",
+    "NoProfits" : [
+    
+    ],
+    "Weights" : {
+       1 : 1.03 , // Tir
+       2 : 0.98 , // Dun
+       3 : 1.02 , // Bangor
+       5 : 1.08 , // Taill
+       6 : 1.01 , // Tara
+       7 : 0.99 , // Cobh
+       8 : 1.06 , // Belvast
+    },
+    "Items": [
+      {
+        "Id": 401,
+        "Name": "Berry Granola",
+        "Image": "data/img/item/berry_granola.png",
+        "Weight": 3,
+        "QuantityPerSlot": 40,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 2.4,
+      },
+      {
+        "Id": 402,
+        "Name": "Butter Beer",
+        "Image": "data/img/item/butter_beer.png",
+        "Weight": 4,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 2,
+        "MultiFactor": 1.15,
+        "AddFactor": 5.55,
+      },
+      {
+        "Id": 403,
+        "Name": "Smoked Wild Animal",
+        "Image": "data/img/item/smoked_wild_animal.png",
+        "Weight": 3,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 4,
+        "MultiFactor": 1.05,
+        "AddFactor": 4,
+      },
+      {
+        "Id": 404,
+        "Name": "Triple Pasta",
+        "Image": "data/img/item/triple_pasta.png",
+        "Weight": 5,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 5,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 405,
+        "Name": "Whole BBQ Bear",
+        "Image": "data/img/item/whole_bbq_bear.png",
+        "Weight": 40,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 7,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  },
+  {
+    "Id": 5,
+    "Name": "Taillteann",
+    "Image": "data/img/town/taill.png",
+    "WaypointRegion" : "taill",
+    "WaypointId" : "taill_commerce_post",
+    "NoProfits" : [
+      6,
+    ],
+    "Weights" : {
+       1 : 1.0 , // Tir
+       2 : 1.06 , // Dun
+       3 : 1.13 , // Bangor
+       4 : 1.08 , // Emain
+       6 : 1.01 , // Tara
+       7 : 1.08 , // Cobh
+       8 : 1.16 , // Belvast
+    },
+    "Items": [
+      {
+        "Id": 501,
+        "Name": "Heat Crystal",
+        "Image": "data/img/item/heat_crystal.png",
+        "Weight": 2,
+        "QuantityPerSlot": 100,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 1.6,
+      },
+      {
+        "Id": 502,
+        "Name": "Music Box Preservation Stone",
+        "Image": "data/img/item/music_box_preservation_stone.png",
+        "Weight": 3,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 2,
+        "MultiFactor": 1.15,
+        "AddFactor": 4.05,
+      },
+      {
+        "Id": 503,
+        "Name": "Palala Crystal",
+        "Image": "data/img/item/palala_crystal.png",
+        "Weight": 2,
+        "QuantityPerSlot": 100,
+        "MerchantRating": 4,
+        "MultiFactor": 1.05,
+        "AddFactor": 2.81,
+      },
+      {
+        "Id": 504,
+        "Name": "Circle Barrier Spike Crystal",
+        "Image": "data/img/item/circle_barrier_spike_crystal.png",
+        "Weight": 4,
+        "QuantityPerSlot": 100,
+        "MerchantRating": 5,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 505,
+        "Name": "Alchemy Crystal",
+        "Image": "data/img/item/alchemy_crystal.png",
+        "Weight": 5,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 6,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  },
+  {
+    "Id": 6,
+    "Name": "Tara",
+    "Image": "data/img/town/tara.png",
+    "WaypointRegion" : "tara",
+    "WaypointId" : "tara_commerce_post",
+    "NoProfits" : [
+      5, // Taill
+    ],
+    "Weights" : {
+       1 : 1.1 , // Tir
+       2 : 1.11 , // Dun
+       3 : 1.16 , // Bangor
+       4 : 1.01 , // Emain
+       5 : 1.01 , // Taill
+       7 : 1.13 , // Cobh
+       8 : 1.16 , // Belvast
+    },
+    "Items": [
+      {
+        "Id": 601,
+        "Name": "Mini Dressing Table",
+        "Image": "data/img/item/mini_dressing_table.png",
+        "Weight": 20,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 17.1,
+      },
+      {
+        "Id": 602,
+        "Name": "Tea Table",
+        "Image": "data/img/item/tea_table.png",
+        "Weight": 25,
+        "QuantityPerSlot": 5,
+        "MerchantRating": 2,
+        "MultiFactor": 1.15,
+        "AddFactor": 60,
+      },
+      {
+        "Id": 603,
+        "Name": "Rocking Chair",
+        "Image": "data/img/item/rocking_chair.png",
+        "Weight": 25,
+        "QuantityPerSlot": 5,
+        "MerchantRating": 4,
+        "MultiFactor": 1.05,
+        "AddFactor": 44,
+      },
+      {
+        "Id": 604,
+        "Name": "Bunk Bed",
+        "Image": "data/img/item/bunk_bed.png",
+        "Weight": 75,
+        "QuantityPerSlot": 3,
+        "MerchantRating": 6,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 605,
+        "Name": "Giant Wine Rack",
+        "Image": "data/img/item/giant_wine_rack.png",
+        "Weight": 300,
+        "QuantityPerSlot": 1,
+        "MerchantRating": 7,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "Name": "Port Cobh",
+    "Image": "data/img/town/cobh.png",
+    "WaypointRegion" : "cobh",
+    "WaypointId" : "cobh_commerce_post",
+    "NoProfits" : [
+      8, // Belvast
+    ],
+    "Weights" : {
+       1 : 1.01 , // Tir
+       2 : 0.65 , // Dun
+       3 : 1.01 , // Bangor
+       4 : 0.99 , // Emain
+       5 : 1.08 , // Taill
+       6 : 1.13 , // Tara
+       8 : 0.7 , // Belvast
+    },
+    "Items": [
+      {
+        "Id": 701,
+        "Name": "Cobh Seaweed",
+        "Image": "data/img/item/cobh_seaweed.png",
+        "Weight": 2,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 2.4,
+      },
+      {
+        "Id": 702,
+        "Name": "Cobh Oyster",
+        "Image": "data/img/item/cobh_oyster.png",
+        "Weight": 3,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 1,
+        "MultiFactor": 1.15,
+        "AddFactor": 6.05,
+      },
+      {
+        "Id": 703,
+        "Name": "Shark Fin",
+        "Image": "data/img/item/shark_fin.png",
+        "Weight": 4,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 3,
+        "MultiFactor": 1.05,
+        "AddFactor": 4,
+      },
+      {
+        "Id": 704,
+        "Name": "Jelly Fish",
+        "Image": "data/img/item/jelly_fish.png",
+        "Weight": 6,
+        "QuantityPerSlot": 30,
+        "MerchantRating": 5,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 705,
+        "Name": "Neid Scales",
+        "Image": "data/img/item/neid_scales.png",
+        "Weight": 2,
+        "QuantityPerSlot": 50,
+        "MerchantRating": 7,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  },
+  {
+    "Id": 8,
+    "Name": "Belvast",
+    "Image": "data/img/town/belvast.png",
+    "WaypointRegion" : "belvast",
+    "WaypointId" : "belvast_commerce_post",
+    "NoProfits" : [
+      7,
+    ],
+    "Weights" : {
+       1 : 1.09 , // Tir
+       2 : 0.7 , // Dun
+       3 : 1.09 , // Bangor
+       4 : 1.06 , // Emain
+       5 : 1.16 , // Taill
+       6 : 1.16 , // Tara
+       7 : 0.7 , // Cobh
+    },
+    "Items": [
+      {
+        "Id": 801,
+        "Name": "Iron Whip",
+        "Image": "data/img/item/iron_whip.png",
+        "Weight": 8,
+        "QuantityPerSlot": 15,
+        "MerchantRating": 1,
+        "MultiFactor": 1.2,
+        "AddFactor": 8,
+      },
+      {
+        "Id": 802,
+        "Name": "Dark Sword",
+        "Image": "data/img/item/dark_sword.png",
+        "Weight": 12,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 1,
+        "MultiFactor": 1.15,
+        "AddFactor": 20,
+      },
+      {
+        "Id": 803,
+        "Name": "Safe",
+        "Image": "data/img/item/safe.png",
+        "Weight": 220,
+        "QuantityPerSlot": 1,
+        "MerchantRating": 3,
+        "MultiFactor": 1.05,
+        "AddFactor": 270.02,
+      },
+      {
+        "Id": 804,
+        "Name": "Skeleton Ogre Armor",
+        "Image": "data/img/item/skeleton_ogre_armor.png",
+        "Weight": 180,
+        "QuantityPerSlot": 1,
+        "MerchantRating": 5,
+        "MultiFactor": 1.02,
+        "AddFactor": 0,
+      },
+      {
+        "Id": 805,
+        "Name": "Fake Morgant Helmet",
+        "Image": "data/img/item/fake_morgant_helmet.png",
+        "Weight": 40,
+        "QuantityPerSlot": 10,
+        "MerchantRating": 7,
+        "MultiFactor": 1.1,
+        "AddFactor": 0,
+      }
+    ]
+  }
+]

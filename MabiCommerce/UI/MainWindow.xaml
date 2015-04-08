@@ -1,0 +1,409 @@
+﻿<Window x:Class="MabiCommerce.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:ui="clr-namespace:MabiCommerce.UI"
+		xmlns:domain="clr-namespace:MabiCommerce.Domain"
+		xmlns:grayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
+		xmlns:trading="clr-namespace:MabiCommerce.Domain.Trading"
+		xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+		mc:Ignorable="d"
+		AllowsTransparency="True" Title="MabiCommerce" Height="536" Width="813" WindowStyle="None"
+		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="MabiScrollViewer.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<SolidColorBrush x:Key="BorderBrush" Color="#6B000000"/>
+			<DropShadowEffect x:Key="DropShadow" ShadowDepth="2" />
+			<Style TargetType="TextBlock">
+				<Style.Triggers>
+					<Trigger Property="Validation.HasError" Value="True">
+						<Setter Property="Background" Value="Pink"/>
+						<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors), Converter={ui:ErrorsToStringConverter}}"/>
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+			<LinearGradientBrush x:Key="MabiListBackground" EndPoint="1,1" StartPoint="1,0">
+				<GradientStop Offset="0.3"/>
+				<GradientStop Color="#CC6F6557" Offset="0.02"/>
+			</LinearGradientBrush>
+			<Style x:Key="ButtonStyle" TargetType="Button">
+				<Setter Property="Foreground" Value="White" />
+				<Setter Property="BorderBrush" Value="Black" />
+				<Setter Property="Padding" Value="2,0" />
+				<Setter Property="Background">
+					<Setter.Value>
+						<ImageBrush ImageSource="Images/BtnBg.png" Stretch="Fill"/>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</ResourceDictionary>
+	</Window.Resources>
+	<Window.Background>
+		<ImageBrush ImageSource="Images/Main.png"/>
+	</Window.Background>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="71*" />
+			<RowDefinition Height="22*" />
+			<RowDefinition Height="46*" />
+			<RowDefinition Height="10*" />
+			<RowDefinition Height="365*"/>
+			<RowDefinition Height="22*" />
+		</Grid.RowDefinitions>
+		<Border x:Name="WindowBar" Grid.Row="1" Margin="11, 0" Padding="9,0" MouseDown="WindowBar_MouseDown" Background="Transparent">
+			<DockPanel LastChildFill="False">
+				<Button x:Name="CloseButton" DockPanel.Dock="Right" Height="19" Width="19" Background="Transparent" Click="CloseButton_Click">
+					<Image Source="Images/Close.png" Stretch="Fill" />
+				</Button>
+				<Button x:Name="MinimizeButton" DockPanel.Dock="Right" Height="19" Width="19" Background="Transparent" Click="MinimizeButton_Click">
+					<Image Source="Images/Minimize.png" Stretch="Fill" />
+				</Button>
+			</DockPanel>
+		</Border>
+		<Grid Grid.Row="2" Margin="36,0">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" Text="Mabinogi Commerce Helper"/>
+			</Grid>
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<StackPanel Orientation="Horizontal">
+					<Button Name="ConnectBtn" Click="ConnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Network.Connected, Converter={ui:NotConverter}}">
+						<StackPanel Orientation="Horizontal">
+							<Ellipse Fill="Lime" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
+							<TextBlock>Connect</TextBlock>
+						</StackPanel>
+					</Button>
+					<Button Name="DisonnectBtn" Click="DisonnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Network.Connected}">
+						<StackPanel Orientation="Horizontal">
+							<Ellipse Fill="Red" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
+							<TextBlock>Disconnect</TextBlock>
+						</StackPanel>
+					</Button>
+				</StackPanel>
+				<TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" Text="By Xcelled194"/>
+			</Grid>
+		</Grid>
+		<Grid Grid.Row="4" Margin="13,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="290*" />
+				<ColumnDefinition Width="236*" />
+				<ColumnDefinition Width="253*" />
+			</Grid.ColumnDefinitions>
+			<Grid Margin="10,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<Image Width="50" Height="50" Source="{Binding ElementName=PostSelect, Path=SelectedItem.Image, Converter={ui:RelativeToAbsolutePathConverter}}" />
+					<Grid Grid.Column="1" Margin="5,0">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<ComboBox x:Name="PostSelect" ItemsSource="{Binding Path=Posts}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Left" SelectionChanged="PostSelect_SelectionChanged" />
+						<StackPanel Grid.Row="1" Orientation="Horizontal">
+							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">My Merchant Rating:</TextBlock>
+							<TextBox VerticalAlignment="Top" Text="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+						</StackPanel>
+					</Grid>
+				</Grid>
+				<ScrollViewer Style="{StaticResource MabiScrollViewer}" Grid.Row="1" Margin="0,15,0,0">
+					<ScrollViewer.Resources>
+						<DataTemplate x:Key="EnabledItem" DataType="domain:Item">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="2*"/>
+									<ColumnDefinition Width="1*"/>
+								</Grid.ColumnDefinitions>
+								<Image Width="48" Height="48" Source="{Binding Path=Image, Converter={ui:RelativeToAbsolutePathConverter}}" />
+								<TextBlock Grid.Column="1" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="8" />
+								<DockPanel Grid.Column="2" LastChildFill="False" HorizontalAlignment="Right" Margin="0,0,5,0">
+									<WrapPanel DockPanel.Dock="Top">
+										<TextBox Text="{Binding Path=Price, Mode=TwoWay, StringFormat=N0}" VerticalAlignment="Bottom"/>
+										<TextBlock xml:space="preserve" TextWrapping="Wrap" Text=" Ducats" />
+									</WrapPanel>
+								</DockPanel>
+							</Grid>
+						</DataTemplate>
+						<DataTemplate x:Key="DisabledItem" DataType="domain:Item">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="2*"/>
+									<ColumnDefinition Width="1*"/>
+								</Grid.ColumnDefinitions>
+								<Image Width="48" Height="48" Source="{Binding Path=Image, Converter={ui:RelativeToAbsolutePathConverter}}">
+									<Image.Effect>
+										<grayscaleEffect:GrayscaleEffect />
+									</Image.Effect>
+								</Image>
+								<TextBlock Grid.Column="1" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="8" />
+								<WrapPanel Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,5,0">
+									<TextBlock xml:space="preserve" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="Merchant Rating Needed: " />
+									<TextBlock VerticalAlignment="Bottom" Text="{Binding Path=MerchantRating}"/>
+								</WrapPanel>
+							</Grid>
+						</DataTemplate>
+					</ScrollViewer.Resources>
+					<Border Padding="2,0,0,0" CornerRadius="2" Background="{StaticResource MabiListBackground}">
+						<ListView ItemsSource="{Binding ElementName=PostSelect, Path=SelectedItem.Items}" BorderBrush="Transparent" Background="Transparent"
+							  SelectedIndex="0" x:Name="ItemSelect" Effect="{StaticResource DropShadow}" SelectionMode="Single"
+							  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+							<ListView.ItemContainerStyle>
+								<Style TargetType="ListViewItem">
+									<Setter Property="Template">
+										<Setter.Value>
+											<ControlTemplate TargetType="ListViewItem">
+												<Grid Background="{TemplateBinding Background}">
+													<Border Padding="3,5,3,5">
+														<ContentPresenter />
+													</Border>
+													<Border SnapsToDevicePixels="True" BorderThickness="2" BorderBrush="{TemplateBinding BorderBrush}" />
+												</Grid>
+												<ControlTemplate.Triggers>
+													<Trigger Property="IsSelected" Value="True">
+														<Setter Property="BorderBrush" Value="White"/>
+													</Trigger>
+													<DataTrigger Binding="{Binding Status}" Value="{x:Static domain:ItemStatus.Available}">
+														<Setter Property="ContentTemplate" Value="{StaticResource EnabledItem}" />
+														<Setter Property="Background">
+															<Setter.Value>
+																<ImageBrush ImageSource="Images/EnabledBg.png" />
+															</Setter.Value>
+														</Setter>
+													</DataTrigger>
+												</ControlTemplate.Triggers>
+											</ControlTemplate>
+										</Setter.Value>
+									</Setter>
+									<Setter Property="Margin" Value="0, 2, 3, 3" />
+									<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+									<Setter Property="ContentTemplate" Value="{StaticResource DisabledItem}" />
+									<Setter Property="Background">
+										<Setter.Value>
+											<ImageBrush ImageSource="Images/DisabledBg.png" />
+										</Setter.Value>
+									</Setter>
+								</Style>
+							</ListView.ItemContainerStyle>
+						</ListView>
+					</Border>
+				</ScrollViewer>
+			</Grid>
+			<Grid Grid.Column="1" Margin="5,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="59*" />
+					<RowDefinition Height="16*" />
+					<RowDefinition Height="169*" />
+					<RowDefinition Height="121*" />
+				</Grid.RowDefinitions>
+				<StackPanel Grid.Row="0" DataContext="{Binding ElementName=ItemSelect, Path=SelectedItem}">
+					<TextBlock TextAlignment="Center" Text="{Binding Name}"/>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+						<TextBlock xml:space="preserve">Weight:</TextBlock>
+						<TextBlock Text="{Binding Weight}" />
+					</StackPanel>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+						<TextBlock xml:space="preserve" VerticalAlignment="Center" Text="Inventory: "/>
+						<TextBox VerticalAlignment="Top" Text="{Binding Stock, StringFormat=N0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+					</StackPanel>
+				</StackPanel>
+				<DockPanel Grid.Row="2">
+					<TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top">Current profit for each town</TextBlock>
+					<Separator DockPanel.Dock="Top" Background="{StaticResource BorderBrush}" Margin="15,0" />
+					<ScrollViewer VerticalScrollBarVisibility="Auto">
+						<ItemsControl ItemsSource="{Binding ElementName=ItemSelect, Path=SelectedItem.Profits}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DockPanel Margin="5, 1">
+										<TextBox DockPanel.Dock="Right" TextAlignment="Right" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" MinWidth="50">
+											<TextBox.Style>
+												<Style TargetType="TextBox">
+													<Style.Triggers>
+														<DataTrigger Binding="{Binding Amount, Converter={ui:IntToPolarIntConverter}}" Value="1">
+															<Setter Property="Foreground" Value="Red" />
+														</DataTrigger>
+														<DataTrigger Binding="{Binding Amount, Converter={ui:IntToPolarIntConverter}}" Value="-1">
+															<Setter Property="Foreground" Value="Blue" />
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</TextBox.Style>
+										</TextBox>
+										<TextBlock Text="{Binding Destination.Name}" />
+									</DockPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</ScrollViewer>
+				</DockPanel>
+				<Grid Grid.Row="3" >
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<GroupBox Foreground="Wheat" BorderBrush="Wheat" Header="I have a..." Margin="0,0,0,2">
+						<DockPanel>
+							<ScrollViewer DockPanel.Dock="Top" BorderBrush="{StaticResource BorderBrush}" VerticalScrollBarVisibility="Auto">
+								<ItemsControl ItemsSource="{Binding Transports}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<CheckBox Content="{Binding FullName}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</ScrollViewer>
+						</DockPanel>
+					</GroupBox>
+					<GroupBox Grid.Column="1" Foreground="Wheat" BorderBrush="Wheat" Header="Modifiers" Margin="0,0,0,2">
+						<DockPanel>
+							<ScrollViewer DockPanel.Dock="Top" BorderBrush="{StaticResource BorderBrush}" VerticalScrollBarVisibility="Auto">
+								<ItemsControl ItemsSource="{Binding Modifiers}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</ScrollViewer>
+						</DockPanel>
+					</GroupBox>
+				</Grid>
+			</Grid>
+			<Grid Grid.Column="2" Margin="5,0">
+				<Grid.Resources>
+					<CollectionViewSource x:Key="TradeSource" Source="{Binding Trades}">
+						<CollectionViewSource.SortDescriptions>
+							<componentModel:SortDescription PropertyName="ProfitPerSecond" Direction="Descending" />
+						</CollectionViewSource.SortDescriptions>
+					</CollectionViewSource>
+				</Grid.Resources>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<DockPanel LastChildFill="False">
+					<StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+						<TextBlock Margin="0,0,5,0">Current<LineBreak/>Ducats</TextBlock>
+						<TextBox VerticalAlignment="Center" Text="{Binding Ducats, StringFormat=N0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+					</StackPanel>
+					<Button DockPanel.Dock="Right" x:Name="CalculateTradesBtn" Click="CalculateTrades_Click">
+						<Button.Style>
+							<Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+								<Setter Property="Content" Value="Calculate Trades" />
+								<Style.Triggers>
+									<Trigger Property="IsEnabled" Value="False">
+										<Setter Property="Content" Value="Calculating..." />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</Button.Style>
+					</Button>
+				</DockPanel>
+				<DataGrid Grid.Row="1" x:Name="TradeSelect" AutoGenerateColumns="False" ItemsSource="{Binding Source={StaticResource TradeSource}}"
+						  CanUserResizeColumns="True" CanUserReorderColumns="True" IsReadOnly="True" VerticalScrollBarVisibility="Visible" SelectionMode="Single"
+						  HorizontalScrollBarVisibility="Visible" RowHeaderWidth="0" IsEnabled="{Binding ElementName=CalculateTradesBtn, Path=IsEnabled}">
+					<DataGrid.Columns>
+						<DataGridTextColumn Binding="{Binding ProfitPerSecond, StringFormat=N2}" Width="Auto">
+							<DataGridTextColumn.Header>
+								<TextBlock ToolTip="The trade's score, expressed in earned ducats/second.">Score</TextBlock>
+							</DataGridTextColumn.Header>
+						</DataGridTextColumn>
+						<DataGridTextColumn Header="Destination" Binding="{Binding Destination.Name}" />
+						<DataGridTextColumn Header="Total Profit" Binding="{Binding Profit, StringFormat=N0}" />
+						<DataGridTextColumn Binding="{Binding Duration, StringFormat=m\\:ss}">
+							<DataGridTextColumn.Header>
+								<TextBlock ToolTip="Total time to run the trade, in mm:ss.">Total Time</TextBlock>
+							</DataGridTextColumn.Header>
+						</DataGridTextColumn>
+						<DataGridTextColumn Header="Cost" Binding="{Binding Cost, StringFormat=N0}" />
+						<DataGridTextColumn Header="Transport" Binding="{Binding Transport.Name}" />
+						<DataGridTextColumn Header="Flags" Binding="{Binding Flags}" />
+					</DataGrid.Columns>
+					<DataGrid.RowStyle>
+						<Style TargetType="DataGridRow">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding Flags, Converter={ui:HasChokePointFlagConverter}}" Value="True">
+									<Setter Property="Background" Value="Gold" />
+									<Setter Property="ToolTip" Value="Warning: This route passes through a bandit choke point." />
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Flags, Converter={ui:HasNoProfitFlagConverter}}" Value="True">
+									<Setter Property="Background" Value="Red" />
+									<Setter Property="ToolTip" Value="Warning: No profit along this route." />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</DataGrid.RowStyle>
+				</DataGrid>
+				<GroupBox Grid.Row="2" Header="Selected Trade Information" Foreground="Black" BorderBrush="Black"
+						  DataContext="{Binding ElementName=TradeSelect, Path=SelectedItem}" d:DataContext="{d:DesignInstance Type=trading:Trade, IsDesignTimeCreatable=False}">
+					<StackPanel>
+						<DockPanel LastChildFill="False">
+							<Button DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="Map It!" Click="MapItButton_Click" />
+						</DockPanel>
+						<Border BorderThickness="1" BorderBrush="{StaticResource BorderBrush}" >
+							<DockPanel DataContext="{Binding Transport}" Height="52">
+								<DockPanel.Background>
+									<ImageBrush ImageSource="Images/TransportBarBg.png" />
+								</DockPanel.Background>
+								<Image DockPanel.Dock="Left" Source="{Binding Icon, Converter={ui:RelativeToAbsolutePathConverter}}"
+									   Width="48" Height="48" Margin="2" />
+								<Viewbox StretchDirection="DownOnly" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top">
+									<TextBlock Text="{Binding FullName}" HorizontalAlignment="Left" Foreground="White" FontSize="22"
+											   Margin="0,6,0,0" FontWeight="Bold" />
+								</Viewbox>
+							</DockPanel>
+						</Border>
+						<ScrollViewer Height="72" Margin="0,10,0,0" Style="{StaticResource MabiScrollViewer}" VerticalScrollBarVisibility="Auto">
+							<ItemsControl Background="{StaticResource MabiListBackground}" ItemsSource="{Binding Load.Slots}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<WrapPanel/>
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Border BorderThickness="1" BorderBrush="{StaticResource BorderBrush}" Height="67" Width="67" Margin="2">
+											<Border.Background>
+												<ImageBrush ImageSource="Images/TradeItemBg.png" />
+											</Border.Background>
+											<Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="48">
+												<Image Source="{Binding Key.Image, Converter={ui:RelativeToAbsolutePathConverter}}" ToolTip="{Binding Key.Name}" />
+												<TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="2" Padding="2,0" Text="{Binding Value, StringFormat=N0}"
+														   Background="{StaticResource BorderBrush}" FontSize="16" Foreground="White"/>
+											</Grid>
+										</Border>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</ScrollViewer>
+					</StackPanel>
+				</GroupBox>
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>
