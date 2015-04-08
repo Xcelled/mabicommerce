@@ -14,7 +14,7 @@ MabiCommerce is a tool to help you get the most out of your trades! MabiCommerce
 
 ### Where do I get it?
 
-You can download the lastest release from the [Releases tab](/releases).
+You can download the lastest release from the [Releases tab](/../../releases).
 
 Once it's downloaded, simply extract it to a folder on your desktop, or somewhere where you can find it.
 
@@ -104,7 +104,7 @@ As players buy and sell goods to posts, the profits naturally fluctuate. It coul
 No. Unfortunately for Belvast, its distance from Uladh makes it horribly inefficient. MabiCommerce will certainly direct you there if it is viable, but this is extremely rare.
 
 ### I found a bug in MabiCommerce!
-Please open a new [issue](/issues), containing details of the bug, screenshots if applicable, and the values you used. I can't reproduce a buggy trade without knowing the values used to calculate it!
+Please open a new [issue](/../../issues), containing details of the bug, screenshots if applicable, and the values you used. I can't reproduce a buggy trade without knowing the values used to calculate it!
 
 ### Do I have to use AutoDetect (Morrighan)?
 No. You can always enter the information by hand.
