@@ -28,7 +28,7 @@ namespace MabiCommerce.Domain
 		[JsonProperty(Required = Required.Default)]
 		public int Id { get; private set; }
 
-		private ObservableCollection<Modifier> _modifiers = new ObservableCollection<Modifier>();
+		private readonly ObservableCollection<Modifier> _modifiers = new ObservableCollection<Modifier>();
 		public ReadOnlyObservableCollection<Modifier> Modifiers { get; private set; }
 
 		public int Slots { get { return BaseSlots + Modifiers.Where(m => m.Enabled).Sum(m => m.ExtraSlots); } }
