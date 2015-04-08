@@ -341,6 +341,7 @@
 							</DataGridTextColumn.Header>
 						</DataGridTextColumn>
 						<DataGridTextColumn Header="Cost" Binding="{Binding Cost, StringFormat=N0}" />
+						<DataGridTextColumn Header="Experience" Binding="{Binding Experience, StringFormat=N0}" />
 						<DataGridTextColumn Header="Transport" Binding="{Binding Transport.Name}" />
 						<DataGridTextColumn Header="Flags" Binding="{Binding Flags}" />
 					</DataGrid.Columns>

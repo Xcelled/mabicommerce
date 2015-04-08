@@ -14,6 +14,7 @@ namespace MabiCommerce.Domain.Trading
 		public double Cost { get; private set; }
 		public double Profit { get; private set; }
 		public double ProfitPerSecond { get; private set; }
+		public long Experience { get; private set; }
 
 		public TradeFlags Flags { get; private set; }
 
@@ -35,6 +36,7 @@ namespace MabiCommerce.Domain.Trading
 			Cost = load.Slots.Sum(i => i.Key.Price * i.Value);
 			Profit = load.CalculateProfit(destination);
 			ProfitPerSecond = Profit / Duration.TotalSeconds;
+			Experience = load.CalculateExperience(destination);
 		}
 
 		public override string ToString()
