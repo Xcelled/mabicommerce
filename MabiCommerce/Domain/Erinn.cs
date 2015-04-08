@@ -29,6 +29,7 @@ namespace MabiCommerce.Domain
 		public AdjacencyGraph<Waypoint, Connection> World { get; private set; }
 
 		private long _ducats = 1000;
+
 		public long Ducats
 		{
 			get { return _ducats; }
@@ -43,17 +44,14 @@ namespace MabiCommerce.Domain
 		private readonly ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>> _routeCache =
 			new ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>>();
 
-#if DEBUG
 		public Erinn()
 		{
-			// <---- Replace with path to your debug folder to get the designer to load startup data ----->
-			Load(@"C:/Users/Scott/Documents/Programming/Visual Studio 2013/Projects/MabiCommerce/MabiCommerce/bin/Debug/data", this);
+			if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+			{
+				Environment.CurrentDirectory = Path.GetFullPath("MabiCommerce");
+				Load(@"data", this);
+			}
 		}
-#else
-		protected Erinn()
-		{
-		}
-#endif
 
 		public static Erinn Load(string dataDir, Action<double, string> progress = null)
 		{
@@ -179,7 +177,7 @@ namespace MabiCommerce.Domain
 		public Route Route(Waypoint start, Waypoint end)
 		{
 			if (!_routeCache.ContainsKey(start))
-				_routeCache[start] = new ConcurrentDictionary<Waypoint,Route>();
+				_routeCache[start] = new ConcurrentDictionary<Waypoint, Route>();
 
 			if (_routeCache[start].ContainsKey(end))
 				return _routeCache[start][end];
