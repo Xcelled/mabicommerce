@@ -48,8 +48,10 @@ namespace MabiCommerce.Domain
 		{
 			if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
 			{
-				Environment.CurrentDirectory = Path.GetFullPath("MabiCommerce");
-				Load(@"data", this);
+				if (!Directory.Exists("data"))
+					Environment.CurrentDirectory = Path.GetFullPath("MabiCommerce");
+				
+				Load("data", this);
 			}
 		}
 

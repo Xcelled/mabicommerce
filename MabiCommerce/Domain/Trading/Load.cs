@@ -32,6 +32,15 @@ namespace MabiCommerce.Domain.Trading
 			return _slots.Sum(kvp => kvp.Key.Profits.First(x => x.Destination == destination).Amount * kvp.Value);
 		}
 
+		public long CalculateExperience(TradingPost destination)
+		{
+			// http://wiki.mabinogiworld.com/view/Commerce
+			// floor(sqrt(Single Item Profit * Single Item Weight)) * Item Quantity * 30
+
+			return _slots.Sum(kvp =>
+				(long)(Math.Sqrt(kvp.Key.Profits.First(x => x.Destination == destination).Amount * kvp.Key.Weight)) * kvp.Value * 30);
+		}
+
 		public override string ToString()
 		{
 			return string.Format("Load of: {0}", string.Join(",", _slots.Keys.Select(i => i.Name)));
