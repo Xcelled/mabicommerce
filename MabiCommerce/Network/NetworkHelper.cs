@@ -102,10 +102,10 @@ namespace MabiCommerce.Network
 
 			if (alissaWindows.Count == 0)
 			{
-				MessageBox.Show("No packet provider found.", _tradingWindow.Title,  MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show("No packet provider found.", _tradingWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
-			
+
 			AlissaHandle = alissaWindows[0].HWnd;
 		}
 
@@ -167,7 +167,7 @@ namespace MabiCommerce.Network
 				WinApi.SendMessage(hWnd, WinApi.WM_COPYDATA, _hwndSource.Handle, cdsBuffer);
 			});
 		}
-		
+
 		private void HandlePacket(Packet packet)
 		{
 			if (packet.Op == Properties.Settings.Default.CommerceInfoRequestOp)
@@ -200,9 +200,12 @@ namespace MabiCommerce.Network
 					town.MerchantRating = GetMerchantRating(tradingExp);
 			}
 
-			foreach (var transport in _tradingWindow.Erinn.Transports)
+			if (Properties.Settings.Default.SniffTransports)
 			{
-				transport.Enabled = (transportFlags & 1 << transport.Id) != 0;
+				foreach (var transport in _tradingWindow.Erinn.Transports)
+				{
+					transport.Enabled = (transportFlags & 1 << transport.Id) != 0;
+				}
 			}
 		}
 
@@ -225,9 +228,12 @@ namespace MabiCommerce.Network
 					town.MerchantRating = GetMerchantRating(tradingExp);
 			}
 
-			foreach (var transport in _tradingWindow.Erinn.Transports)
+			if (Properties.Settings.Default.SniffTransports)
 			{
-				transport.Enabled = (transportFlags & 1 << transport.Id) != 0;
+				foreach (var transport in _tradingWindow.Erinn.Transports)
+				{
+					transport.Enabled = (transportFlags & 1 << transport.Id) != 0;
+				}
 			}
 		}
 
@@ -311,7 +317,7 @@ namespace MabiCommerce.Network
 			598500,
 			1148500
 		};
-		private static readonly Dictionary<int, double> MerchantDiscounts = new Dictionary<int,double>
+		private static readonly Dictionary<int, double> MerchantDiscounts = new Dictionary<int, double>
 		{
 			{ 1, 1},
 			{2, 1},

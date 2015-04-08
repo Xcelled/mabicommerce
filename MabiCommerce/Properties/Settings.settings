@@ -11,5 +11,8 @@
     <Setting Name="CommerceInfoUpdateOp" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">43684</Value>
     </Setting>
+    <Setting Name="SniffTransports" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
