@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="MabiCommerce.UI.MabiProgressBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="clr-namespace:MabiCommerce.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="Bar">
+	<Grid>
+		<Border Height="7" CornerRadius="3" BorderBrush="{Binding ElementName=Bar, Path=BarBorderStroke}" BorderThickness="1" x:Name="BgBar" 
+				Background="{Binding ElementName=Bar, Path=BarBackground}" />
+		<Border Height="7" CornerRadius="3" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Left"
+				Background="{Binding ElementName=Bar, Path=BarForeground}">
+			<Border.Width>
+				<MultiBinding Converter="{ui:RatioToPercentOfConverter}">
+					<Binding ElementName="Bar" Path="Value"/>
+					<Binding ElementName="Bar" Path="Maximum" />
+					<Binding ElementName="BgBar" Path="ActualWidth" />
+				</MultiBinding>
+			</Border.Width>
+		</Border>
+	</Grid>
+</UserControl>
