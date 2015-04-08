@@ -58,5 +58,17 @@ namespace MabiCommerce.Properties {
                 this["CommerceInfoUpdateOp"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SniffTransports {
+            get {
+                return ((bool)(this["SniffTransports"]));
+            }
+            set {
+                this["SniffTransports"] = value;
+            }
+        }
     }
 }
