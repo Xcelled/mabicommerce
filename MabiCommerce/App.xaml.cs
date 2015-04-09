@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,6 +42,43 @@ namespace MabiCommerce
 			_resetSplashCreated.WaitOne();
 
 			base.OnStartup(e);
+
+			if (MabiCommerce.Properties.Settings.Default.UpdateCheck)
+			{
+				Task.Factory.StartNew(CheckForUpdates);
+			}
+		}
+
+		private static async void CheckForUpdates()
+		{
+			await Task.Delay(5000);
+
+			try
+			{
+				using (var wc = new WebClient())
+				{
+					var latest =
+						Version.Parse(wc.DownloadString("https://raw.githubusercontent.com/Xcelled/mabicommerce/master/latest"));
+
+					var current = typeof(Settings).Assembly.GetName().Version;
+					if (current < latest)
+					{
+						if (MessageBox.Show(string.Format(@"There is a new version of MabiCommerce available!
+
+You're running: {0}
+Latest: {1}
+
+Would you like to download the new version?", current, latest), "Update Available", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+						{
+							Process.Start(@"https://github.com/Xcelled/mabicommerce");
+						}
+					}
+				}
+			}
+			catch
+			{
+				
+			}
 		}
 
 		private void ShowSplash()
