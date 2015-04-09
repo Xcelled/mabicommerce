@@ -105,5 +105,10 @@ namespace MabiCommerce.UI
 		{
 			Network.Disconnect();
 		}
+
+		private void SettingsBtn_Click(object sender, RoutedEventArgs e)
+		{
+			new Settings().ShowDialog();
+		}
 	}
 }
