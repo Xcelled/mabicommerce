@@ -27,6 +27,17 @@ namespace MabiCommerce.Network
 			private set { _connected = value; RaisePropertyChanged(); }
 		}
 
+		~NetworkHelper()
+		{
+			try
+			{
+				Disconnect();
+			}
+			catch
+			{
+			}
+		}
+
 		public NetworkHelper(MainWindow tradingWindow)
 		{
 			_tradingWindow = tradingWindow;
@@ -46,13 +57,13 @@ namespace MabiCommerce.Network
 			_hiddenWindow.Show();
 
 			_tradingWindow.Loaded += _tradingWindow_Loaded;
-			_tradingWindow.Closed += _tradingWindow_Closed;
+			_tradingWindow.Closing +=_tradingWindow_Closing;
 
 			_hwndSource = PresentationSource.FromVisual(_hiddenWindow) as HwndSource;
 			_hwndSource.AddHook(WndProc);
 		}
 
-		void _tradingWindow_Closed(object sender, EventArgs e)
+		void _tradingWindow_Closing(object sender, EventArgs e)
 		{
 			Disconnect();
 		}
@@ -93,7 +104,7 @@ namespace MabiCommerce.Network
 				HandlePacket(packet);
 			}
 
-			return IntPtr.Zero;
+			return (IntPtr)1;
 		}
 
 		public void SelectPacketProvider(bool selectSingle)
