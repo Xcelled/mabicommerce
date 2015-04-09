@@ -125,7 +125,7 @@
 							<RowDefinition />
 							<RowDefinition />
 						</Grid.RowDefinitions>
-						<ComboBox x:Name="PostSelect" ItemsSource="{Binding Path=Posts}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Left" SelectionChanged="PostSelect_SelectionChanged" />
+						<ComboBox x:Name="PostSelect" ItemsSource="{Binding Path=Posts}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Left" />
 						<StackPanel Grid.Row="1" Orientation="Horizontal">
 							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">My Merchant Rating:</TextBlock>
 							<TextBox VerticalAlignment="Top" Text="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -172,8 +172,8 @@
 						</DataTemplate>
 					</ScrollViewer.Resources>
 					<Border Padding="2,0,0,0" CornerRadius="2" Background="{StaticResource MabiListBackground}">
-						<ListView ItemsSource="{Binding ElementName=PostSelect, Path=SelectedItem.Items}" BorderBrush="Transparent" Background="Transparent"
-							  SelectedIndex="0" x:Name="ItemSelect" Effect="{StaticResource DropShadow}" SelectionMode="Single"
+						<ListView ItemsSource="{Binding ElementName=PostSelect, Path=SelectedItem.Items, NotifyOnTargetUpdated=True}" BorderBrush="Transparent" Background="Transparent"
+							  SelectedIndex="0" x:Name="ItemSelect" Effect="{StaticResource DropShadow}" SelectionMode="Single" TargetUpdated="ItemSelect_TargetUpdated"
 							  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
 							<ListView.ItemContainerStyle>
 								<Style TargetType="ListViewItem">

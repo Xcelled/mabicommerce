@@ -49,11 +49,6 @@ namespace MabiCommerce.UI
 			WindowState = WindowState.Minimized;
 		}
 
-		private void PostSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			ItemSelect.SelectedIndex = 0;
-		}
-
 		private void CalculateTrades_Click(object sender, RoutedEventArgs e)
 		{
 			CalculateTrades();
@@ -109,6 +104,11 @@ namespace MabiCommerce.UI
 		private void SettingsBtn_Click(object sender, RoutedEventArgs e)
 		{
 			new Settings().ShowDialog();
+		}
+
+		private void ItemSelect_TargetUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+		{
+			ItemSelect.SelectedIndex = 0;
 		}
 	}
 }
