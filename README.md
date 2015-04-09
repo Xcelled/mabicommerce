@@ -6,6 +6,8 @@ Thank you for using MabiCommerce.
 
 MabiCommerce is a tool to help you get the most out of your trades! MabiCommerce will take a variety of factors, toss them into a magical calculating machine, grind it around, and show you a list of all the trades you can make, and their associated stats. Optionally, MabiCommerce can automatically detect and fill in the information it needs.
 
+***Note: Morrighan is still in a "beta" stage and does have some bugs.*** These bugs affect MabiCommmerce's AutoDetect. If AutoDetect stops working, simply CC or restart the game until it does. Check the Morrighan thread frequently for updates!
+
 ### Basic Features
  - Takes a large number of factors into account to get YOU the best trade.
  - Warns you about "no profit" routes or routes that have unavoidable bandits.
