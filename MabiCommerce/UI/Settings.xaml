@@ -1,0 +1,91 @@
+﻿<Window x:Class="MabiCommerce.UI.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:MabiCommerce.UI"
+		Closed="Window_Closed"
+        Title="Settings" Height="244" Width="491" DataContext="{Binding RelativeSource={RelativeSource Self}}" >
+	<Window.Resources>
+		<Style TargetType="TextBox">
+			<Style.Triggers>
+				<Trigger Property="Validation.HasError" Value="True">
+					<Setter Property="Background" Value="Pink"/>
+					<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors), Converter={ui:ErrorsToStringConverter}}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="#FFD8D8D8" Offset="1"/>
+			<GradientStop Color="White" Offset="0.163"/>
+		</LinearGradientBrush>
+	</Window.Background>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<StackPanel>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">MabiCommerce version <Run Text="{Binding Version, Mode=OneTime}" />. Copyright © 2015 X</TextBlock>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">
+				<Hyperlink NavigateUri="https://github.com/Xcelled/mabicommerce" RequestNavigate="Hyperlink_RequestNavigate">https://github.com/Xcelled/mabicommerce</Hyperlink>
+			</TextBlock>
+		</StackPanel>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<GroupBox Header="Network Settings">
+				<StackPanel>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Label>Commerce Info Request Op</Label>
+						<TextBox Grid.Row="0" Grid.Column="1">
+							<Binding Path="CommerceInfoRequestOp" Mode="TwoWay" Converter="{ui:IntToHexStringConverter}">
+								<Binding.ValidationRules>
+									<ui:OpCodeValidationRule />
+								</Binding.ValidationRules>
+							</Binding>
+						</TextBox>
+						<Label Grid.Row="1" Grid.Column="0">Commerce Info Update Op</Label>
+						<TextBox Grid.Row="1" Grid.Column="1">
+							<Binding Path="CommerceInfoUpdateOp" Mode="TwoWay" Converter="{ui:IntToHexStringConverter}">
+								<Binding.ValidationRules>
+									<ui:OpCodeValidationRule />
+								</Binding.ValidationRules>
+							</Binding>
+						</TextBox>
+						<Label Grid.Row="2" Grid.Column="0">Product List Request Op</Label>
+						<TextBox Grid.Row="2" Grid.Column="1">
+							<Binding Path="ProductListRequestOp" Mode="TwoWay" Converter="{ui:IntToHexStringConverter}">
+								<Binding.ValidationRules>
+									<ui:OpCodeValidationRule />
+								</Binding.ValidationRules>
+							</Binding>
+						</TextBox>
+					</Grid>
+					<CheckBox Margin="0,5" IsChecked="{Binding SniffTransports, Mode=TwoWay}">Auto Detect Transports</CheckBox>
+				</StackPanel>
+			</GroupBox>
+			<GroupBox Grid.Column="1" Header="Other Settings">
+				<StackPanel>
+					<CheckBox Margin="0,5" IsChecked="{Binding UpdateCheck, Mode=TwoWay}">Check for Updates</CheckBox>
+				</StackPanel>
+			</GroupBox>
+		</Grid>
+		<DockPanel Grid.Row="2" LastChildFill="False">
+			<Button DockPanel.Dock="Right" Name="SaveBtn" Content="Save" Click="SaveBtn_Click" />
+			<Button IsCancel="True" DockPanel.Dock="Right" Name="CancelBtn" Content="Cancel" Click="CancelBtn_Click" />
+		</DockPanel>
+	</Grid>
+</Window>

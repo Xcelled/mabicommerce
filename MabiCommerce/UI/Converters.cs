@@ -37,6 +37,32 @@ namespace MabiCommerce.UI
 		public abstract object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture);
 	}
 
+	public class IntToHexStringConverter : ConverterBase
+	{
+		public IntToHexStringConverter()
+		{
+
+		}
+
+		public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return string.Format("0x{0:X}", (int)value);
+		}
+
+		public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			var str = value as string;
+
+			if (string.IsNullOrEmpty(str))
+				throw new ArgumentException();
+
+			if (str.StartsWith("0x"))
+				str = str.Substring(2);
+
+			return int.Parse(str, NumberStyles.HexNumber);
+		}
+	}
+
 	public class NotConverter : ConverterBase
 	{
 		public NotConverter()

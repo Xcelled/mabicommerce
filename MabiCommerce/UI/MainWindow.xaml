@@ -98,6 +98,9 @@
 					</Button>
 				</StackPanel>
 				<TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" Text="By Xcelled194"/>
+				<DockPanel Grid.Column="2" LastChildFill="False">
+					<Button Name="SettingsBtn" DockPanel.Dock="Right" Content="Settings" Click="SettingsBtn_Click" />
+				</DockPanel>
 			</Grid>
 		</Grid>
 		<Grid Grid.Row="4" Margin="13,0">
