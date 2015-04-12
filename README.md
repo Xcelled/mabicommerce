@@ -6,8 +6,6 @@ Thank you for using MabiCommerce.
 
 MabiCommerce is a tool to help you get the most out of your trades! MabiCommerce will take a variety of factors, toss them into a magical calculating machine, grind it around, and show you a list of all the trades you can make, and their associated stats. Optionally, MabiCommerce can automatically detect and fill in the information it needs.
 
-***Note: Morrighan is still in a "beta" stage and does have some bugs.*** These bugs affect MabiCommmerce's AutoDetect. If AutoDetect stops working, simply CC or restart the game until it does. Check the Morrighan thread frequently for updates!
-
 ![MabiCommerce Demo](/../screenshots/demo1.gif?raw=true)
 
 ### Basic Features
@@ -25,9 +23,10 @@ Once it's downloaded, simply extract it to a folder on your desktop, or somewher
 **If you wish to enable AutoDetect, you need to do the following:**
 
 1. Download (and extract) Morrighan from [the Aura project](http://aura-project.org/forum/index.php/topic/1082-morrighan-client-proxy-updated-2015-03-01-v121b/#entry8050).
-2. Copy `Morrighan.exe` (from Aura) and `MorriOneClick.exe` (from MabiCommerce's folder) to your client directory\*.
+	***Note: Morrighan is still in a "beta" stage and does have some bugs.*** Check the Morrighan thread frequently for updates, especially if you randonly "freeze" or become unable to move!
+2. Copy `Morrighan.exe` (from Aura's website) and `MorriOneClick.exe` (from MabiCommerce's folder) to your client directory\*.
 3. Shut down Mabinogi if it is running.
-4. Run MorriOneClick to start the game. You must run the game this way every time. You may create a shortcut to it on your desktop to make it easier.
+4. Run MorriOneClick to start the game. You may create a shortcut to MorriOneClick on your desktop to make it easier.
 5. If you ever get a "HackShield" error, you simply need to patch your game by running Mabinogi normally (NOT through MorriOneClick!) and then re-opening it with MorriOneClick.
 
 \*Your client directory is located at different places depending on how you installed the game:
@@ -36,7 +35,7 @@ Once it's downloaded, simply extract it to a folder on your desktop, or somewher
 - If you used Steam, it'll be in your [steamapps](https://support.steampowered.com/kb_article.php?ref=7418-YUBN-8129) folder.
 - If you used the new Nexon launcher, it'll be `C:\Nexon\Library\mabinogi\appdata` 
 
-If you see a file called "client", you're in the right place. Copy Morrighan and MorriOneClick here!
+If you see a file called `client`, you're in the right place. Copy Morrighan and MorriOneClick here!
 
 ### How do I use it?
 
@@ -50,8 +49,10 @@ If you see a file called "client", you're in the right place. Copy Morrighan and
 6. If you're using AutoDetect, MabiCommerce should have filled all the information in for you. If not, you'll have to enter the prices and profits for each item by hand, as well as the stock, your current ducats, and merchant level.
 7. Press "Calculate Trades". The button will change appearance and become unclickable until calculation is finished. This may take several seconds, depending on your computer.
 8. Results are displayed below the Calculate button. By default, they're sorted by the item score, but you can click the column headers to change their sort order.
-9. Click on a result to view the type and quantity of items in the load and transportation.
+9. Click on a result to view the type and quantity of items in the load and transportation method.
 10. Optionally click "Map It" to have MabiCommerce show you the fastest route. Clicking a green region will bring up a minimap with the best route shown in blue.
+
+***Note:*** If you talk to a goblin and then restart MabiCommerce, MabiCommerce will **not** detect profit information *for that trading post only* for approximately five minutes. This is due to client caching of prices. If it's a big deal for you, you can change channels to immediately restore AutoDetect.
 
 ## How does MabiCommerce work?
 
