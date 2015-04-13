@@ -136,7 +136,7 @@ MabiCommerce has the ability to "flag" trades if they meet certain criteria. Rig
 
 MabiCommerce will report flags in the `Flags` column and may also color-code the trade's entry:
 
-![Flags](/../screenshots/flags.jpg?raw=true)
+![Flags](/../screenshots/flags.png?raw=true)
 
 ##### Choke Point
 
@@ -171,7 +171,7 @@ For more details, see the [Algorithm](#Algorithm) section.
 
 Here is an example of MabiCommerce advising a mixed load of `Highlander Ore` and `Topaz`, to get the most profit.
 
-![Mixed Loads](/../screenshots/mixed_loads.jpg?raw=true)
+![Mixed Loads](/../screenshots/mixed_loads.png?raw=true)
 
 ### Algorithm
 
