@@ -116,7 +116,7 @@ If you have a Commerce Partner or Alpaca, one of more of your transportation met
 >
 > -- <cite>Commerce Goblin</cite>
 
-MabiCommerce, unlike nearly every other method of calculating commerce information, heeds the Goblin's advice. I spent an afternoon running around Erinn, marking down the coordinates of various waypoints. MabiCommerce loads these and connects them via a stryctyre called a **directed graph**, to make a spiderweb of routes across Erinn. By using [Djikstra's Algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm), MabiCommerce knows the shortest way to get from point A to point B.
+MabiCommerce, unlike nearly every other method of calculating commerce information, heeds the Goblin's advice. I spent an afternoon running around Erinn, marking down the coordinates of various waypoints. MabiCommerce loads these and connects them via a structure called a **directed graph**, to make a spiderweb of routes across Erinn. By using [Djikstra's Algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm), MabiCommerce knows the shortest way to get from point A to point B.
 
 Once it knows how far apart the posts are, it uses the game's human running speed (3.43 meters/second) to calculate the total time required to get there. Total profit of the route is divided by total time to run it, yielding `profit/second`, a measure of how efficient a given trade is. High efficency trades earn you more Ducats faster, even though individually, they may give less profit. See also [the FAQ](/../FAQ.md).
 
@@ -165,7 +165,7 @@ The current list of no-profit routes is:
 >
 > -- <cite>Rydian</cite>
 
-A common occurance while trading is that, after you buy the maximum number of some item, you still have slots, weight, and ducats left to buy other items. Instead of wasting these slots, MabiCommerce will fill them with other items, so you truly get the most bang for your, err... Ducat. MabiCommerce will even explore the possibily of rounding down to the nearest whole-slot, instead of only partially filling slots.
+A common occurance while trading is that, after you buy the maximum number of some item, you still have slots, weight, and ducats left to buy other items. Instead of wasting these slots, MabiCommerce will fill them with other items, so you truly get the most bang for your, err... Ducat. MabiCommerce will even explore the possibily of rounding down to the nearest whole-slot, instead of leaving one slot partially filled.
 
 For more details, see the [Algorithm](#Algorithm) section.
 
