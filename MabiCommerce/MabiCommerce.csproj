@@ -96,6 +96,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Domain\Item.cs" />
+    <Compile Include="Domain\MerchantLevel.cs" />
     <Compile Include="Domain\Trading\Load.cs" />
     <Compile Include="Domain\Mapping\Portal.cs" />
     <Compile Include="Domain\Mapping\Connection.cs" />
@@ -183,6 +184,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\db\posts.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\db\merchant_levels.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\img\worldmap\abb.png">
