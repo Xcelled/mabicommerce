@@ -148,7 +148,7 @@ namespace MabiCommerce.Domain
 				foreach (var p2 in e.Posts)
 				{
 					if (p2 == p)
-						break;
+						continue;
 
 					progress(done / total, "Caching route data...");
 					e.Route(p.Waypoint, p2.Waypoint);
