@@ -26,6 +26,7 @@ namespace MabiCommerce.Domain
 
 		public List<Region> Regions { get; private set; }
 		public List<Portal> Portals { get; private set; }
+		public List<MerchantLevel> MerchantLevels { get; private set; }
 		public AdjacencyGraph<Waypoint, Connection> World { get; private set; }
 
 		private long _ducats = 1000;
@@ -69,7 +70,7 @@ namespace MabiCommerce.Domain
 			if (progress == null)
 				progress = (d, s) => { };
 
-			var total = 5.0;
+			var total = 6.0;
 
 			progress(0 / total, "Loading transports...");
 			e.Transports = new ObservableCollection<Transportation>(
@@ -86,9 +87,11 @@ namespace MabiCommerce.Domain
 			e.Regions = JsonConvert.DeserializeObject<List<Region>>(File.ReadAllText(Path.Combine(dataDir, "db/regions.js")));
 			progress(4 / total, "Loading transports...");
 			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
-			e.World = new AdjacencyGraph<Waypoint, Connection>();
+			progress(5 / total, "Loading merchant levels...");
+			e.MerchantLevels = JsonConvert.DeserializeObject<List<MerchantLevel>>(File.ReadAllText(Path.Combine(dataDir, "db/merchant_levels.js")));
 
 			progress(0, "Initializing data...");
+			e.World = new AdjacencyGraph<Waypoint, Connection>();
 			foreach (var _ in e.Modifiers)
 			{
 				var mod = _;
@@ -105,6 +108,9 @@ namespace MabiCommerce.Domain
 						conflict.Enabled = false;
 				};
 			}
+
+			foreach (var p in e.Posts)
+				p.MerchantLevel = e.MerchantLevels.First();
 
 			InitializeProfits(e);
 			MapWorld(e, progress);

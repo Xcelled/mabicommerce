@@ -208,7 +208,7 @@ namespace MabiCommerce.Network
 				var town = _tradingWindow.Erinn.Posts.FirstOrDefault(t => t.Id == townId);
 
 				if (town != null)
-					town.MerchantRating = GetMerchantRating(tradingExp);
+					town.MerchantLevel = GetMerchantLevel(tradingExp);
 			}
 
 			if (Properties.Settings.Default.SniffTransports)
@@ -236,7 +236,7 @@ namespace MabiCommerce.Network
 				var town = _tradingWindow.Erinn.Posts.FirstOrDefault(t => t.Id == townId);
 
 				if (town != null)
-					town.MerchantRating = GetMerchantRating(tradingExp);
+					town.MerchantLevel = GetMerchantLevel(tradingExp);
 			}
 
 			if (Properties.Settings.Default.SniffTransports)
@@ -280,7 +280,7 @@ namespace MabiCommerce.Network
 				if (item != null)
 				{
 					item.Stock = stock;
-					item.Price = (int)Math.Round(normalizedCost * MerchantDiscounts[post.MerchantRating], MidpointRounding.AwayFromZero);
+					item.Price = (int)Math.Round(normalizedCost * post.MerchantLevel.Discount, MidpointRounding.AwayFromZero);
 				}
 
 				var townCount = packet.GetInt();
@@ -316,34 +316,9 @@ namespace MabiCommerce.Network
 			//_tradingWindow.CalculateTrades();
 		}
 
-		private static readonly List<int> MerchantRatings = new List<int>()
+		private MerchantLevel GetMerchantLevel(int tradingExp)
 		{
-			0,
-			500,
-			3500,
-			13500,
-			38500,
-			98500,
-			248500,
-			598500,
-			1148500
-		};
-		private static readonly Dictionary<int, double> MerchantDiscounts = new Dictionary<int, double>
-		{
-			{ 1, 1},
-			{2, 1},
-			{3, 1},
-			{4, 1},
-			{5, .99},
-			{6, .99},
-			{7,.98},
-			{8,.98},
-			{9,.97},
-		};
-
-		private static int GetMerchantRating(int tradingExp)
-		{
-			return MerchantRatings.TakeWhile(level => tradingExp >= level).Count();
+			return _tradingWindow.Erinn.MerchantLevels.TakeWhile(level => tradingExp >= level.Exp).Last();
 		}
 	}
 }
