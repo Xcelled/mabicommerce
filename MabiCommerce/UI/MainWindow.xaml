@@ -84,13 +84,13 @@
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 				<StackPanel Orientation="Horizontal">
-					<Button Name="ConnectBtn" Click="ConnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Network.Connected, Converter={ui:NotConverter}}">
+					<Button Name="ConnectBtn" Click="ConnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Connected, Converter={ui:NotConverter}}">
 						<StackPanel Orientation="Horizontal">
 							<Ellipse Fill="Lime" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
 							<TextBlock>Connect</TextBlock>
 						</StackPanel>
 					</Button>
-					<Button Name="DisonnectBtn" Click="DisonnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Network.Connected}">
+					<Button Name="DisonnectBtn" Click="DisonnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Connected}">
 						<StackPanel Orientation="Horizontal">
 							<Ellipse Fill="Red" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
 							<TextBlock>Disconnect</TextBlock>
