@@ -274,7 +274,7 @@
 								<ItemsControl ItemsSource="{Binding Transports}">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<CheckBox Content="{Binding FullName}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
+											<CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
@@ -377,7 +377,7 @@
 								<Image DockPanel.Dock="Left" Source="{Binding Icon, Converter={ui:RelativeToAbsolutePathConverter}}"
 									   Width="48" Height="48" Margin="2" />
 								<Viewbox StretchDirection="DownOnly" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top">
-									<TextBlock Text="{Binding FullName}" HorizontalAlignment="Left" Foreground="White" FontSize="22"
+									<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Foreground="White" FontSize="22"
 											   Margin="0,6,0,0" FontWeight="Bold" />
 								</Viewbox>
 							</DockPanel>

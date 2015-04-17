@@ -20,32 +20,13 @@ namespace MabiCommerce.Domain
 		[JsonProperty(Required = Required.Always)]
 		public float SpeedFactor { get; private set; }
 		[JsonProperty(Required = Required.Always)]
-		public int BaseSlots { get; private set; }
+		public int Slots { get; private set; }
 		[JsonProperty(Required = Required.Always)]
-		public int BaseWeight { get; private set; }
+		public int Weight { get; private set; }
 		[JsonProperty(Required = Required.Default)]
 		public bool IsRequired { get; private set; }
 		[JsonProperty(Required = Required.Default)]
 		public int Id { get; private set; }
-
-		private readonly ObservableCollection<Modifier> _modifiers = new ObservableCollection<Modifier>();
-		public ReadOnlyObservableCollection<Modifier> Modifiers { get; private set; }
-
-		public int Slots { get { return BaseSlots + Modifiers.Where(m => m.Enabled).Sum(m => m.ExtraSlots); } }
-		public int Weight { get { return BaseWeight + Modifiers.Where(m => m.Enabled).Sum(m => m.ExtraWeight); } }
-
-		public string FullName
-		{
-			get
-			{
-				if (Modifiers.Any(m => m.Enabled))
-				{
-					return string.Format("{0} ({1})", Name, string.Join(", ", Modifiers.Where(m => m.Enabled).Select(m => m.Name)));
-				}
-
-				return Name;
-			}
-		}
 
 		private bool _enabled;
 		public bool Enabled
@@ -75,35 +56,18 @@ namespace MabiCommerce.Domain
 		}
 
 		[JsonConstructor]
-		public Transportation(string name, string icon, float speedFactor, int baseSlots, int baseWeight, bool isRequired, int id)
+		public Transportation(string name, string icon, float speedFactor, int slots, int weight, bool isRequired, int id)
 		{
 			Id = id;
 			IsRequired = isRequired;
-			BaseWeight = baseWeight;
-			BaseSlots = baseSlots;
+			Weight = weight;
+			Slots = slots;
 			SpeedFactor = speedFactor;
 			Icon = icon;
 			Name = name;
 
 			if (IsRequired)
 				Enabled = true;
-
-			Modifiers = new ReadOnlyObservableCollection<Modifier>(_modifiers);
-
-			System.Diagnostics.Debug.Assert(BaseWeight != 0, "Base weight is 0 for " + name);
-			System.Diagnostics.Debug.Assert(BaseSlots != 0, "Base slots is 0 for " + name);
-		}
-
-		public void AddModifier(Modifier mod)
-		{
-			_modifiers.Add(mod);
-			mod.PropertyChanged += mod_PropertyChanged;
-			RaisePropertyChangedExplicit("FullName");
-		}
-
-		void mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
-			RaisePropertyChangedExplicit("FullName");
 		}
 
 		public override string ToString()
