@@ -89,22 +89,6 @@ namespace MabiCommerce.Domain
 			e.World = new AdjacencyGraph<Waypoint, Connection>();
 
 			progress(0, "Initializing data...");
-			foreach (var _ in e.Modifiers)
-			{
-				var mod = _;
-
-				foreach (var t in e.Transports.Where(a => mod.AppliesTo.Contains(a.Id)))
-					t.AddModifier(mod);
-
-				mod.PropertyChanged += (o, a) =>
-				{
-					if (!mod.Enabled)
-						return;
-
-					foreach (var conflict in e.Modifiers.Where(m => mod.ConflictsWith.Contains(m.Id)))
-						conflict.Enabled = false;
-				};
-			}
 
 			InitializeProfits(e);
 			MapWorld(e, progress);
