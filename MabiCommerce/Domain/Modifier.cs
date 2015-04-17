@@ -15,16 +15,25 @@ namespace MabiCommerce.Domain
 		public int Id { get; private set; }
 		[JsonProperty(Required = Required.Always)]
 		public string Name { get; private set; }
-		[JsonProperty(Required = Required.Always)]
+		[JsonProperty(Required = Required.Default)]
 		public int ExtraSlots { get; private set; }
-		[JsonProperty(Required = Required.Always)]
+		[JsonProperty(Required = Required.Default)]
 		public int ExtraWeight { get; private set; }
-		[JsonProperty(Required = Required.Always)]
-		public List<int> AppliesTo { get; private set; }
-		[JsonProperty(Required = Required.Always)]
+		[JsonProperty(Required = Required.Default)]
+		public double SpeedBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public double ExpBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public double GoldBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public double ProfitBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public List<int> TransportationBlacklist { get; private set; }
+		[JsonProperty(Required = Required.Default)]
 		public List<int> ConflictsWith { get; private set; }
 
 		private bool _enabled;
+		[JsonIgnore]
 		public bool Enabled
 		{
 			get { return _enabled; }
@@ -49,10 +58,11 @@ namespace MabiCommerce.Domain
 			}
 		}
 
-		public Modifier(int id, string name, int extraSlots, int extraWeight, List<int> appliesTo, List<int> conflictsWith)
+		public Modifier(int id, string name, int extraSlots, int extraWeight, List<int> transportationBlacklist, List<int> conflictsWith)
+			: this()
 		{
 			ConflictsWith = conflictsWith;
-			AppliesTo = appliesTo;
+			TransportationBlacklist = transportationBlacklist;
 			ExtraWeight = extraWeight;
 			ExtraSlots = extraSlots;
 			Name = name;
