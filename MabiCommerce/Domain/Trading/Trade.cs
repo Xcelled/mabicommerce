@@ -42,6 +42,10 @@ namespace MabiCommerce.Domain.Trading
 			//MerchantRating *= (1 + modifiers.Sum(m => m.MerchantRating));
 			Experience *= (1 + modifiers.Sum(m => m.ExpBonus));
 
+			Gold = Math.Max(0, Gold);
+			MerchantRating = Math.Max(0, MerchantRating);
+			Experience = Math.Max(0, Experience);
+
 			ProfitPerSecond = Profit / Duration.TotalSeconds;
 
 			if (source.NoProfits.Contains(destination.Id))
