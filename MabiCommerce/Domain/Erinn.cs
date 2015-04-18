@@ -87,46 +87,11 @@ namespace MabiCommerce.Domain
 			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
 			e.World = new AdjacencyGraph<Waypoint, Connection>();
 
-			e._modifierCombinatons = GetModifierCombinations(e.Modifiers);
 
 			progress(0, "Initializing data...");
 
 			InitializeProfits(e);
 			MapWorld(e, progress);
-		}
-
-		// Given A, B, C
-		// Produces A, AB, B, AC, ABC, BC, C
-		private static List<List<Modifier>> GetModifierCombinations(IList<Modifier> modifiers, Action<double, string> progress)
-		{
-			var combinations = new List<List<Modifier>>();
-
-			for (var append = 1; append < modifiers.Count; append++;)
-			{
-				Progress((append - 1) / (double)modifiers.Count, "Computing modifier combinations");
-
-				// Add another "base" element
-				combinations.Add(new List<Modifier> { modifiers[append - 1] });
-
-				for (int i = 0, count = combinations.Count; i < count; i++)
-				{
-					var existing = combinations[i];
-					var toAdd = modifiers[append];
-
-					// If we'd produce a conflict (illegal state), skip adding it.
-					if (existing.Any(m => toAdd.ConflictsWith.Contains(m.Id)))
-						continue;
-
-					var newSet = new List<Modifier>(existing);
-					newSet.Add(toAdd);
-					combinations.Add(newSet);
-				}
-			}
-
-			// Add the last modifer by itself (since for loop is 1 based)
-			combinations.Add(new List<Modifier> { modifiers.Last() });
-
-			return combinations;
 		}
 
 		private static void MapWorld(Erinn e, Action<double, string> progress)
@@ -262,19 +227,31 @@ namespace MabiCommerce.Domain
 			var newTrades = new ConcurrentBag<Trade>();
 
 			var s = new System.Diagnostics.Stopwatch();
-
 			s.Start();
+
+			var mods = GetModifierCombinations();
 
 			Parallel.ForEach(Transports.Where(t => t.Enabled), t =>
 				{
-					var loads = new ConcurrentBag<Load>();
-					GetLoads(loads, post, new Load(t.Slots, t.Weight), Ducats);
+					var allowedMods = mods.Where(combination =>
+						!combination.Any(m => 
+							m.TransportationBlacklist.Contains(t.Id))
+						);
 
-					foreach (var load in loads)
-						foreach (var dst in Posts.Where(p => p != post))
-						{
-							newTrades.Add(new Trade(t, Route(post.Waypoint, dst.Waypoint), load, post, dst));
-						}
+					Parallel.ForEach(allowedMods, m =>
+					{
+						var baseLoad = new Load(t.Slots + m.Sum(i => i.ExtraSlots),
+							t.Weight + m.Sum(i => i.ExtraWeight));
+
+						var loads = new ConcurrentBag<Load>();
+						GetLoads(loads, post, baseLoad, Ducats);
+
+						foreach (var load in loads)
+							foreach (var dst in Posts.Where(p => p != post))
+							{
+								newTrades.Add(new Trade(t, Route(post.Waypoint, dst.Waypoint), load, post, dst, m));
+							}
+					}
 				});
 
 			s.Stop();
@@ -282,6 +259,44 @@ namespace MabiCommerce.Domain
 			System.Diagnostics.Debug.WriteLine("Calculated {0} possible trades ({1} items, {2} destinations, {3} means of transport) in {4}", newTrades.Count, post.Items.Count(i => i.Status == ItemStatus.Available), Posts.Count - 1, Transports.Count(t => t.Enabled), s.Elapsed);
 
 			return newTrades;
+		}
+
+		// Given A, B, C
+		// Produces A, AB, B, AC, ABC, BC, C
+		private static List<List<Modifier>> GetModifierCombinations(IList<Modifier> modifiers, Action<double, string> progress)
+		{
+			var combinations = new List<List<Modifier>>();
+
+			combinations.Add(new List<Modifier>());
+
+			for (var append = 1; append < modifiers.Count; append++;)
+			{
+				// Add another "base" element
+				combinations.Add(new List<Modifier> { modifiers[append - 1] });
+
+				var toAdd = modifiers[append];
+				if (!toAdd.Enabled)
+					continue;
+
+				for (int i = 0, count = combinations.Count; i < count; i++)
+				{
+					var existing = combinations[i];
+
+					// If we'd produce a conflict (illegal state), skip adding it.
+					if (existing.Any(m => toAdd.ConflictsWith.Contains(m.Id)))
+						continue;
+
+					var newSet = new List<Modifier>(existing);
+					newSet.Add(toAdd);
+					combinations.Add(newSet);
+				}
+			}
+
+			// Add the last modifer by itself (since for loop is 1 based)
+			if (modifiers.Last().Enabled)
+				combinations.Add(new List<Modifier> { modifiers.Last() });
+
+			return combinations;
 		}
 	}
 }
