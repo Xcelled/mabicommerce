@@ -17,38 +17,38 @@
 	{
 		"Id" : 2,
 		"Name": "Alpaca Robe",
-		"SpeedBonus": 1.2, 
+		"SpeedBonus": .2, 
 	},
 	{
 		"Id" : 3,
 		"Name": "Letter [Ogre]",
-		"ExpBonus": 1.3, 
-		"GoldBonus": 1.3, 
-		"ProfitBonus": 1.3, 
+		"ExpBonus": 0.3, 
+		"GoldBonus": 0.3, 
+		"ProfitBonus": 0.3, 
 		"ConflictsWith" : [4,5,6,7,8]
 	},
 	{
 		"Id" : 4,
 		"Name": "Letter [Goblin]",
-		"ExpBonus": 1.4, 
-		"GoldBonus": 1.4, 
-		"ProfitBonus": 1.4, 
+		"ExpBonus": 0.4, 
+		"GoldBonus": 0.4, 
+		"ProfitBonus": 0.4, 
 		"ConflictsWith" : [3,5,6,7,8]
 	},
 	{
 		"Id" : 5,
 		"Name": "Letter [Imp]",
-		"ExpBonus": 1.5, 
-		"ProfitBonus": 1.5, 
-		"GoldBonus": 1.5, 
+		"ExpBonus": 0.5, 
+		"ProfitBonus": 0.5, 
+		"GoldBonus": 0.5, 
 		"ConflictsWith" : [3,4,6,7,8]
 	},
 	{
 		"Id" : 6,
 		"Name": "Letter [Ogre, Fine]",
-		"ExpBonus": 1.9, 
-		"GoldBonus": 1.9, 
-		"ProfitBonus": 1.9, 
+		"ExpBonus": 0.9, 
+		"GoldBonus": 0.9, 
+		"ProfitBonus": 0.9, 
 		"ConflictsWith" : [3,4,5,7,8]
 	},
 	{
