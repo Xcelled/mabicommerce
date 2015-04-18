@@ -29,7 +29,6 @@ namespace MabiCommerce.Domain
 		public AdjacencyGraph<Waypoint, Connection> World { get; private set; }
 
 		private long _ducats = 1000;
-
 		public long Ducats
 		{
 			get { return _ducats; }
@@ -40,7 +39,7 @@ namespace MabiCommerce.Domain
 			}
 		}
 
-
+		private List<List<Modifier>> _modifierCominatons;
 		private readonly ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>> _routeCache =
 			new ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>>();
 
@@ -88,10 +87,46 @@ namespace MabiCommerce.Domain
 			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
 			e.World = new AdjacencyGraph<Waypoint, Connection>();
 
+			e._modifierCombinatons = GetModifierCombinations(e.Modifiers);
+
 			progress(0, "Initializing data...");
 
 			InitializeProfits(e);
 			MapWorld(e, progress);
+		}
+
+		// Given A, B, C
+		// Produces A, AB, B, AC, ABC, BC, C
+		private static List<List<Modifier>> GetModifierCombinations(IList<Modifier> modifiers, Action<double, string> progress)
+		{
+			var combinations = new List<List<Modifier>>();
+
+			for (var append = 1; append < modifiers.Count; append++;)
+			{
+				Progress((append - 1) / (double)modifiers.Count, "Computing modifier combinations");
+
+				// Add another "base" element
+				combinations.Add(new List<Modifier> { modifiers[append - 1] });
+
+				for (int i = 0, count = combinations.Count; i < count; i++)
+				{
+					var existing = combinations[i];
+					var toAdd = modifiers[append];
+
+					// If we'd produce a conflict (illegal state), skip adding it.
+					if (existing.Any(m => toAdd.ConflictsWith.Contains(m.Id)))
+						continue;
+
+					var newSet = new List<Modifier>(existing);
+					newSet.Add(toAdd);
+					combinations.Add(newSet);
+				}
+			}
+
+			// Add the last modifer by itself (since for loop is 1 based)
+			combinations.Add(new List<Modifier> { modifiers.Last() });
+
+			return combinations;
 		}
 
 		private static void MapWorld(Erinn e, Action<double, string> progress)
