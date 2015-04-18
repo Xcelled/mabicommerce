@@ -44,7 +44,7 @@ If you see a file called `client`, you're in the right place. Copy Morrighan and
 1. If you're using AutoDetect, make sure you started the game with MorriOneClick. You should see a black box with an `M` in it in the upper left corner of your screen.
 2. Run MabiCommerce by double clicking on it.
 3. If you're using AutoDetect, click connect. If not, enter your information like your transports.
-4. Select any modifiers you might have.
+4. Select any modifiers you might have. Be warned, large numbers of modifiers may slow down the application! See the `Modifiers` section later in this document for details.
 5. Talk to a goblin and trade!
 6. If you're using AutoDetect, MabiCommerce should have filled all the information in for you. If not, you'll have to enter the prices and profits (red/blue numbers!) for each item by hand, as well as the stock, your current ducats, and merchant level.
 7. Press "Calculate Trades". The button will change appearance and become unclickable until calculation is finished. This may take several seconds, depending on your computer.
@@ -73,10 +73,12 @@ Here's a laundry list of what MabiCommerce takes into account when calculating t
 And here is what MabiCommerce tells you about each trade:
 
  - Score: This is how "good" the trade is. It represents how many ducats you earn for every second of trading.
- - Total Profit: The total amount you'll earn, in ducats. This is also the amount of gold and merchant rating you'll get.
- - Total Cost: How much you'll pay to buy the load.
+ - Profit: The total amount you'll earn, in ducats.
+ - Gold: The total amount of gold you'll earn.
+ - Merchant Rating: The total amount of merchant rating you'll receive.
+ - Cost: How much you'll pay to buy the load.
  - Flags: Extra route information, such as No Profit or Choke Point.
- - Exp: The amount of exp you'll get for the load.
+ - Exp: The amount of experince you'll get for the load.
 
 #### Merchant Rating
 
@@ -106,9 +108,17 @@ Many traders think that the wagon is better, because of its speed bonus and thus
 
 The question remains: Horse's slots and speed or Elephant's weight? The answer is... it depends on what you're taking where. Usually, it's a pain to figure this out. MabiCommerce will calculate the results for each, eliminating guesswork.
 
-#### Modifiers (Commerce Partner, Alpaca)
+#### Modifiers (Commerce Partner, Alpaca, ...)
 
 If you have a Commerce Partner or Alpaca, one of more of your transportation methods receives an upgrade to weight, slots, or both, essentially turning it into a new form of transportation. Not taking this into account results in some heafty missed profits.
+
+Additionally, since MabiCommerce 2.0.2, Alpaca Robes and Letters of Guarantee are supported to improve accuracy.
+
+MabiCommerce will evaluate all combinations of enabled modifiers (the [power set](http://en.wikipedia.org/wiki/Power_set), for you math geeks) to find the best combination for you.
+
+**Note:** Because the size of the *n*th power set is `2^n`, enabling a large number of modifiers can drastically lengthen the time it takes to calculate trades. For example, while 2 modifiers only increases complexity by a factor of 4, enabling 9 modifiers will cause calculation to take **512** times as long. This is the difference between MabiCommerce doing its work in 4 seconds vs 8 minutes!
+
+For those of you wondering: Yes, I have optimized the power set algorithm. It will [short circuit](http://en.wikipedia.org/wiki/Short-circuit_evaluation) "illegal" states, such as multiple letters. This should severely reduce the amount of sets actually generated, but the above is still worth bearing in mind.
 
 #### Total Time
 
