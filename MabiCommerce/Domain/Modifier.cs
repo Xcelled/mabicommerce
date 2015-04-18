@@ -58,15 +58,22 @@ namespace MabiCommerce.Domain
 			}
 		}
 
-		public Modifier(int id, string name, int extraSlots, int extraWeight, List<int> transportationBlacklist, List<int> conflictsWith)
-			: this()
+		public Modifier(int id, string name, int extraSlots, int extraWeight,
+			double speedBonus, double expBonus, double goldBonus, double profitBonus,
+			List<int> transportationBlacklist, List<int> conflictsWith)
 		{
+			Id = id;
+			Name = name;
+
+			ExtraSlots = extraSlots;
+			ExtraWeight = extraWeight;
+			SpeedBonus = speedBonus;
+			ExpBonus = expBonus;
+			GoldBonus = goldBonus;
+			ProfitBonus = profitBonus;
+
 			ConflictsWith = conflictsWith;
 			TransportationBlacklist = transportationBlacklist;
-			ExtraWeight = extraWeight;
-			ExtraSlots = extraSlots;
-			Name = name;
-			Id = id;
 		}
 	}
 }

@@ -33,8 +33,8 @@ namespace MabiCommerce.Domain
 
 		public Waypoint Waypoint { get; set; }
 
-		private int _merchantRating;
-		public int MerchantRating
+		private MerchantRating _merchantRating;
+		public MerchantRating MerchantRating
 		{
 			get { return _merchantRating; }
 			set
@@ -60,8 +60,6 @@ namespace MabiCommerce.Domain
 			Items = items;
 			Image = image;
 			Name = name;
-
-			MerchantRating = 1;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
