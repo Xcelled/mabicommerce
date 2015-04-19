@@ -343,7 +343,7 @@ namespace MabiCommerce.Network
 
 		private static int GetMerchantRating(int tradingExp)
 		{
-			return MerchantRatings.TakeWhile(level => tradingExp > level).Count();
+			return MerchantRatings.TakeWhile(level => tradingExp >= level).Count();
 		}
 	}
 }
