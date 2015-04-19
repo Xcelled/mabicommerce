@@ -24,6 +24,7 @@ namespace MabiCommerce.Domain
 		public ObservableCollection<Trade> Trades { get; private set; }
 		public ObservableCollection<Modifier> Modifiers { get; private set; }
 
+		public List<CommerceMasteryRank> CommerceMasteryRanks { get; private set; }
 		public List<Region> Regions { get; private set; }
 		public List<Portal> Portals { get; private set; }
 		public AdjacencyGraph<Waypoint, Connection> World { get; private set; }
@@ -39,7 +40,17 @@ namespace MabiCommerce.Domain
 			}
 		}
 
-		private List<List<Modifier>> _modifierCominatons;
+		private CommerceMasteryRank _cmRank;
+		public CommerceMasteryRank CmRank
+		{
+			get { return _cmRank; }
+			set
+			{
+				_cmRank = value;
+				RaisePropertyChanged();
+			}
+		}
+
 		private readonly ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>> _routeCache =
 			new ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>>();
 
@@ -68,27 +79,37 @@ namespace MabiCommerce.Domain
 			if (progress == null)
 				progress = (d, s) => { };
 
-			var total = 5.0;
+			var total = 6.0;
+			var done = 0;
 
-			progress(0 / total, "Loading transports...");
+			progress(done / total, "Loading transports...");
 			e.Transports = new ObservableCollection<Transportation>(
 				JsonConvert.DeserializeObject<List<Transportation>>(File.ReadAllText(Path.Combine(dataDir, "db/transports.js"))));
-			progress(1 / total, "Loading modifiers...");
+			done++;
+			progress(done / total, "Loading modifiers...");
 			e.Modifiers = new ObservableCollection<Modifier>(
 				JsonConvert.DeserializeObject<List<Modifier>>(File.ReadAllText(Path.Combine(dataDir, "db/modifiers.js"))));
-			progress(2 / total, "Loading posts...");
+			done++;
+			progress(done / total, "Loading commerce mastery ranks...");
+			e.CommerceMasteryRanks = JsonConvert.DeserializeObject<List<CommerceMasteryRank>>(File.ReadAllText(Path.Combine(dataDir, "db/commerce_mastery_ranks.js")));
+			done++;
+			progress(done / total, "Loading posts...");
 			e.Posts = new ObservableCollection<TradingPost>(
 				JsonConvert.DeserializeObject<List<TradingPost>>(File.ReadAllText(Path.Combine(dataDir, "db/posts.js"))));
-			e.Trades = new ObservableCollection<Trade>();
+			done++;
 
-			progress(3 / total, "Loading regions...");
+			progress(done / total, "Loading regions...");
 			e.Regions = JsonConvert.DeserializeObject<List<Region>>(File.ReadAllText(Path.Combine(dataDir, "db/regions.js")));
-			progress(4 / total, "Loading transports...");
+			done++:
+			progress(done / total, "Loading portals...");
 			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
-			e.World = new AdjacencyGraph<Waypoint, Connection>();
+			done++;
 
 
 			progress(0, "Initializing data...");
+			e.Trades = new ObservableCollection<Trade>();
+			e.World = new AdjacencyGraph<Waypoint, Connection>();
+			e.CmRank = e.CommerceMasteryRanks.First();
 
 			InitializeProfits(e);
 			MapWorld(e, progress);
@@ -230,6 +251,12 @@ namespace MabiCommerce.Domain
 			s.Start();
 
 			var mods = GetModifierCombinations();
+
+			var cmMod = new Modifier(-1, "Commerce Mastery", 0, 0, 0,
+					CmRank.Bonus, CmRank.Bonus, CmRank.Bonus, new List<int>(), new List<int>());
+
+			foreach (var m in mods)
+				m.Add(cmMod);
 
 			Parallel.ForEach(Transports.Where(t => t.Enabled), t =>
 				{
