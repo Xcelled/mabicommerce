@@ -78,7 +78,7 @@ And here is what MabiCommerce tells you about each trade:
  - Merchant Rating: The total amount of merchant rating you'll receive.
  - Cost: How much you'll pay to buy the load.
  - Flags: Extra route information, such as No Profit or Choke Point.
- - Exp: The amount of experince you'll get for the load.
+ - Exp: The amount of experience you'll get for the load.
 
 #### Merchant Rating
 
@@ -191,7 +191,7 @@ Ever wanted to know how MabiCommerce does what it does, but you don't want to go
 CODE GOES HERE.
 ````
 
-## Acknowledgements
+## Acknowledgments
 
 MabiCommerce would not have happened without the contributions of these wonderful people:
 
