@@ -9,18 +9,30 @@ namespace MabiCommerce.Domain.Trading
 		public Route Route { get; private set; }
 		public Load Load { get; private set; }
 		public TradingPost Destination { get; private set; }
-		public TimeSpan Duration { get; private set; }
+		public TradeFlags Flags { get; private set; }
+		public List<Modifiers> Modifiers { get; private set; }
+		public double ProfitPerSecond { get; private set; }
 
+		public TimeSpan Duration { get; private set; }
 		public int Cost { get; private set; }
 		public int Profit { get; private set; }
 		public int Gold { get; private set; }
 		public int MerchantRating { get; private set; }
-		public int ProfitPerSecond { get; private set; }
-		public long Experience { get; private set; }
+		public int Experience { get; private set; }
 
-		public TradeFlags Flags { get; private set; }
+		public TimeSpan BaseDuration { get; private set; }
+		public int BaseCost { get; private set; }
+		public int BaseProfit { get; private set; }
+		public int BaseGold { get; private set; }
+		public int BaseMerchantRating { get; private set; }
+		public int BaseExperience { get; private set; }
 
-		public List<Modifiers> Modifiers { get; private set; }
+		public TimeSpan AddedDuration { get; private set; }
+		public int AddedCost { get; private set; }
+		public int AddedProfit { get; private set; }
+		public int AddedGold { get; private set; }
+		public int AddedMerchantRating { get; private set; }
+		public int AddedExperience { get; private set; }
 
 		public Trade(Transportation transport, Route route, Load load, TradingPost source, TradingPost destination, List<Modifier> modifiers)
 		{
@@ -30,21 +42,26 @@ namespace MabiCommerce.Domain.Trading
 			Transport = transport;
 			Modifiers = modifiers;
 
-			Duration = TimeSpan.FromSeconds(route.Duration.TotalSeconds / 
-				(Transport.SpeedFactor + modifiers.Sum(m => m.SpeedBonus)));
+			BaseDuration = TimeSpan.FromSeconds(route.Duration.TotalSeconds / Transport.SpeedFactor);
+			BaseCost = load.Slots.Sum(i => i.Key.Price * i.Value);
+			BaseProfit = BaseGold = BaseMerchantRating = load.CalculateProfit(destination);
+			BaseExperience = load.CalculateExperience(destination);
 
-			Cost = load.Slots.Sum(i => i.Key.Price * i.Value);
-			Profit = Gold = MerchantRating = load.CalculateProfit(destination);
-			Experience = load.CalculateExperience(destination);
-
-			Profit *= (1 + modifiers.Sum(m => m.ProfitBonus));
-			Gold *= (1 + modifiers.Sum(m => m.GoldBonus));
-			//MerchantRating *= (1 + modifiers.Sum(m => m.MerchantRating));
-			Experience *= (1 + modifiers.Sum(m => m.ExpBonus));
+			Profit = BaseProfit * (1 + modifiers.Sum(m => m.ProfitBonus));
+			Gold = BaseGold * (1 + modifiers.Sum(m => m.GoldBonus));
+			MerchantRating = BaseMerchantRating * (1 + modifiers.Sum(m => m.MerchantRating));
+			Experience = BaseExperience * (1 + modifiers.Sum(m => m.ExpBonus));
+			Duration = BaseDuration / (1  + modifiers.Sum(m => m.SpeedBonus));
 
 			Gold = Math.Max(0, Gold);
 			MerchantRating = Math.Max(0, MerchantRating);
 			Experience = Math.Max(0, Experience);
+
+			AddedProfit = Profit - BaseProfit;
+			AddedGold = Gold - BaseGold;
+			AddedMerchantRating = MerchantRating - BaseMerchantRating;
+			AddedExperience = Experience - BaseExperience;
+			AddedDuration = Duration - BaseDuration;
 
 			ProfitPerSecond = Profit / Duration.TotalSeconds;
 
