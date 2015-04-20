@@ -44,6 +44,9 @@ namespace MabiCommerce.Domain
 			}
 		}
 
+		[JsonIgnore]
+		public string EffectDescription { get; private set; }
+
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void RaisePropertyChanged([CallerMemberName] string caller = "")
 		{
@@ -74,6 +77,25 @@ namespace MabiCommerce.Domain
 
 			ConflictsWith = conflictsWith;
 			TransportationBlacklist = transportationBlacklist;
+
+			const string intFormat = "+#,###;-#,###";
+			const string percentFormat = "+#,##0.##%;-#,##0.##%";
+
+			var effects = new StringBuilder();
+			if (extraSlots != 0)
+				effects.AppendLine(string.Format("{0} Slots", extraSlots.ToString(intFormat)));
+			if (extraWeight != 0)
+				effects.AppendLine(string.Format("{0} Weight", extraWeight.ToString(intFormat)));
+			if (speedBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Speed", speedBonus.ToString(percentFormat)));
+			if (profitBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Profit", profitBonus.ToString(percentFormat)));
+			if (goldBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Gold", goldBonus.ToString(percentFormat)));
+			if (expBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Exp", expBonus.ToString(percentFormat)));
+
+			EffectDescription = effects.ToString().Trim();
 		}
 	}
 }

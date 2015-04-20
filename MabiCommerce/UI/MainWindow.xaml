@@ -268,8 +268,8 @@
 				</DockPanel>
 				<Grid Grid.Row="3" >
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition />
 					</Grid.ColumnDefinitions>
 					<GroupBox Foreground="Wheat" BorderBrush="Wheat" Header="I have a..." Margin="0,0,0,2">
 						<DockPanel>
@@ -277,7 +277,7 @@
 								<ItemsControl ItemsSource="{Binding Transports}">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
+											<CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White"  />
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
@@ -290,7 +290,9 @@
 								<ItemsControl ItemsSource="{Binding Modifiers}">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
+											<CheckBox IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White">
+												<TextBlock Text="{Binding Name}" TextWrapping="Wrap" ToolTip="{Binding EffectDescription}" />
+											</CheckBox>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
