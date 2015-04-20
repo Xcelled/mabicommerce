@@ -333,18 +333,59 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn Binding="{Binding ProfitPerSecond, StringFormat=N2}" Width="Auto">
 							<DataGridTextColumn.Header>
-								<TextBlock ToolTip="The trade's score, expressed in earned ducats/second.">Score</TextBlock>
+								<TextBlock ToolTip="The trade's score, expressed in earned-ducats-per-second.">Score</TextBlock>
 							</DataGridTextColumn.Header>
 						</DataGridTextColumn>
 						<DataGridTextColumn Header="Destination" Binding="{Binding Destination.Name}" />
-						<DataGridTextColumn Header="Total Profit" Binding="{Binding Profit, StringFormat=N0}" />
-						<DataGridTextColumn Binding="{Binding Duration, StringFormat=m\\:ss}">
-							<DataGridTextColumn.Header>
+						<DataGridTemplateColumn Header="Profit">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Profit, StringFormat=N0}" /> (<Run Text="{Binding AddedProfit StringFormat=+#,###;-#,###;0}" />)
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Binding="{Binding Duration, StringFormat=m\\:ss}">
+							<DataGridTemplateColumn.Header>
 								<TextBlock ToolTip="Total time to run the trade, in mm:ss.">Total Time</TextBlock>
-							</DataGridTextColumn.Header>
-						</DataGridTextColumn>
+							</DataGridTemplateColumn.Header>
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Duration, StringFormat=m\\:ss}" /> (<Run Text="{Binding AddedDuration StringFormat=m\\:ss}" />)
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
 						<DataGridTextColumn Header="Cost" Binding="{Binding Cost, StringFormat=N0}" />
-						<DataGridTextColumn Header="Experience" Binding="{Binding Experience, StringFormat=N0}" />
+						<DataGridTemplateColumn Header="Gold">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Gold, StringFormat=N0}" /> (<Run Text="{Binding AddedGold StringFormat=+#,###;-#,###;0}" />)
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Merchant Rating">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding MerchantRating, StringFormat=N0}" /> (<Run Text="{Binding AddedMerchantRating StringFormat=+#,###;-#,###;0}" />)
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Experience">				<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Experience, StringFormat=N0}" /> (<Run Text="{Binding AddedExperience StringFormat=+#,###;-#,###;0}" />)
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
 						<DataGridTextColumn Header="Transport" Binding="{Binding Transport.Name}" />
 						<DataGridTextColumn Header="Flags" Binding="{Binding Flags}" />
 					</DataGrid.Columns>
