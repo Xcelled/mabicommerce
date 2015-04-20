@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MabiCommerce.Domain.Trading
@@ -10,7 +11,7 @@ namespace MabiCommerce.Domain.Trading
 		public Load Load { get; private set; }
 		public TradingPost Destination { get; private set; }
 		public TradeFlags Flags { get; private set; }
-		public List<Modifiers> Modifiers { get; private set; }
+		public List<Modifier> Modifiers { get; private set; }
 		public double ProfitPerSecond { get; private set; }
 
 		public TimeSpan Duration { get; private set; }
@@ -47,11 +48,12 @@ namespace MabiCommerce.Domain.Trading
 			BaseProfit = BaseGold = BaseMerchantRating = load.CalculateProfit(destination);
 			BaseExperience = load.CalculateExperience(destination);
 
-			Profit = BaseProfit * (1 + modifiers.Sum(m => m.ProfitBonus));
-			Gold = BaseGold * (1 + modifiers.Sum(m => m.GoldBonus));
-			MerchantRating = BaseMerchantRating * (1 + modifiers.Sum(m => m.MerchantRating));
-			Experience = BaseExperience * (1 + modifiers.Sum(m => m.ExpBonus));
-			Duration = BaseDuration / (1  + modifiers.Sum(m => m.SpeedBonus));
+			Profit = (int)(BaseProfit * (1 + modifiers.Sum(m => m.ProfitBonus)));
+			Gold = (int)(BaseGold * (1 + modifiers.Sum(m => m.GoldBonus)));
+			MerchantRating = BaseMerchantRating; // * (1 + modifiers.Sum(m => m.MerchantRating));
+			Experience = (int)(BaseExperience * (1 + modifiers.Sum(m => m.ExpBonus)));
+			Duration =
+				TimeSpan.FromSeconds(route.Duration.TotalSeconds / (Transport.SpeedFactor + modifiers.Sum(m => m.SpeedBonus)));
 
 			Gold = Math.Max(0, Gold);
 			MerchantRating = Math.Max(0, MerchantRating);
