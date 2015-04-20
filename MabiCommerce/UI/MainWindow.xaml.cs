@@ -88,15 +88,15 @@ namespace MabiCommerce.UI
 
 		private void ConnectBtn_Click(object sender, RoutedEventArgs e)
 		{
-			if (Network.AlissaHandle == IntPtr.Zero)
-				Network.SelectPacketProvider(true);
+			if (AlissaHandle == IntPtr.Zero)
+				SelectPacketProvider(true);
 
-			Network.Connect();
+			Connect();
 		}
 
 		private void DisonnectBtn_Click(object sender, RoutedEventArgs e)
 		{
-			Network.Disconnect();
+			Disconnect();
 		}
 
 		private void SettingsBtn_Click(object sender, RoutedEventArgs e)
