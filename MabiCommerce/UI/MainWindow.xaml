@@ -12,7 +12,7 @@
 		mc:Ignorable="d"
 		AllowsTransparency="True" Title="MabiCommerce" Height="536" Width="813" WindowStyle="None"
 		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window"
-		Loaded="Window_Network_Loaded" Closing="Window_Network_Closing">
+		Loaded="Window_Loaded" Closing="Window_Network_Closing">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -287,11 +287,13 @@
 					<GroupBox Grid.Column="1" Foreground="Wheat" BorderBrush="Wheat" Header="Modifiers" Margin="0,0,0,2">
 						<DockPanel>
 							<ScrollViewer DockPanel.Dock="Top" BorderBrush="{StaticResource BorderBrush}" VerticalScrollBarVisibility="Auto">
-								<ItemsControl ItemsSource="{Binding Modifiers}">
+								<ItemsControl ItemsSource="{Binding Modifiers}" Name="ModifierSelect">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
 											<CheckBox IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White">
-												<TextBlock Text="{Binding Name}" TextWrapping="Wrap" ToolTip="{Binding EffectDescription}" />
+												<Border ClipToBounds="True">
+													<TextBlock Text="{Binding Name}" ToolTip="{Binding EffectDescription}" TextWrapping="Wrap" />
+												</Border>
 											</CheckBox>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
