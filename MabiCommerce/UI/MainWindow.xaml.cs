@@ -16,12 +16,10 @@ namespace MabiCommerce.UI
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public NetworkHelper Network { get; private set; }
 		public Erinn Erinn { get; private set; }
 
 		public MainWindow()
 		{
-			Network = new NetworkHelper(this);
 			InitializeComponent();
 
 			Environment.CurrentDirectory = Path.GetDirectoryName(GetType().Assembly.Location);
