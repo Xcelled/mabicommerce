@@ -109,8 +109,10 @@ namespace MabiCommerce.Domain
 				};
 			}
 
+			var lowestMerch = e.MerchantLevels.OrderBy(m => m.Level).First();
+
 			foreach (var p in e.Posts)
-				p.MerchantLevel = e.MerchantLevels.First();
+				p.MerchantLevel = lowestMerch;
 
 			InitializeProfits(e);
 			MapWorld(e, progress);
