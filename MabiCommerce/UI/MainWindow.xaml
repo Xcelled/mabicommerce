@@ -10,7 +10,8 @@
 		xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
 		mc:Ignorable="d"
 		AllowsTransparency="True" Title="MabiCommerce" Height="536" Width="813" WindowStyle="None"
-		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window">
+		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window"
+		Loaded="Window_Network_Loaded" Closing="Window_Network_Closing">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>

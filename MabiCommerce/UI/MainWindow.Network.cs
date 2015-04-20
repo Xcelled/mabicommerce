@@ -43,7 +43,7 @@ namespace MabiCommerce.UI
 			}
 		}
 
-		void Window_Network_Closing(object sender, EventArgs e)
+		void Window_Network_Closing(object sender, CancelEventArgs e)
 		{
 			Disconnect();
 		}
