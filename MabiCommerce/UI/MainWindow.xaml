@@ -129,7 +129,7 @@
 						</Grid.RowDefinitions>
 						<ComboBox x:Name="PostSelect" ItemsSource="{Binding Path=Posts}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Left" />
 						<StackPanel Grid.Row="1" Orientation="Horizontal">
-							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">My Merchant Rating:</TextBlock>
+							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">Merchant Rating:</TextBlock>
 							<ComboBox VerticalAlignment="Top" ItemsSource="{Binding MerchantLevels}" DisplayMemberPath="Level"
 									  SelectedItem="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 						</StackPanel>
@@ -229,8 +229,7 @@
 				<StackPanel Grid.Row="0" DataContext="{Binding ElementName=ItemSelect, Path=SelectedItem}">
 					<TextBlock TextAlignment="Center" Text="{Binding Name}"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-						<TextBlock xml:space="preserve">Weight:</TextBlock>
-						<TextBlock Text="{Binding Weight}" />
+						<TextBlock xml:space="preserve">Weight: <Run Text="{Binding Weight}" /></TextBlock>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBlock xml:space="preserve" VerticalAlignment="Center" Text="Inventory: "/>
