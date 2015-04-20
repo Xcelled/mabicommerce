@@ -22,8 +22,8 @@ namespace MabiCommerce.UI
 	/// </summary>
 	public partial class MainWindow : INotifyPropertyChanged
 	{
-		private readonly Window _hiddenWindow;
-		private readonly HwndSource _hwndSource;
+		private Window _hiddenWindow;
+		private HwndSource _hwndSource;
 		private bool _connected;
 
 		public IntPtr AlissaHandle { get; private set; }
