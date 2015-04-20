@@ -33,18 +33,18 @@ namespace MabiCommerce.Domain
 
 		public Waypoint Waypoint { get; set; }
 
-		private MerchantRating _merchantRating;
-		public MerchantRating MerchantRating
+		private MerchantLevel _merchantLevel;
+		public MerchantLevel MerchantLevel
 		{
-			get { return _merchantRating; }
+			get { return _merchantLevel; }
 			set
 			{
-				_merchantRating = value;
+				_merchantLevel = value;
 				RaisePropertyChanged();
 
 				foreach (var item in Items)
 				{
-					item.IsRatingMet = value >= item.MerchantRating;
+					item.IsRatingMet = item.MerchantRating <= value.Level;
 				}
 			}
 		}

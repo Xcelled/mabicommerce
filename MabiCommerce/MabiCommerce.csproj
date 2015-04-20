@@ -63,7 +63,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Domain\Modifier.cs" />
-    <Compile Include="Network\NetworkHelper.cs" />
     <Compile Include="Network\Packet.cs" />
     <Compile Include="Network\Sig.cs" />
     <Compile Include="Network\WinApi.cs" />
@@ -97,6 +96,7 @@
     </Compile>
     <Compile Include="Domain\Item.cs" />
     <Compile Include="Domain\CommerceMasteryRank.cs" />
+    <Compile Include="Domain\MerchantLevel.cs" />
     <Compile Include="Domain\Trading\Load.cs" />
     <Compile Include="Domain\Mapping\Portal.cs" />
     <Compile Include="Domain\Mapping\Connection.cs" />
@@ -112,6 +112,10 @@
       <DependentUpon>MabiProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\MainWindow.Network.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -187,6 +191,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\db\commerce_mastery_ranks.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\db\merchant_levels.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\img\worldmap\abb.png">

@@ -27,6 +27,7 @@ namespace MabiCommerce.Domain
 		public List<CommerceMasteryRank> CommerceMasteryRanks { get; private set; }
 		public List<Region> Regions { get; private set; }
 		public List<Portal> Portals { get; private set; }
+		public List<MerchantLevel> MerchantLevels { get; private set; }
 		public AdjacencyGraph<Waypoint, Connection> World { get; private set; }
 
 		private long _ducats = 1000;
@@ -104,12 +105,19 @@ namespace MabiCommerce.Domain
 			progress(done / total, "Loading portals...");
 			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
 			done++;
-
+			progress(done / total, "Loading merchant levels...");
+			e.MerchantLevels = JsonConvert.DeserializeObject<List<MerchantLevel>>(File.ReadAllText(Path.Combine(dataDir, "db/merchant_levels.js")));
+			done++;
 
 			progress(0, "Initializing data...");
 			e.Trades = new ObservableCollection<Trade>();
 			e.World = new AdjacencyGraph<Waypoint, Connection>();
 			e.CmRank = e.CommerceMasteryRanks.First();
+
+			var lowestMerch = e.MerchantLevels.OrderBy(m => m.Level).First();
+
+			foreach (var p in e.Posts)
+				p.MerchantLevel = lowestMerch;
 
 			InitializeProfits(e);
 			MapWorld(e, progress);
@@ -147,7 +155,7 @@ namespace MabiCommerce.Domain
 				foreach (var p2 in e.Posts)
 				{
 					if (p2 == p)
-						break;
+						continue;
 
 					progress(done / total, "Caching route data...");
 					e.Route(p.Waypoint, p2.Waypoint);
@@ -250,7 +258,7 @@ namespace MabiCommerce.Domain
 			var s = new System.Diagnostics.Stopwatch();
 			s.Start();
 
-			var mods = GetModifierCombinations();
+			var mods = GetModifierCombinations(Modifiers);
 
 			var cmMod = new Modifier(-1, "Commerce Mastery", 0, 0, 0,
 					CmRank.Bonus, CmRank.Bonus, CmRank.Bonus, new List<int>(), new List<int>());
