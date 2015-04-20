@@ -11,7 +11,8 @@
 		xmlns:system="clr-namespace:System;assembly=mscorlib"
 		mc:Ignorable="d"
 		AllowsTransparency="True" Title="MabiCommerce" Height="536" Width="813" WindowStyle="None"
-		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window">
+		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window"
+		Loaded="Window_Network_Loaded" Closing="Window_Network_Closing">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -85,13 +86,13 @@
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 				<StackPanel Orientation="Horizontal">
-					<Button Name="ConnectBtn" Click="ConnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Network.Connected, Converter={ui:NotConverter}}">
+					<Button Name="ConnectBtn" Click="ConnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Connected, Converter={ui:NotConverter}}">
 						<StackPanel Orientation="Horizontal">
 							<Ellipse Fill="Lime" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
 							<TextBlock>Connect</TextBlock>
 						</StackPanel>
 					</Button>
-					<Button Name="DisonnectBtn" Click="DisonnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Network.Connected}">
+					<Button Name="DisonnectBtn" Click="DisonnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Connected}">
 						<StackPanel Orientation="Horizontal">
 							<Ellipse Fill="Red" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
 							<TextBlock>Disconnect</TextBlock>
@@ -129,7 +130,8 @@
 						<ComboBox x:Name="PostSelect" ItemsSource="{Binding Path=Posts}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Left" />
 						<StackPanel Grid.Row="1" Orientation="Horizontal">
 							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">My Merchant Rating:</TextBlock>
-							<TextBox VerticalAlignment="Top" Text="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+							<ComboBox VerticalAlignment="Top" ItemsSource="{Binding MerchantLevels}" DisplayMemberPath="Level"
+									  SelectedItem="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 						</StackPanel>
 					</Grid>
 				</Grid>

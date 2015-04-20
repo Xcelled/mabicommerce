@@ -1,22 +1,29 @@
-﻿using System;
+﻿using MabiCommerce.Domain.Trading;
+using MabiCommerce.Domain;
+using MabiCommerce.Network;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using MabiCommerce.UI;
+using System.Windows;
+using System;
 
-namespace MabiCommerce.Network
+namespace MabiCommerce.UI
 {
-	public class NetworkHelper : INotifyPropertyChanged
+	/// <summary>
+	/// Network logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : INotifyPropertyChanged
 	{
-		private readonly MainWindow _tradingWindow;
-		private readonly Window _hiddenWindow;
-		private readonly HwndSource _hwndSource;
+		private Window _hiddenWindow;
+		private HwndSource _hwndSource;
 		private bool _connected;
 
 		public IntPtr AlissaHandle { get; private set; }
@@ -25,47 +32,6 @@ namespace MabiCommerce.Network
 		{
 			get { return _connected; }
 			private set { _connected = value; RaisePropertyChanged(); }
-		}
-
-		~NetworkHelper()
-		{
-			try
-			{
-				Disconnect();
-			}
-			catch
-			{
-			}
-		}
-
-		public NetworkHelper(MainWindow tradingWindow)
-		{
-			_tradingWindow = tradingWindow;
-
-			_hiddenWindow = new Window()
-			{
-				Width = 0,
-				Height = 0,
-				WindowStyle = WindowStyle.None,
-				ShowInTaskbar = false,
-				ShowActivated = false,
-				Background = Brushes.Transparent,
-				AllowsTransparency = true,
-				Title = "MabiCommerce"
-			};
-
-			_hiddenWindow.Show();
-
-			_tradingWindow.Loaded += _tradingWindow_Loaded;
-			_tradingWindow.Closing +=_tradingWindow_Closing;
-
-			_hwndSource = PresentationSource.FromVisual(_hiddenWindow) as HwndSource;
-			_hwndSource.AddHook(WndProc);
-		}
-
-		void _tradingWindow_Closing(object sender, EventArgs e)
-		{
-			Disconnect();
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -77,9 +43,30 @@ namespace MabiCommerce.Network
 			}
 		}
 
-		void _tradingWindow_Loaded(object sender, RoutedEventArgs e)
+		void Window_Network_Closing(object sender, CancelEventArgs e)
 		{
-			_hiddenWindow.Owner = _tradingWindow;
+			Disconnect();
+		}
+
+		void Window_Network_Loaded(object sender, RoutedEventArgs e)
+		{
+			_hiddenWindow = new Window()
+			{
+				Width = 0,
+				Height = 0,
+				WindowStyle = WindowStyle.None,
+				ShowInTaskbar = false,
+				ShowActivated = false,
+				Background = Brushes.Transparent,
+				AllowsTransparency = true,
+				Title = "MabiCommerce",
+				Owner = this,
+			};
+
+			_hiddenWindow.Show();
+
+			_hwndSource = PresentationSource.FromVisual(_hiddenWindow) as HwndSource;
+			_hwndSource.AddHook(WndProc);
 		}
 
 		private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
@@ -113,7 +100,7 @@ namespace MabiCommerce.Network
 
 			if (alissaWindows.Count == 0)
 			{
-				MessageBox.Show("No packet provider found.", _tradingWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show("No packet provider found.", Title, MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
@@ -173,7 +160,7 @@ namespace MabiCommerce.Network
 			var cdsBuffer = Marshal.AllocHGlobal(Marshal.SizeOf(cds));
 			Marshal.StructureToPtr(cds, cdsBuffer, false);
 
-			_tradingWindow.Dispatcher.Invoke(delegate
+			Dispatcher.Invoke(delegate
 			{
 				WinApi.SendMessage(hWnd, WinApi.WM_COPYDATA, _hwndSource.Handle, cdsBuffer);
 			});
@@ -194,7 +181,7 @@ namespace MabiCommerce.Network
 			if (!packet.GetBool()) // Valid
 				return;
 
-			_tradingWindow.Erinn.Ducats = packet.GetLong();
+			Erinn.Ducats = packet.GetLong();
 			var transportFlags = packet.GetLong(); // Transport type flags (Bitfield)
 			packet.GetInt(); // Unknown
 
@@ -205,15 +192,15 @@ namespace MabiCommerce.Network
 				var townId = packet.GetInt();
 				var tradingExp = packet.GetInt();
 
-				var town = _tradingWindow.Erinn.Posts.FirstOrDefault(t => t.Id == townId);
+				var town = Erinn.Posts.FirstOrDefault(t => t.Id == townId);
 
 				if (town != null)
-					town.MerchantRating = GetMerchantRating(tradingExp);
+					town.MerchantLevel = GetMerchantLevel(tradingExp);
 			}
 
 			if (Properties.Settings.Default.SniffTransports)
 			{
-				foreach (var transport in _tradingWindow.Erinn.Transports)
+				foreach (var transport in Erinn.Transports)
 				{
 					transport.Enabled = (transportFlags & 1 << transport.Id) != 0;
 				}
@@ -222,7 +209,7 @@ namespace MabiCommerce.Network
 
 		private void InfoUpdate(Packet packet)
 		{
-			_tradingWindow.Erinn.Ducats = packet.GetLong();
+			Erinn.Ducats = packet.GetLong();
 			var transportFlags = packet.GetLong(); // Transport type flags (Bitfield)
 			packet.GetInt(); // Unknown
 
@@ -233,15 +220,15 @@ namespace MabiCommerce.Network
 				var townId = packet.GetInt();
 				var tradingExp = packet.GetInt();
 
-				var town = _tradingWindow.Erinn.Posts.FirstOrDefault(t => t.Id == townId);
+				var town = Erinn.Posts.FirstOrDefault(t => t.Id == townId);
 
 				if (town != null)
-					town.MerchantRating = GetMerchantRating(tradingExp);
+					town.MerchantLevel = GetMerchantLevel(tradingExp);
 			}
 
 			if (Properties.Settings.Default.SniffTransports)
 			{
-				foreach (var transport in _tradingWindow.Erinn.Transports)
+				foreach (var transport in Erinn.Transports)
 				{
 					transport.Enabled = (transportFlags & 1 << transport.Id) != 0;
 				}
@@ -254,7 +241,7 @@ namespace MabiCommerce.Network
 				return;
 
 			var currentPostId = packet.GetInt();
-			var post = _tradingWindow.Erinn.Posts.FirstOrDefault(p => p.Id == currentPostId);
+			var post = Erinn.Posts.FirstOrDefault(p => p.Id == currentPostId);
 
 			if (post == null)
 				return;
@@ -280,7 +267,7 @@ namespace MabiCommerce.Network
 				if (item != null)
 				{
 					item.Stock = stock;
-					item.Price = (int)Math.Round(normalizedCost * MerchantDiscounts[post.MerchantRating], MidpointRounding.AwayFromZero);
+					item.Price = (int)Math.Round(normalizedCost * post.MerchantLevel.Discount, MidpointRounding.AwayFromZero);
 				}
 
 				var townCount = packet.GetInt();
@@ -290,7 +277,7 @@ namespace MabiCommerce.Network
 					packet.GetInt(); // Stock at destination
 					var normalizedSellPrice = packet.GetInt();
 
-					var destPost = _tradingWindow.Erinn.Posts.FirstOrDefault(p => p.Id == destId);
+					var destPost = Erinn.Posts.FirstOrDefault(p => p.Id == destId);
 
 					if (destPost == null || item == null)
 						continue;
@@ -312,38 +299,14 @@ namespace MabiCommerce.Network
 				}
 			}
 
-			_tradingWindow.PostSelect.SelectedItem = post;
-			//_tradingWindow.CalculateTrades();
+			PostSelect.SelectedItem = post;
+			//CalculateTrades();
 		}
 
-		private static readonly List<int> MerchantRatings = new List<int>()
+		private MerchantLevel GetMerchantLevel(int tradingExp)
 		{
-			0,
-			500,
-			3500,
-			13500,
-			38500,
-			98500,
-			248500,
-			598500,
-			1148500
-		};
-		private static readonly Dictionary<int, double> MerchantDiscounts = new Dictionary<int, double>
-		{
-			{ 1, 1},
-			{2, 1},
-			{3, 1},
-			{4, 1},
-			{5, .99},
-			{6, .99},
-			{7,.98},
-			{8,.98},
-			{9,.97},
-		};
-
-		private static int GetMerchantRating(int tradingExp)
-		{
-			return MerchantRatings.TakeWhile(level => tradingExp >= level).Count();
+			return Erinn.MerchantLevels.TakeWhile(level => tradingExp >= level.Exp).Last();
 		}
+
 	}
 }
