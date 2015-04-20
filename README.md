@@ -16,14 +16,14 @@ MabiCommerce is a tool to help you get the most out of your trades! MabiCommerce
 
 ### Where do I get it?
 
-You can download the lastest release from the [Releases tab](/../../releases).
+You can download the latest release from the [Releases tab](/../../releases).
 
 Once it's downloaded, simply extract it to a folder on your desktop, or somewhere where you can find it.
 
 **If you wish to enable AutoDetect, you need to do the following:**
 
 1. Download (and extract) Morrighan from [the Aura project](http://aura-project.org/forum/index.php/topic/1082-morrighan-client-proxy-updated-2015-03-01-v121b/#entry8050).
-	***Note: Morrighan is still in a "beta" stage and does have some bugs.*** Check the Morrighan thread frequently for updates, especially if you randonly "freeze" or become unable to move!
+	***Note: Morrighan is still in a "beta" stage and does have some bugs.*** Check the Morrighan thread frequently for updates, especially if you randomly "freeze" or become unable to move!
 2. Copy `Morrighan.exe` (from Aura's website) and `MorriOneClick.exe` (from MabiCommerce's folder) to your client directory\*.
 3. Shut down Mabinogi if it is running.
 4. Run MorriOneClick to start the game. You may create a shortcut to MorriOneClick on your desktop to make it easier.
@@ -108,7 +108,7 @@ The question remains: Horse's slots and speed or Elephant's weight? The answer i
 
 #### Modifiers (Commerce Partner, Alpaca)
 
-If you have a Commerce Partner or Alpaca, one of more of your transportation methods receives an upgrade to weight, slots, or both, essentially turning it into a new form of transportation. Not taking this into account results in some heafty missed profits.
+If you have a Commerce Partner or Alpaca, one of more of your transportation methods receives an upgrade to weight, slots, or both, essentially turning it into a new form of transportation. Not taking this into account results in some hefty missed profits.
 
 #### Total Time
 
@@ -118,7 +118,7 @@ If you have a Commerce Partner or Alpaca, one of more of your transportation met
 
 MabiCommerce, unlike nearly every other method of calculating commerce information, heeds the Goblin's advice. I spent an afternoon running around Erinn, marking down the coordinates of various waypoints. MabiCommerce loads these and connects them via a structure called a **directed graph**, to make a spiderweb of routes across Erinn. By using [Djikstra's Algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm), MabiCommerce knows the shortest way to get from point A to point B.
 
-Once it knows how far apart the posts are, it uses the game's human running speed (3.43 meters/second) to calculate the total time required to get there. Total profit of the route is divided by total time to run it, yielding `profit/second`, a measure of how efficient a given trade is. High efficency trades earn you more Ducats faster, even though individually, they may give less profit. See also [the FAQ](/../FAQ.md).
+Once it knows how far apart the posts are, it uses the game's human running speed (3.43 meters/second) to calculate the total time required to get there. Total profit of the route is divided by total time to run it, yielding `profit/second`, a measure of how efficient a given trade is. High efficiency trades earn you more Ducats faster, even though individually, they may give less profit. See also [the FAQ](/../FAQ.md).
 
 Here is how MabiCommerce sees Dunbarton, with potential paths highlighted in blue:
 
@@ -126,7 +126,7 @@ Here is how MabiCommerce sees Dunbarton, with potential paths highlighted in blu
 
 #### Loading times of maps
 
-Any experinced Mabinogi player knows what Tara lag is. It's the minute or so you can't use your computer as the game loads you into Tara. This represents 60 seconds of lost trading time, enough to drastically alter profit margins. I measured the time it took to load each map, and MabiCommerce uses this information in its calculation of the time required to reach a destination trading post.
+Any experienced Mabinogi player knows what Tara lag is. It's the minute or so you can't use your computer as the game loads you into Tara. This represents 60 seconds of lost trading time, enough to drastically alter profit margins. I measured the time it took to load each map, and MabiCommerce uses this information in its calculation of the time required to reach a destination trading post.
 
 MabiCommerce takes this one step further, however. It knows that leaving Tara is faster than entering, and so it intelligently makes use of one of *two* times, depending on if the route is entering or leaving the map.
 
@@ -140,7 +140,7 @@ MabiCommerce will report flags in the `Flags` column and may also color-code the
 
 ##### Choke Point
 
-MabiCommerce flags as trade as a **Choke Point** if the route passes through a tight map, where bandits may be impossible to avoid if they appear. Traders who have touble with bandits may want to avoid these routes, or seek assistance before embarking on them.
+MabiCommerce flags as trade as a **Choke Point** if the route passes through a tight map, where bandits may be impossible to avoid if they appear. Traders who have trouble with bandits may want to avoid these routes, or seek assistance before embarking on them.
 
 The current list of choke point maps is:
 
@@ -165,7 +165,7 @@ The current list of no-profit routes is:
 >
 > -- <cite>Rydian</cite>
 
-A common occurance while trading is that, after you buy the maximum number of some item, you still have slots, weight, and ducats left to buy other items. Instead of wasting these slots, MabiCommerce will fill them with other items, so you truly get the most bang for your, err... Ducat. MabiCommerce will even explore the possibily of rounding down to the nearest whole-slot, instead of leaving one slot partially filled.
+A common occurrence while trading is that, after you buy the maximum number of some item, you still have slots, weight, and ducats left to buy other items. Instead of wasting these slots, MabiCommerce will fill them with other items, so you truly get the most bang for your, err... Ducat. MabiCommerce will even explore the possibility of rounding down to the nearest whole-slot, instead of leaving one slot partially filled.
 
 For more details, see the [Algorithm](#Algorithm) section.
 
@@ -183,14 +183,14 @@ CODE GOES HERE.
 
 ## Acknowledgements
 
-MabiCommerce would not have happend without the contributions of these wonderful people:
+MabiCommerce would not have happened without the contributions of these wonderful people:
 
- - Huge, huge thank you to **Rydian** ([http://rydian.net/]) for his countless hours of testing, screenshotting, debugging, feedback, writing, and suggestions.
- - Thank you to **Exec** ([http://mabinoger.com/]) for developing Morrighan and helping debug some issues with AutoDetect.
- - Thank you to **Plonecakes** ([https://github.com/Plonecakes/]) for being my rock during development, double checking my math, and figuring out that my merchant rating was the reason MabiCommerce was detecting prices 2% higher than they were.
- - Thank you to the men and women of the **Mabinogi World Wiki** ([http://wiki.mabinogiworld.com/]) for their tireless research on the game, including the `Exp` formula for commerce.
- - Thank you to **Hanae** ([http://xerodox.com/] for helping me with the original MabiCommerce's web site and giving me design tips.
- - Thank you to **Cosmos** ([http://cosrnos.com/]) for his help with UI design, something I'm notoriously bad at!
- - Thank you to **devCAT** and **Nexon** ([http://mabinogi.nexon.net/]) for making an awesome (yet horribly coded at times) game, and sharing it with the world.
+ - Huge, huge thank you to **Rydian** (http://rydian.net/) for his countless hours of testing, screenshotting, debugging, feedback, writing, and suggestions.
+ - Thank you to **Exec** (http://mabinoger.com/) for developing Morrighan and helping debug some issues with AutoDetect.
+ - Thank you to **Plonecakes** (https://github.com/Plonecakes/) for being my rock during development, double checking my math, and figuring out that my merchant rating was the reason MabiCommerce was detecting prices 2% higher than they were.
+ - Thank you to the men and women of the **Mabinogi World Wiki** (http://wiki.mabinogiworld.com/) for their tireless research on the game, including the `Exp` formula for commerce.
+ - Thank you to **Hanae** (http://xerodox.com/) for helping me with the original MabiCommerce's web site and giving me design tips.
+ - Thank you to **Cosmos** (http://cosrnos.com/) for his help with UI design, something I'm notoriously bad at!
+ - Thank you to **devCAT** and **Nexon** (http://mabinogi.nexon.net/) for making an awesome (yet horribly coded at times) game, and sharing it with the world.
 
 And finally, thank you, loyal users of MabiCommerce, who helped the original be downloaded over ***2,000*** times!
