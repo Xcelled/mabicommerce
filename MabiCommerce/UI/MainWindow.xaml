@@ -128,7 +128,8 @@
 						<ComboBox x:Name="PostSelect" ItemsSource="{Binding Path=Posts}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Left" />
 						<StackPanel Grid.Row="1" Orientation="Horizontal">
 							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">My Merchant Rating:</TextBlock>
-							<TextBox VerticalAlignment="Top" Text="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+							<ComboBox VerticalAlignment="Top" ItemsSource="{Binding MerchantLevels}" DisplayMemberPath="Level"
+									  SelectedItem="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 						</StackPanel>
 					</Grid>
 				</Grid>
