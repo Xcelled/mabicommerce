@@ -100,7 +100,7 @@ namespace MabiCommerce.Domain
 
 			progress(done / total, "Loading regions...");
 			e.Regions = JsonConvert.DeserializeObject<List<Region>>(File.ReadAllText(Path.Combine(dataDir, "db/regions.js")));
-			done++:
+			done++;
 			progress(done / total, "Loading portals...");
 			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
 			done++;
@@ -278,7 +278,7 @@ namespace MabiCommerce.Domain
 							{
 								newTrades.Add(new Trade(t, Route(post.Waypoint, dst.Waypoint), load, post, dst, m));
 							}
-					}
+					});
 				});
 
 			s.Stop();
@@ -290,13 +290,11 @@ namespace MabiCommerce.Domain
 
 		// Given A, B, C
 		// Produces A, AB, B, AC, ABC, BC, C
-		private static List<List<Modifier>> GetModifierCombinations(IList<Modifier> modifiers, Action<double, string> progress)
+		private static List<List<Modifier>> GetModifierCombinations(IList<Modifier> modifiers)
 		{
-			var combinations = new List<List<Modifier>>();
+			var combinations = new List<List<Modifier>> { new List<Modifier>() };
 
-			combinations.Add(new List<Modifier>());
-
-			for (var append = 1; append < modifiers.Count; append++;)
+			for (var append = 1; append < modifiers.Count; append++)
 			{
 				// Add another "base" element
 				combinations.Add(new List<Modifier> { modifiers[append - 1] });

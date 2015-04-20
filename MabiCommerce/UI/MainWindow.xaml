@@ -8,6 +8,7 @@
 		xmlns:grayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
 		xmlns:trading="clr-namespace:MabiCommerce.Domain.Trading"
 		xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+		xmlns:system="clr-namespace:System;assembly=mscorlib"
 		mc:Ignorable="d"
 		AllowsTransparency="True" Title="MabiCommerce" Height="536" Width="813" WindowStyle="None"
 		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window">
@@ -330,6 +331,9 @@
 				<DataGrid Grid.Row="1" x:Name="TradeSelect" AutoGenerateColumns="False" ItemsSource="{Binding Source={StaticResource TradeSource}}"
 						  CanUserResizeColumns="True" CanUserReorderColumns="True" IsReadOnly="True" VerticalScrollBarVisibility="Visible" SelectionMode="Single"
 						  HorizontalScrollBarVisibility="Visible" RowHeaderWidth="0" IsEnabled="{Binding ElementName=CalculateTradesBtn, Path=IsEnabled}">
+					<DataGrid.Resources>
+						<system:String x:Key="AddedFormat">+#,###;-#,###;0</system:String>
+					</DataGrid.Resources>
 					<DataGrid.Columns>
 						<DataGridTextColumn Binding="{Binding ProfitPerSecond, StringFormat=N2}" Width="Auto">
 							<DataGridTextColumn.Header>
@@ -341,19 +345,19 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Profit, StringFormat=N0}" /> (<Run Text="{Binding AddedProfit StringFormat=+#,###;-#,###;0}" />)
+										<Run Text="{Binding Profit, StringFormat=N0}" /> (<Run Text="{Binding AddedProfit, StringFormat={StaticResource AddedFormat}}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
-						<DataGridTemplateColumn Binding="{Binding Duration, StringFormat=m\\:ss}">
+						<DataGridTemplateColumn>
 							<DataGridTemplateColumn.Header>
 								<TextBlock ToolTip="Total time to run the trade, in mm:ss.">Total Time</TextBlock>
 							</DataGridTemplateColumn.Header>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Duration, StringFormat=m\\:ss}" /> (<Run Text="{Binding AddedDuration StringFormat=m\\:ss}" />)
+										<Run Text="{Binding Duration, StringFormat=m\\:ss}" /> (<Run Text="{Binding AddedDuration, StringFormat=m\\:ss}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -363,7 +367,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Gold, StringFormat=N0}" /> (<Run Text="{Binding AddedGold StringFormat=+#,###;-#,###;0}" />)
+										<Run Text="{Binding Gold, StringFormat=N0}" /> (<Run Text="{Binding AddedGold, StringFormat={StaticResource AddedFormat}}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -372,16 +376,16 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding MerchantRating, StringFormat=N0}" /> (<Run Text="{Binding AddedMerchantRating StringFormat=+#,###;-#,###;0}" />)
+										<Run Text="{Binding MerchantRating, StringFormat=N0}" /> (<Run Text="{Binding AddedMerchantRating, StringFormat={StaticResource AddedFormat}}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
-
-						<DataGridTemplateColumn Header="Experience">				<DataGridTemplateColumn.CellTemplate>
+						<DataGridTemplateColumn Header="Experience">
+							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Experience, StringFormat=N0}" /> (<Run Text="{Binding AddedExperience StringFormat=+#,###;-#,###;0}" />)
+										<Run Text="{Binding Experience, StringFormat=N0}" /> (<Run Text="{Binding AddedExperience, StringFormat={StaticResource AddedFormat}}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
