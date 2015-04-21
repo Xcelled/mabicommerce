@@ -266,6 +266,8 @@ namespace MabiCommerce.Domain
 			foreach (var m in mods)
 				m.Add(cmMod);
 
+			mods.Add(new List<Modifier> { cmMod });
+
 			Parallel.ForEach(Transports.Where(t => t.Enabled), t =>
 				{
 					var allowedMods = mods.Where(combination =>
@@ -291,7 +293,8 @@ namespace MabiCommerce.Domain
 
 			s.Stop();
 
-			System.Diagnostics.Debug.WriteLine("Calculated {0} possible trades ({1} items, {2} destinations, {3} means of transport) in {4}", newTrades.Count, post.Items.Count(i => i.Status == ItemStatus.Available), Posts.Count - 1, Transports.Count(t => t.Enabled), s.Elapsed);
+			System.Diagnostics.Debug.WriteLine("Calculated {0} possible trades ({1} items, {2} destinations, {3} means of transport, {4} modifier combinations) in {5}", newTrades.Count,
+				post.Items.Count(i => i.Status == ItemStatus.Available), Posts.Count - 1, Transports.Count(t => t.Enabled), mods.Count, s.Elapsed);
 
 			return newTrades;
 		}
@@ -300,12 +303,13 @@ namespace MabiCommerce.Domain
 		// Produces A, AB, B, AC, ABC, BC, C
 		private static List<List<Modifier>> GetModifierCombinations(IList<Modifier> modifiers)
 		{
-			var combinations = new List<List<Modifier>> { new List<Modifier>() };
+			var combinations = new List<List<Modifier>>();
 
 			for (var append = 1; append < modifiers.Count; append++)
 			{
 				// Add another "base" element
-				combinations.Add(new List<Modifier> { modifiers[append - 1] });
+				if (modifiers[append - 1].Enabled)
+					combinations.Add(new List<Modifier>(modifiers.Count) { modifiers[append - 1] });
 
 				var toAdd = modifiers[append];
 				if (!toAdd.Enabled)
@@ -325,7 +329,7 @@ namespace MabiCommerce.Domain
 				}
 			}
 
-			// Add the last modifer by itself (since for loop is 1 based)
+			// Add the last modifier by itself (since for loop is 1 based)
 			if (modifiers.Last().Enabled)
 				combinations.Add(new List<Modifier> { modifiers.Last() });
 
