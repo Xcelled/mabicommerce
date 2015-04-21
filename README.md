@@ -1,5 +1,5 @@
 # MabiCommerce
-Thank you for using MabiCommerce. Please make sure to also read the [FAQ](/../FAQ.md).
+Thank you for using MabiCommerce. Please make sure to also read the [FAQ](/FAQ.md).
 
 ## Quick Start
 ### What is MabiCommerce?
