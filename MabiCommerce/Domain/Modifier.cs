@@ -75,8 +75,8 @@ namespace MabiCommerce.Domain
 			GoldBonus = goldBonus;
 			ProfitBonus = profitBonus;
 
-			ConflictsWith = conflictsWith;
-			TransportationBlacklist = transportationBlacklist;
+			ConflictsWith = conflictsWith ?? new List<int>();
+			TransportationBlacklist = transportationBlacklist ?? new List<int>();
 
 			const string intFormat = "+#,###;-#,###";
 			const string percentFormat = "+#,##0.##%;-#,##0.##%";

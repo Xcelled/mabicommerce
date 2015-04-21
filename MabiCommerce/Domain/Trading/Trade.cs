@@ -48,6 +48,7 @@ namespace MabiCommerce.Domain.Trading
 			BaseProfit = BaseGold = BaseMerchantRating = load.CalculateProfit(destination);
 			BaseExperience = load.CalculateExperience(destination);
 
+			Cost = BaseCost;
 			Profit = (int)(BaseProfit * (1 + modifiers.Sum(m => m.ProfitBonus)));
 			Gold = (int)(BaseGold * (1 + modifiers.Sum(m => m.GoldBonus)));
 			MerchantRating = BaseMerchantRating; // * (1 + modifiers.Sum(m => m.MerchantRating));
@@ -59,6 +60,7 @@ namespace MabiCommerce.Domain.Trading
 			MerchantRating = Math.Max(0, MerchantRating);
 			Experience = Math.Max(0, Experience);
 
+			AddedCost = Cost - BaseCost;
 			AddedProfit = Profit - BaseProfit;
 			AddedGold = Gold - BaseGold;
 			AddedMerchantRating = MerchantRating - BaseMerchantRating;

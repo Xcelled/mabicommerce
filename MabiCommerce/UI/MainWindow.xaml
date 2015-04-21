@@ -114,9 +114,17 @@
 			<Grid Margin="10,0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
 					<RowDefinition />
 				</Grid.RowDefinitions>
-				<Grid>
+				<StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock TextWrapping="Wrap" Margin="7,0" VerticalAlignment="Center">Commerce Mastery Rank:</TextBlock>
+						<ComboBox ItemsSource="{Binding CommerceMasteryRanks}" SelectedItem="{Binding CmRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Rank" />
+					</StackPanel>
+					<Separator Background="{StaticResource BorderBrush}" />
+				</StackPanel>
+				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition />
@@ -135,7 +143,7 @@
 						</StackPanel>
 					</Grid>
 				</Grid>
-				<ScrollViewer Style="{StaticResource MabiScrollViewer}" Grid.Row="1" Margin="0,15,0,0">
+				<ScrollViewer Style="{StaticResource MabiScrollViewer}" Grid.Row="2" Margin="0,15,0,0">
 					<ScrollViewer.Resources>
 						<DataTemplate x:Key="EnabledItem" DataType="domain:Item">
 							<Grid>
@@ -350,7 +358,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Profit, StringFormat=N0}" /> (<Run Text="{Binding AddedProfit, StringFormat={StaticResource AddedFormat}}" />)
+										<Run Text="{Binding Profit, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedProfit, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -362,7 +370,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Duration, StringFormat=m\\:ss}" /> (<Run Text="{Binding AddedDuration, StringFormat=m\\:ss}" />)
+										<Run Text="{Binding Duration, StringFormat=m\\:ss, Mode=OneWay}" /> (<Run Text="{Binding AddedDuration, StringFormat=m\\:ss, Mode=OneWay}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -372,7 +380,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Gold, StringFormat=N0}" /> (<Run Text="{Binding AddedGold, StringFormat={StaticResource AddedFormat}}" />)
+										<Run Text="{Binding Gold, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedGold, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -381,7 +389,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding MerchantRating, StringFormat=N0}" /> (<Run Text="{Binding AddedMerchantRating, StringFormat={StaticResource AddedFormat}}" />)
+										<Run Text="{Binding MerchantRating, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedMerchantRating, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -390,7 +398,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Experience, StringFormat=N0}" /> (<Run Text="{Binding AddedExperience, StringFormat={StaticResource AddedFormat}}" />)
+										<Run Text="{Binding Experience, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedExperience, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -420,16 +428,42 @@
 							<Button DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="Map It!" Click="MapItButton_Click" />
 						</DockPanel>
 						<Border BorderThickness="1" BorderBrush="{StaticResource BorderBrush}" >
-							<DockPanel DataContext="{Binding Transport}" Height="52">
+							<DockPanel Height="52">
 								<DockPanel.Background>
 									<ImageBrush ImageSource="Images/TransportBarBg.png" />
 								</DockPanel.Background>
-								<Image DockPanel.Dock="Left" Source="{Binding Icon, Converter={ui:RelativeToAbsolutePathConverter}}"
-									   Width="48" Height="48" Margin="2" />
-								<Viewbox StretchDirection="DownOnly" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top">
-									<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Foreground="White" FontSize="22"
-											   Margin="0,6,0,0" FontWeight="Bold" />
-								</Viewbox>
+								<Image DockPanel.Dock="Left" Source="{Binding Transport.Icon, Converter={ui:RelativeToAbsolutePathConverter}}"
+										   Width="48" Height="48" Margin="2" />
+								<Grid Margin="10,1,2,0" DockPanel.Dock="Left">
+									<Grid.RowDefinitions>
+										<RowDefinition />
+										<RowDefinition />
+									</Grid.RowDefinitions>
+									<Viewbox StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Top">
+										<TextBlock Text="{Binding Transport.Name}" HorizontalAlignment="Center" Foreground="White" FontSize="22" FontWeight="Bold" />
+									</Viewbox>
+									<ItemsControl Grid.Row="1" ItemsSource="{Binding Modifiers}" Foreground="White">
+										<ItemsControl.ItemsPanel>
+											<ItemsPanelTemplate>
+												<StackPanel Orientation="Horizontal"/>
+											</ItemsPanelTemplate>
+										</ItemsControl.ItemsPanel>
+										<ItemsControl.ItemTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal">
+													<TextBlock Text=", " Name="commaTextBlock"/>
+													<TextBlock Text="{Binding Name}"/>
+												</StackPanel>
+												<!-- Hide the first comma -->
+												<DataTemplate.Triggers>
+													<DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+														<Setter Property="Visibility" TargetName="commaTextBlock" Value="Collapsed"/>
+													</DataTrigger>
+												</DataTemplate.Triggers>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+									</ItemsControl>
+								</Grid>
 							</DockPanel>
 						</Border>
 						<ScrollViewer Height="72" Margin="0,10,0,0" Style="{StaticResource MabiScrollViewer}" VerticalScrollBarVisibility="Auto">
