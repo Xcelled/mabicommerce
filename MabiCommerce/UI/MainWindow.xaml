@@ -342,7 +342,7 @@
 					</Button>
 				</DockPanel>
 				<DataGrid Grid.Row="1" x:Name="TradeSelect" AutoGenerateColumns="False" ItemsSource="{Binding Source={StaticResource TradeSource}}"
-						  CanUserResizeColumns="True" CanUserReorderColumns="True" IsReadOnly="True" VerticalScrollBarVisibility="Visible" SelectionMode="Single"
+						  CanUserResizeColumns="True" CanUserReorderColumns="True" CanUserSortColumns="True" IsReadOnly="True" VerticalScrollBarVisibility="Visible" SelectionMode="Single"
 						  HorizontalScrollBarVisibility="Visible" RowHeaderWidth="0" IsEnabled="{Binding ElementName=CalculateTradesBtn, Path=IsEnabled}">
 					<DataGrid.Resources>
 						<system:String x:Key="AddedFormat">+#,###;-#,###;0</system:String>
@@ -354,7 +354,7 @@
 							</DataGridTextColumn.Header>
 						</DataGridTextColumn>
 						<DataGridTextColumn Header="Destination" Binding="{Binding Destination.Name}" Width="Auto" />
-						<DataGridTemplateColumn Header="Profit" Width="Auto">
+						<DataGridTemplateColumn Header="Profit" Width="Auto" SortMemberPath="Profit">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
@@ -363,7 +363,7 @@
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
-						<DataGridTemplateColumn Width="Auto">
+						<DataGridTemplateColumn Width="Auto" SortMemberPath="Duration">
 							<DataGridTemplateColumn.Header>
 								<TextBlock ToolTip="Total time to run the trade, in mm:ss.">Time</TextBlock>
 							</DataGridTemplateColumn.Header>
@@ -376,7 +376,7 @@
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
 						<DataGridTextColumn Header="Cost" Binding="{Binding Cost, StringFormat=N0}" Width="Auto" />
-						<DataGridTemplateColumn Header="Gold">
+						<DataGridTemplateColumn Header="Gold" SortMemberPath="Gold">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
@@ -385,7 +385,7 @@
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
-						<DataGridTemplateColumn Header="Merchant Rating" Width="Auto">
+						<DataGridTemplateColumn Header="Merchant Rating" Width="Auto" SortMemberPath="MerchantRating">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
@@ -394,7 +394,7 @@
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
-						<DataGridTemplateColumn Header="Experience" Width="Auto">
+						<DataGridTemplateColumn Header="Experience" Width="Auto" SortMemberPath="Experience">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
