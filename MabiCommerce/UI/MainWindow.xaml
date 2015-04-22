@@ -85,14 +85,24 @@
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
-				<StackPanel Orientation="Horizontal">
-					<Button Name="ConnectBtn" Click="ConnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Connected, Converter={ui:NotConverter}}">
+				<StackPanel Orientation="Horizontal" DataContext="{Binding ElementName=Window}">
+					<StackPanel.Style>
+						<Style TargetType="StackPanel">
+							<Setter Property="Visibility" Value="Visible" />
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding AutoDetectSupport}" Value="False">
+									<Setter Property="Visibility" Value="Collapsed" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</StackPanel.Style>
+					<Button Name="ConnectBtn" Click="ConnectBtn_Click" IsEnabled="{Binding Connected, Converter={ui:NotConverter}}">
 						<StackPanel Orientation="Horizontal">
 							<Ellipse Fill="Lime" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
 							<TextBlock>Connect</TextBlock>
 						</StackPanel>
 					</Button>
-					<Button Name="DisonnectBtn" Click="DisonnectBtn_Click" IsEnabled="{Binding ElementName=Window, Path=Connected}">
+					<Button Name="DisonnectBtn" Click="DisonnectBtn_Click" IsEnabled="{Binding Path=Connected}">
 						<StackPanel Orientation="Horizontal">
 							<Ellipse Fill="Red" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" Margin="3" />
 							<TextBlock>Disconnect</TextBlock>

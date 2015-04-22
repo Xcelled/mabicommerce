@@ -10,7 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using MabiCommerce.Domain;
 using MabiCommerce.Domain.Trading;
-using MabiCommerce.Network;
 
 namespace MabiCommerce.UI
 {
@@ -20,6 +19,18 @@ namespace MabiCommerce.UI
 	public partial class MainWindow : Window
 	{
 		public Erinn Erinn { get; private set; }
+
+		public bool AutoDetectSupport
+		{
+			get
+			{
+#if AUTODETECT
+				return true;
+#else
+				return false;
+#endif
+			}
+		}
 
 		public MainWindow()
 		{
@@ -91,15 +102,19 @@ namespace MabiCommerce.UI
 
 		private void ConnectBtn_Click(object sender, RoutedEventArgs e)
 		{
+#if AUTODETECT
 			if (AlissaHandle == IntPtr.Zero)
 				SelectPacketProvider(true);
 
 			Connect();
+#endif
 		}
 
 		private void DisonnectBtn_Click(object sender, RoutedEventArgs e)
 		{
+#if AUTODETECT
 			Disconnect();
+#endif
 		}
 
 		private void SettingsBtn_Click(object sender, RoutedEventArgs e)
@@ -114,7 +129,9 @@ namespace MabiCommerce.UI
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+#if AUTODETECT
 			Window_Network_Loaded(sender, e);
+#endif
 
 			var newCm = Erinn.CommerceMasteryRanks.FirstOrDefault(r => r.Id == Properties.Settings.Default.CommerceMasteryRankId);
 
@@ -124,7 +141,9 @@ namespace MabiCommerce.UI
 		
 		void Window_Closing(object sender, CancelEventArgs e)
 		{
+#if AUTODETECT
 			Window_Network_Closing(sender, e);
+#endif
 
 			Properties.Settings.Default.CommerceMasteryRankId = Erinn.CmRank.Id;
 			Properties.Settings.Default.Save();

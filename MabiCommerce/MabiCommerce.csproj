@@ -29,12 +29,22 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;AUTODETECT</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>MabiCommerce.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-Neutured|AnyCPU' ">
+    <OutputPath>bin\Release-Neutured\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GrayscaleEffect">
@@ -57,15 +67,17 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
+  <ItemGroup Condition=" $(DefineConstants.Contains(';AUTODETECT'))">
+    <Compile Include="Network\Packet.cs" />
+    <Compile Include="Network\Sig.cs" />
+    <Compile Include="Network\WinApi.cs" />
+  </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Domain\Modifier.cs" />
-    <Compile Include="Network\Packet.cs" />
-    <Compile Include="Network\Sig.cs" />
-    <Compile Include="Network\WinApi.cs" />
     <Compile Include="UI\ContentBouncer.cs" />
     <Compile Include="UI\MiniMapWindow.xaml.cs">
       <DependentUpon>MiniMapWindow.xaml</DependentUpon>
@@ -180,12 +192,9 @@
     <Resource Include="UI\Images\TickDisable.png" />
     <Resource Include="UI\Images\ProgressBars\Bg.png" />
     <Resource Include="UI\Images\ProgressBars\WeightFg.png" />
+    <Resource Include="UI\Images\Trade_Assistant_Imp.png" />
     <Resource Include="UI\Images\TransportBarBg.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="UI\Images\TradeItemBg.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="UI\Images\World.png" />
   </ItemGroup>
   <ItemGroup>
@@ -486,17 +495,12 @@
     <None Include="data\db\transports.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="data\db\modifiers.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MabiCommerce.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Images\Trade_Assistant_Imp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
