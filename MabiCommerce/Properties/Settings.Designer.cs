@@ -82,5 +82,17 @@ namespace MabiCommerce.Properties {
                 this["UpdateCheck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CommerceMasteryRankId {
+            get {
+                return ((int)(this["CommerceMasteryRankId"]));
+            }
+            set {
+                this["CommerceMasteryRankId"] = value;
+            }
+        }
     }
 }

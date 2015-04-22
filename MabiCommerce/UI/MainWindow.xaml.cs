@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -114,7 +115,19 @@ namespace MabiCommerce.UI
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			Window_Network_Loaded(sender, e);
-		}
 
+			var newCm = Erinn.CommerceMasteryRanks.FirstOrDefault(r => r.Id == Properties.Settings.Default.CommerceMasteryRankId);
+
+			if (newCm != null)
+				Erinn.CmRank = newCm;
+		}
+		
+		void Window_Closing(object sender, CancelEventArgs e)
+		{
+			Window_Network_Closing(sender, e);
+
+			Properties.Settings.Default.CommerceMasteryRankId = Erinn.CmRank.Id;
+			Properties.Settings.Default.Save();
+		}
 	}
 }
