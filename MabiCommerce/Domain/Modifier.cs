@@ -15,16 +15,25 @@ namespace MabiCommerce.Domain
 		public int Id { get; private set; }
 		[JsonProperty(Required = Required.Always)]
 		public string Name { get; private set; }
-		[JsonProperty(Required = Required.Always)]
+		[JsonProperty(Required = Required.Default)]
 		public int ExtraSlots { get; private set; }
-		[JsonProperty(Required = Required.Always)]
+		[JsonProperty(Required = Required.Default)]
 		public int ExtraWeight { get; private set; }
-		[JsonProperty(Required = Required.Always)]
-		public List<int> AppliesTo { get; private set; }
-		[JsonProperty(Required = Required.Always)]
+		[JsonProperty(Required = Required.Default)]
+		public double SpeedBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public double ExpBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public double GoldBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public double ProfitBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
+		public List<int> TransportationBlacklist { get; private set; }
+		[JsonProperty(Required = Required.Default)]
 		public List<int> ConflictsWith { get; private set; }
 
 		private bool _enabled;
+		[JsonIgnore]
 		public bool Enabled
 		{
 			get { return _enabled; }
@@ -34,6 +43,9 @@ namespace MabiCommerce.Domain
 				RaisePropertyChanged();
 			}
 		}
+
+		[JsonIgnore]
+		public string EffectDescription { get; private set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void RaisePropertyChanged([CallerMemberName] string caller = "")
@@ -49,14 +61,41 @@ namespace MabiCommerce.Domain
 			}
 		}
 
-		public Modifier(int id, string name, int extraSlots, int extraWeight, List<int> appliesTo, List<int> conflictsWith)
+		public Modifier(int id, string name, int extraSlots, int extraWeight,
+			double speedBonus, double expBonus, double goldBonus, double profitBonus,
+			List<int> transportationBlacklist, List<int> conflictsWith)
 		{
-			ConflictsWith = conflictsWith;
-			AppliesTo = appliesTo;
-			ExtraWeight = extraWeight;
-			ExtraSlots = extraSlots;
-			Name = name;
 			Id = id;
+			Name = name;
+
+			ExtraSlots = extraSlots;
+			ExtraWeight = extraWeight;
+			SpeedBonus = speedBonus;
+			ExpBonus = expBonus;
+			GoldBonus = goldBonus;
+			ProfitBonus = profitBonus;
+
+			ConflictsWith = conflictsWith ?? new List<int>();
+			TransportationBlacklist = transportationBlacklist ?? new List<int>();
+
+			const string intFormat = "+#,###;-#,###";
+			const string percentFormat = "+#,##0.##%;-#,##0.##%";
+
+			var effects = new StringBuilder();
+			if (extraSlots != 0)
+				effects.AppendLine(string.Format("{0} Slots", extraSlots.ToString(intFormat)));
+			if (extraWeight != 0)
+				effects.AppendLine(string.Format("{0} Weight", extraWeight.ToString(intFormat)));
+			if (speedBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Speed", speedBonus.ToString(percentFormat)));
+			if (profitBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Profit", profitBonus.ToString(percentFormat)));
+			if (goldBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Gold", goldBonus.ToString(percentFormat)));
+			if (expBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Exp", expBonus.ToString(percentFormat)));
+
+			EffectDescription = effects.ToString().Trim();
 		}
 	}
 }

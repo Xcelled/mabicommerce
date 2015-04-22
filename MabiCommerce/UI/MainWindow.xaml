@@ -8,10 +8,11 @@
 		xmlns:grayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
 		xmlns:trading="clr-namespace:MabiCommerce.Domain.Trading"
 		xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+		xmlns:system="clr-namespace:System;assembly=mscorlib"
 		mc:Ignorable="d"
 		AllowsTransparency="True" Title="MabiCommerce" Height="536" Width="813" WindowStyle="None"
 		d:DataContext="{d:DesignInstance Type=domain:Erinn, IsDesignTimeCreatable=True}" Name="Window"
-		Loaded="Window_Network_Loaded" Closing="Window_Network_Closing">
+		Loaded="Window_Loaded" Closing="Window_Network_Closing">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -113,9 +114,17 @@
 			<Grid Margin="10,0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
 					<RowDefinition />
 				</Grid.RowDefinitions>
-				<Grid>
+				<StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock TextWrapping="Wrap" Margin="5,0" VerticalAlignment="Center">Commerce Mastery Rank:</TextBlock>
+						<ComboBox ItemsSource="{Binding CommerceMasteryRanks}" SelectedItem="{Binding CmRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Rank" />
+					</StackPanel>
+					<Separator Background="{StaticResource BorderBrush}" />
+				</StackPanel>
+				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition />
@@ -128,13 +137,13 @@
 						</Grid.RowDefinitions>
 						<ComboBox x:Name="PostSelect" ItemsSource="{Binding Path=Posts}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Left" />
 						<StackPanel Grid.Row="1" Orientation="Horizontal">
-							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">My Merchant Rating:</TextBlock>
+							<TextBlock VerticalAlignment="Center" Margin="0,0,7,0">Merchant Rating:</TextBlock>
 							<ComboBox VerticalAlignment="Top" ItemsSource="{Binding MerchantLevels}" DisplayMemberPath="Level"
 									  SelectedItem="{Binding ElementName=PostSelect, Path=SelectedItem.MerchantLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 						</StackPanel>
 					</Grid>
 				</Grid>
-				<ScrollViewer Style="{StaticResource MabiScrollViewer}" Grid.Row="1" Margin="0,15,0,0">
+				<ScrollViewer Style="{StaticResource MabiScrollViewer}" Grid.Row="2" Margin="0,15,0,0">
 					<ScrollViewer.Resources>
 						<DataTemplate x:Key="EnabledItem" DataType="domain:Item">
 							<Grid>
@@ -228,8 +237,7 @@
 				<StackPanel Grid.Row="0" DataContext="{Binding ElementName=ItemSelect, Path=SelectedItem}">
 					<TextBlock TextAlignment="Center" Text="{Binding Name}"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-						<TextBlock xml:space="preserve">Weight:</TextBlock>
-						<TextBlock Text="{Binding Weight}" />
+						<TextBlock xml:space="preserve">Weight: <Run Text="{Binding Weight}" /></TextBlock>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBlock xml:space="preserve" VerticalAlignment="Center" Text="Inventory: "/>
@@ -267,8 +275,8 @@
 				</DockPanel>
 				<Grid Grid.Row="3" >
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition />
 					</Grid.ColumnDefinitions>
 					<GroupBox Foreground="Wheat" BorderBrush="Wheat" Header="I have a..." Margin="0,0,0,2">
 						<DockPanel>
@@ -276,7 +284,7 @@
 								<ItemsControl ItemsSource="{Binding Transports}">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<CheckBox Content="{Binding FullName}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
+											<CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White"  />
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
@@ -286,10 +294,14 @@
 					<GroupBox Grid.Column="1" Foreground="Wheat" BorderBrush="Wheat" Header="Modifiers" Margin="0,0,0,2">
 						<DockPanel>
 							<ScrollViewer DockPanel.Dock="Top" BorderBrush="{StaticResource BorderBrush}" VerticalScrollBarVisibility="Auto">
-								<ItemsControl ItemsSource="{Binding Modifiers}">
+								<ItemsControl ItemsSource="{Binding Modifiers}" Name="ModifierSelect">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" />
+											<CheckBox IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White">
+												<ui:ContentBouncer>
+													<TextBlock Text="{Binding Name}" ToolTip="{Binding EffectDescription}" Padding="0,0,3,0" />
+												</ui:ContentBouncer>
+											</CheckBox>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
@@ -332,22 +344,67 @@
 				<DataGrid Grid.Row="1" x:Name="TradeSelect" AutoGenerateColumns="False" ItemsSource="{Binding Source={StaticResource TradeSource}}"
 						  CanUserResizeColumns="True" CanUserReorderColumns="True" IsReadOnly="True" VerticalScrollBarVisibility="Visible" SelectionMode="Single"
 						  HorizontalScrollBarVisibility="Visible" RowHeaderWidth="0" IsEnabled="{Binding ElementName=CalculateTradesBtn, Path=IsEnabled}">
+					<DataGrid.Resources>
+						<system:String x:Key="AddedFormat">+#,###;-#,###;0</system:String>
+					</DataGrid.Resources>
 					<DataGrid.Columns>
 						<DataGridTextColumn Binding="{Binding ProfitPerSecond, StringFormat=N2}" Width="Auto">
 							<DataGridTextColumn.Header>
-								<TextBlock ToolTip="The trade's score, expressed in earned ducats/second.">Score</TextBlock>
+								<TextBlock ToolTip="The trade's score, expressed in earned-ducats-per-second.">Score</TextBlock>
 							</DataGridTextColumn.Header>
 						</DataGridTextColumn>
 						<DataGridTextColumn Header="Destination" Binding="{Binding Destination.Name}" />
-						<DataGridTextColumn Header="Total Profit" Binding="{Binding Profit, StringFormat=N0}" />
-						<DataGridTextColumn Binding="{Binding Duration, StringFormat=m\\:ss}">
-							<DataGridTextColumn.Header>
+						<DataGridTemplateColumn Header="Profit">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Profit, StringFormat=N0, Mode=OneWay}" />
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.Header>
 								<TextBlock ToolTip="Total time to run the trade, in mm:ss.">Total Time</TextBlock>
-							</DataGridTextColumn.Header>
-						</DataGridTextColumn>
+							</DataGridTemplateColumn.Header>
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Duration, StringFormat=m\\:ss, Mode=OneWay}" />
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
 						<DataGridTextColumn Header="Cost" Binding="{Binding Cost, StringFormat=N0}" />
-						<DataGridTextColumn Header="Experience" Binding="{Binding Experience, StringFormat=N0}" />
+						<DataGridTemplateColumn Header="Gold">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Gold, StringFormat=N0, Mode=OneWay}" />
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Merchant Rating">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding MerchantRating, StringFormat=N0, Mode=OneWay}" />
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Experience">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<Run Text="{Binding Experience, StringFormat=N0, Mode=OneWay}" />
+									</TextBlock>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
 						<DataGridTextColumn Header="Transport" Binding="{Binding Transport.Name}" />
+						<DataGridTextColumn Header="Modifiers" Binding="{Binding ModifierNames}" />
 						<DataGridTextColumn Header="Flags" Binding="{Binding Flags}" />
 					</DataGrid.Columns>
 					<DataGrid.RowStyle>
@@ -372,16 +429,24 @@
 							<Button DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="Map It!" Click="MapItButton_Click" />
 						</DockPanel>
 						<Border BorderThickness="1" BorderBrush="{StaticResource BorderBrush}" >
-							<DockPanel DataContext="{Binding Transport}" Height="52">
+							<DockPanel Height="52">
 								<DockPanel.Background>
 									<ImageBrush ImageSource="Images/TransportBarBg.png" />
 								</DockPanel.Background>
-								<Image DockPanel.Dock="Left" Source="{Binding Icon, Converter={ui:RelativeToAbsolutePathConverter}}"
-									   Width="48" Height="48" Margin="2" />
-								<Viewbox StretchDirection="DownOnly" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top">
-									<TextBlock Text="{Binding FullName}" HorizontalAlignment="Left" Foreground="White" FontSize="22"
-											   Margin="0,6,0,0" FontWeight="Bold" />
-								</Viewbox>
+								<Image DockPanel.Dock="Left" Source="{Binding Transport.Icon, Converter={ui:RelativeToAbsolutePathConverter}}"
+										   Width="48" Height="48" Margin="2" />
+								<Grid Margin="10,1,2,0" DockPanel.Dock="Left">
+									<Grid.RowDefinitions>
+										<RowDefinition />
+										<RowDefinition />
+									</Grid.RowDefinitions>
+									<Viewbox StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Top">
+										<TextBlock Text="{Binding Transport.Name}" HorizontalAlignment="Center" Foreground="White" FontSize="22" FontWeight="Bold" />
+									</Viewbox>
+									<ui:ContentBouncer Grid.Row="1" PixelsPerSecond="40" HorizontalAlignment="Center" >
+										<TextBlock Text="{Binding ModifierNames}" Foreground="White" />
+									</ui:ContentBouncer>
+								</Grid>
 							</DockPanel>
 						</Border>
 						<ScrollViewer Height="72" Margin="0,10,0,0" Style="{StaticResource MabiScrollViewer}" VerticalScrollBarVisibility="Auto">

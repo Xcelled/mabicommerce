@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using MabiCommerce.Domain;
 using MabiCommerce.Domain.Trading;
 using MabiCommerce.Network;
@@ -108,5 +110,11 @@ namespace MabiCommerce.UI
 		{
 			ItemSelect.SelectedIndex = 0;
 		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			Window_Network_Loaded(sender, e);
+		}
+
 	}
 }

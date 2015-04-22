@@ -307,6 +307,5 @@ namespace MabiCommerce.UI
 		{
 			return Erinn.MerchantLevels.TakeWhile(level => tradingExp >= level.Exp).Last();
 		}
-
 	}
 }
