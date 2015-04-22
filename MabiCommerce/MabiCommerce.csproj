@@ -36,8 +36,8 @@
   <PropertyGroup>
     <ApplicationIcon>MabiCommerce.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-Neutured|AnyCPU' ">
-    <OutputPath>bin\Release-Neutured\</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-Neutered|AnyCPU' ">
+    <OutputPath>bin\Release-Neutered\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
