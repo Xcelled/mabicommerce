@@ -15,11 +15,6 @@ AutoDetection with Morrighan is purely a passive activity - no network data is m
 
 You could, in fact, use a program like Excel to duplicate MabiCommerce's functionality, but I don't even want to think about the complexity of such a spreadsheet.
 
-## Why doesn't MabiCommerce support Commerce Mastery/Letters of Guarantee/Alpaca Robe?
-These modifiers are "static" modifiers. They have no effect on the calculation of loads, but are applied afterwards, to the final number. More importantly, they are all scalar and applied equally to all loads. It made no sense to me to add the complexity of these items just to scale every result by the same amount.
-
-If you're curious as to what the true value is, grab a calculator. For example, `1000` ducat profit with `10%` bonus from Commerce Mastery would be `1000 * 1.1 = 1100`.
-
 ## MabiCommerce directed me to a town with a NEGATIVE profit! Who do I sue?
 As players buy and sell goods to posts, the profits naturally fluctuate. It could be (especially with slower transportation, like the backpack) that by the time you get to your destination, the profit is now negative. There is nothing to do but turn to another trading post.
 

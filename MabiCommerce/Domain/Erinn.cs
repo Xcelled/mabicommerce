@@ -24,13 +24,13 @@ namespace MabiCommerce.Domain
 		public ObservableCollection<Trade> Trades { get; private set; }
 		public ObservableCollection<Modifier> Modifiers { get; private set; }
 
+		public List<CommerceMasteryRank> CommerceMasteryRanks { get; private set; }
 		public List<Region> Regions { get; private set; }
 		public List<Portal> Portals { get; private set; }
 		public List<MerchantLevel> MerchantLevels { get; private set; }
 		public AdjacencyGraph<Waypoint, Connection> World { get; private set; }
 
 		private long _ducats = 1000;
-
 		public long Ducats
 		{
 			get { return _ducats; }
@@ -41,6 +41,16 @@ namespace MabiCommerce.Domain
 			}
 		}
 
+		private CommerceMasteryRank _cmRank;
+		public CommerceMasteryRank CmRank
+		{
+			get { return _cmRank; }
+			set
+			{
+				_cmRank = value;
+				RaisePropertyChanged();
+			}
+		}
 
 		private readonly ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>> _routeCache =
 			new ConcurrentDictionary<Waypoint, ConcurrentDictionary<Waypoint, Route>>();
@@ -71,43 +81,38 @@ namespace MabiCommerce.Domain
 				progress = (d, s) => { };
 
 			var total = 6.0;
+			var done = 0;
 
-			progress(0 / total, "Loading transports...");
+			progress(done / total, "Loading transports...");
 			e.Transports = new ObservableCollection<Transportation>(
 				JsonConvert.DeserializeObject<List<Transportation>>(File.ReadAllText(Path.Combine(dataDir, "db/transports.js"))));
-			progress(1 / total, "Loading modifiers...");
+			done++;
+			progress(done / total, "Loading modifiers...");
 			e.Modifiers = new ObservableCollection<Modifier>(
 				JsonConvert.DeserializeObject<List<Modifier>>(File.ReadAllText(Path.Combine(dataDir, "db/modifiers.js"))));
-			progress(2 / total, "Loading posts...");
+			done++;
+			progress(done / total, "Loading commerce mastery ranks...");
+			e.CommerceMasteryRanks = JsonConvert.DeserializeObject<List<CommerceMasteryRank>>(File.ReadAllText(Path.Combine(dataDir, "db/commerce_mastery_ranks.js")));
+			done++;
+			progress(done / total, "Loading posts...");
 			e.Posts = new ObservableCollection<TradingPost>(
 				JsonConvert.DeserializeObject<List<TradingPost>>(File.ReadAllText(Path.Combine(dataDir, "db/posts.js"))));
-			e.Trades = new ObservableCollection<Trade>();
+			done++;
 
-			progress(3 / total, "Loading regions...");
+			progress(done / total, "Loading regions...");
 			e.Regions = JsonConvert.DeserializeObject<List<Region>>(File.ReadAllText(Path.Combine(dataDir, "db/regions.js")));
-			progress(4 / total, "Loading transports...");
+			done++;
+			progress(done / total, "Loading portals...");
 			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
-			progress(5 / total, "Loading merchant levels...");
+			done++;
+			progress(done / total, "Loading merchant levels...");
 			e.MerchantLevels = JsonConvert.DeserializeObject<List<MerchantLevel>>(File.ReadAllText(Path.Combine(dataDir, "db/merchant_levels.js")));
+			done++;
 
 			progress(0, "Initializing data...");
+			e.Trades = new ObservableCollection<Trade>();
 			e.World = new AdjacencyGraph<Waypoint, Connection>();
-			foreach (var _ in e.Modifiers)
-			{
-				var mod = _;
-
-				foreach (var t in e.Transports.Where(a => mod.AppliesTo.Contains(a.Id)))
-					t.AddModifier(mod);
-
-				mod.PropertyChanged += (o, a) =>
-				{
-					if (!mod.Enabled)
-						return;
-
-					foreach (var conflict in e.Modifiers.Where(m => mod.ConflictsWith.Contains(m.Id)))
-						conflict.Enabled = false;
-				};
-			}
+			e.CmRank = e.CommerceMasteryRanks.First();
 
 			var lowestMerch = e.MerchantLevels.OrderBy(m => m.Level).First();
 
@@ -251,26 +256,84 @@ namespace MabiCommerce.Domain
 			var newTrades = new ConcurrentBag<Trade>();
 
 			var s = new System.Diagnostics.Stopwatch();
-
 			s.Start();
+
+			var mods = GetModifierCombinations(Modifiers);
+
+			var cmMod = new Modifier(-1, "Commerce Mastery", 0, 0, 0,
+					CmRank.Bonus, CmRank.Bonus, CmRank.Bonus, new List<int>(), new List<int>());
+
+			foreach (var m in mods)
+				m.Add(cmMod);
+
+			mods.Add(new List<Modifier> { cmMod });
 
 			Parallel.ForEach(Transports.Where(t => t.Enabled), t =>
 				{
-					var loads = new ConcurrentBag<Load>();
-					GetLoads(loads, post, new Load(t.Slots, t.Weight), Ducats);
+					var allowedMods = mods.Where(combination =>
+						!combination.Any(m => 
+							m.TransportationBlacklist.Contains(t.Id))
+						);
 
-					foreach (var load in loads)
-						foreach (var dst in Posts.Where(p => p != post))
-						{
-							newTrades.Add(new Trade(t, Route(post.Waypoint, dst.Waypoint), load, post, dst));
-						}
+					Parallel.ForEach(allowedMods, m =>
+					{
+						var baseLoad = new Load(t.Slots + m.Sum(i => i.ExtraSlots),
+							t.Weight + m.Sum(i => i.ExtraWeight));
+
+						var loads = new ConcurrentBag<Load>();
+						GetLoads(loads, post, baseLoad, Ducats);
+
+						foreach (var load in loads)
+							foreach (var dst in Posts.Where(p => p != post))
+							{
+								newTrades.Add(new Trade(t, Route(post.Waypoint, dst.Waypoint), load, post, dst, m));
+							}
+					});
 				});
 
 			s.Stop();
 
-			System.Diagnostics.Debug.WriteLine("Calculated {0} possible trades ({1} items, {2} destinations, {3} means of transport) in {4}", newTrades.Count, post.Items.Count(i => i.Status == ItemStatus.Available), Posts.Count - 1, Transports.Count(t => t.Enabled), s.Elapsed);
+			System.Diagnostics.Debug.WriteLine("Calculated {0} possible trades ({1} items, {2} destinations, {3} means of transport, {4} modifier combinations) in {5}", newTrades.Count,
+				post.Items.Count(i => i.Status == ItemStatus.Available), Posts.Count - 1, Transports.Count(t => t.Enabled), mods.Count, s.Elapsed);
 
 			return newTrades;
+		}
+
+		// Given A, B, C
+		// Produces A, AB, B, AC, ABC, BC, C
+		private static List<List<Modifier>> GetModifierCombinations(IList<Modifier> modifiers)
+		{
+			var combinations = new List<List<Modifier>>();
+
+			for (var append = 1; append < modifiers.Count; append++)
+			{
+				// Add another "base" element
+				if (modifiers[append - 1].Enabled)
+					combinations.Add(new List<Modifier>(modifiers.Count) { modifiers[append - 1] });
+
+				var toAdd = modifiers[append];
+				if (!toAdd.Enabled)
+					continue;
+
+				for (int i = 0, count = combinations.Count; i < count; i++)
+				{
+					var existing = combinations[i];
+
+					// If we'd produce a conflict (illegal state), skip adding it.
+					if (existing.Any(m => toAdd.ConflictsWith.Contains(m.Id)))
+						continue;
+
+					var newSet = new List<Modifier>(existing);
+					newSet.Add(toAdd);
+					combinations.Add(newSet);
+				}
+			}
+
+			// Add the last modifier by itself (since for loop is 1 based)
+			if (modifiers.Last().Enabled)
+				combinations.Add(new List<Modifier> { modifiers.Last() });
+
+			return combinations;
 		}
 	}
 }

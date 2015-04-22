@@ -66,6 +66,7 @@
     <Compile Include="Network\Packet.cs" />
     <Compile Include="Network\Sig.cs" />
     <Compile Include="Network\WinApi.cs" />
+    <Compile Include="UI\ContentBouncer.cs" />
     <Compile Include="UI\MiniMapWindow.xaml.cs">
       <DependentUpon>MiniMapWindow.xaml</DependentUpon>
     </Compile>
@@ -78,6 +79,10 @@
     <Compile Include="UI\WorldMapWindow.xaml.cs">
       <DependentUpon>WorldMapWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="UI\ContentBouncerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\MabiProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +100,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Domain\Item.cs" />
+    <Compile Include="Domain\CommerceMasteryRank.cs" />
     <Compile Include="Domain\MerchantLevel.cs" />
     <Compile Include="Domain\Trading\Load.cs" />
     <Compile Include="Domain\Mapping\Portal.cs" />
@@ -187,6 +193,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\db\posts.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\db\commerce_mastery_ranks.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\db\merchant_levels.js">
