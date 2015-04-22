@@ -1,4 +1,6 @@
-﻿using MabiCommerce.Domain.Trading;
+﻿#if AUTODETECT
+
+using MabiCommerce.Domain.Trading;
 using MabiCommerce.Domain;
 using MabiCommerce.Network;
 using System.Collections.Generic;
@@ -31,10 +33,15 @@ namespace MabiCommerce.UI
 		public bool Connected
 		{
 			get { return _connected; }
-			private set { _connected = value; RaisePropertyChanged(); }
+			private set
+			{
+				_connected = value;
+				RaisePropertyChanged();
+			}
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
+
 		private void RaisePropertyChanged([CallerMemberName] string caller = "")
 		{
 			if (PropertyChanged != null)
@@ -43,12 +50,12 @@ namespace MabiCommerce.UI
 			}
 		}
 
-		void Window_Network_Closing(object sender, CancelEventArgs e)
+		private void Window_Network_Closing(object sender, CancelEventArgs e)
 		{
 			Disconnect();
 		}
 
-		void Window_Network_Loaded(object sender, RoutedEventArgs e)
+		private void Window_Network_Loaded(object sender, RoutedEventArgs e)
 		{
 			_hiddenWindow = new Window()
 			{
@@ -309,3 +316,5 @@ namespace MabiCommerce.UI
 		}
 	}
 }
+
+#endif
