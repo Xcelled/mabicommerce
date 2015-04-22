@@ -28,6 +28,8 @@ namespace MabiCommerce.Domain
 		[JsonProperty(Required = Required.Default)]
 		public double ProfitBonus { get; private set; }
 		[JsonProperty(Required = Required.Default)]
+		public double MerchantRatingBonus { get; private set; }
+		[JsonProperty(Required = Required.Default)]
 		public List<int> TransportationBlacklist { get; private set; }
 		[JsonProperty(Required = Required.Default)]
 		public List<int> ConflictsWith { get; private set; }
@@ -63,7 +65,7 @@ namespace MabiCommerce.Domain
 
 		public Modifier(int id, string name, int extraSlots, int extraWeight,
 			double speedBonus, double expBonus, double goldBonus, double profitBonus,
-			List<int> transportationBlacklist, List<int> conflictsWith)
+			double merchantRatingBonus, List<int> transportationBlacklist, List<int> conflictsWith)
 		{
 			Id = id;
 			Name = name;
@@ -74,6 +76,7 @@ namespace MabiCommerce.Domain
 			ExpBonus = expBonus;
 			GoldBonus = goldBonus;
 			ProfitBonus = profitBonus;
+			MerchantRatingBonus = merchantRatingBonus;
 
 			ConflictsWith = conflictsWith ?? new List<int>();
 			TransportationBlacklist = transportationBlacklist ?? new List<int>();
@@ -94,6 +97,8 @@ namespace MabiCommerce.Domain
 				effects.AppendLine(string.Format("{0} Gold", goldBonus.ToString(percentFormat)));
 			if (expBonus != 0.0)
 				effects.AppendLine(string.Format("{0} Exp", expBonus.ToString(percentFormat)));
+			if (merchantRatingBonus != 0.0)
+				effects.AppendLine(string.Format("{0} Merch. Rating", merchantRatingBonus.ToString(percentFormat)));
 
 			EffectDescription = effects.ToString().Trim();
 		}
