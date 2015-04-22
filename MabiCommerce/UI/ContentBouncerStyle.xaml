@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ui="clr-namespace:MabiCommerce.UI">
+	<Style TargetType="ui:ContentBouncer">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ui:ContentBouncer">
+					<Border Name="Bounds" ClipToBounds="True">
+						<ContentPresenter Name="DisplayContent" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

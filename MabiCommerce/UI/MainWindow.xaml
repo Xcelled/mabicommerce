@@ -119,7 +119,7 @@
 				</Grid.RowDefinitions>
 				<StackPanel>
 					<StackPanel Orientation="Horizontal">
-						<TextBlock TextWrapping="Wrap" Margin="7,0" VerticalAlignment="Center">Commerce Mastery Rank:</TextBlock>
+						<TextBlock TextWrapping="Wrap" Margin="5,0" VerticalAlignment="Center">Commerce Mastery Rank:</TextBlock>
 						<ComboBox ItemsSource="{Binding CommerceMasteryRanks}" SelectedItem="{Binding CmRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Rank" />
 					</StackPanel>
 					<Separator Background="{StaticResource BorderBrush}" />
@@ -298,9 +298,9 @@
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
 											<CheckBox IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White">
-												<Border ClipToBounds="True">
-													<TextBlock Text="{Binding Name}" ToolTip="{Binding EffectDescription}" TextWrapping="Wrap" />
-												</Border>
+												<ui:ContentBouncer>
+													<TextBlock Text="{Binding Name}" ToolTip="{Binding EffectDescription}" Padding="0,0,3,0" />
+												</ui:ContentBouncer>
 											</CheckBox>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
@@ -358,7 +358,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Profit, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedProfit, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
+										<Run Text="{Binding Profit, StringFormat=N0, Mode=OneWay}" />
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -370,7 +370,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Duration, StringFormat=m\\:ss, Mode=OneWay}" /> (<Run Text="{Binding AddedDuration, StringFormat=m\\:ss, Mode=OneWay}" />)
+										<Run Text="{Binding Duration, StringFormat=m\\:ss, Mode=OneWay}" />
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -380,7 +380,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Gold, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedGold, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
+										<Run Text="{Binding Gold, StringFormat=N0, Mode=OneWay}" />
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -389,7 +389,7 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding MerchantRating, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedMerchantRating, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
+										<Run Text="{Binding MerchantRating, StringFormat=N0, Mode=OneWay}" />
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -398,12 +398,13 @@
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<TextBlock>
-										<Run Text="{Binding Experience, StringFormat=N0, Mode=OneWay}" /> (<Run Text="{Binding AddedExperience, StringFormat={StaticResource AddedFormat}, Mode=OneWay}" />)
+										<Run Text="{Binding Experience, StringFormat=N0, Mode=OneWay}" />
 									</TextBlock>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
 						<DataGridTextColumn Header="Transport" Binding="{Binding Transport.Name}" />
+						<DataGridTextColumn Header="Modifiers" Binding="{Binding ModifierNames}" />
 						<DataGridTextColumn Header="Flags" Binding="{Binding Flags}" />
 					</DataGrid.Columns>
 					<DataGrid.RowStyle>
@@ -442,27 +443,9 @@
 									<Viewbox StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Top">
 										<TextBlock Text="{Binding Transport.Name}" HorizontalAlignment="Center" Foreground="White" FontSize="22" FontWeight="Bold" />
 									</Viewbox>
-									<ItemsControl Grid.Row="1" ItemsSource="{Binding Modifiers}" Foreground="White">
-										<ItemsControl.ItemsPanel>
-											<ItemsPanelTemplate>
-												<StackPanel Orientation="Horizontal"/>
-											</ItemsPanelTemplate>
-										</ItemsControl.ItemsPanel>
-										<ItemsControl.ItemTemplate>
-											<DataTemplate>
-												<StackPanel Orientation="Horizontal">
-													<TextBlock Text=", " Name="commaTextBlock"/>
-													<TextBlock Text="{Binding Name}"/>
-												</StackPanel>
-												<!-- Hide the first comma -->
-												<DataTemplate.Triggers>
-													<DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-														<Setter Property="Visibility" TargetName="commaTextBlock" Value="Collapsed"/>
-													</DataTrigger>
-												</DataTemplate.Triggers>
-											</DataTemplate>
-										</ItemsControl.ItemTemplate>
-									</ItemsControl>
+									<ui:ContentBouncer Grid.Row="1" PixelsPerSecond="40" HorizontalAlignment="Center" >
+										<TextBlock Text="{Binding ModifierNames}" Foreground="White" />
+									</ui:ContentBouncer>
 								</Grid>
 							</DockPanel>
 						</Border>

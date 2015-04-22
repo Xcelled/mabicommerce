@@ -13,6 +13,7 @@ namespace MabiCommerce.Domain.Trading
 		public TradeFlags Flags { get; private set; }
 		public List<Modifier> Modifiers { get; private set; }
 		public double ProfitPerSecond { get; private set; }
+		public string ModifierNames { get; private set; }
 
 		public TimeSpan Duration { get; private set; }
 		public int Cost { get; private set; }
@@ -74,6 +75,8 @@ namespace MabiCommerce.Domain.Trading
 
 			if (route.Path.Select(w => w.Target.Region).Any(r => r.ChokePoint))
 				Flags |= TradeFlags.ChokePoint;
+
+			ModifierNames = string.Join(", ", Modifiers.Select(m => m.Name));
 		}
 
 		public override string ToString()
