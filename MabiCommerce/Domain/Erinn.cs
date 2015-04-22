@@ -261,7 +261,7 @@ namespace MabiCommerce.Domain
 			var mods = GetModifierCombinations(Modifiers);
 
 			var cmMod = new Modifier(-1, "Commerce Mastery", 0, 0, 0,
-					CmRank.Bonus, CmRank.Bonus, CmRank.Bonus, new List<int>(), new List<int>());
+					CmRank.Bonus, CmRank.Bonus, CmRank.Bonus, CmRank.Bonus, new List<int>(), new List<int>());
 
 			foreach (var m in mods)
 				m.Add(cmMod);

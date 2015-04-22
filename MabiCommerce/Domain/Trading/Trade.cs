@@ -52,7 +52,7 @@ namespace MabiCommerce.Domain.Trading
 			Cost = BaseCost;
 			Profit = (int)(BaseProfit * (1 + modifiers.Sum(m => m.ProfitBonus)));
 			Gold = (int)(BaseGold * (1 + modifiers.Sum(m => m.GoldBonus)));
-			MerchantRating = BaseMerchantRating; // * (1 + modifiers.Sum(m => m.MerchantRating));
+			MerchantRating = (int)(BaseMerchantRating * (1 + modifiers.Sum(m => m.MerchantRatingBonus)));
 			Experience = (int)(BaseExperience * (1 + modifiers.Sum(m => m.ExpBonus)));
 			Duration =
 				TimeSpan.FromSeconds(route.Duration.TotalSeconds / (Transport.SpeedFactor + modifiers.Sum(m => m.SpeedBonus)));
