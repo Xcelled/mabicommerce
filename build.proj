@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Start">
+	<!-- Variables -->
+	<PropertyGroup>
+
+		<!-- Release Folder -->
+		<!-- To change the output folder, use the following parameter: /p:BuildDir=C:\BuildTest-->
+		<OutputDir>Deploy</OutputDir>
+
+		<!-- Build Folder -->
+		<ReleaseBuildDir>MabiCommerce\bin\Release</ReleaseBuildDir>
+		<ReleaseNeuteredBuildDir>MabiCommerce\bin\Release-Neutered</ReleaseNeuteredBuildDir>
+
+		<!-- create zip file? -->
+		<CreateZip>1</CreateZip>
+
+	    <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+	</PropertyGroup>  
+
+	<Import Project=".build\MSBuild.Community.Tasks.Targets" />
+
+	<!-- "Autostart" -->
+	<Target Name="Start">
+		<CallTarget Targets="DeleteFolders"/>
+		<CallTarget Targets="Build"/>
+		<CallTarget Targets="CopyRelease"/>
+		<CallTarget Targets="CopyReleaseNeutered"/>
+		<CallTarget Condition="$(CreateZip) == '1'" Targets="ZipRelease"/>
+		<CallTarget Condition="$(CreateZip) == '1'" Targets="ZipReleaseNeutered"/>
+	</Target>
+
+
+	<!-- delete release folder -->
+	<Target Name="DeleteFolders">
+		<RemoveDir Directories="$(ReleaseDir)"/>
+	</Target>
+
+
+	<!-- compile solution -->
+	<Target Name="Build">
+		<MSBuild Projects="MabiCommerce.sln" Properties="Configuration=Release"/>
+		<MSBuild Projects="MabiCommerce.sln" Properties="Configuration=Release-Neutered"/>
+	</Target>
+
+	<!-- copy files to release folder -->
+	<Target Name="CopyRelease">
+		<MakeDir Directories="$(OutputDir)\mabicommerce"/>
+		<ItemGroup>
+			<ReleaseFiles
+				Include="$(ReleaseBuildDir)\**\*.*;
+						*.md;
+						license"
+				Exclude="$(ReleaseBuildDir)\*.xml;$(ReleaseBuildDir)\*.vshost.*;$(ReleaseBuildDir)\*.config*">
+			</ReleaseFiles>
+		</ItemGroup>
+		<Copy SourceFiles="@(ReleaseFiles)" DestinationFolder="$(OutputDir)\mabicommerce\%(RecursiveDir)"/>
+	</Target>
+
+	<!-- copy files to release folder -->
+	<Target Name="CopyReleaseNeutered">
+		<MakeDir Directories="$(OutputDir)\mabicommerce-neutered"/>
+		<ItemGroup>
+			<ReleaseFilesNeutered
+				Include="$(ReleaseNeuteredBuildDir)\*.*;
+						*.md;
+						license"
+				Exclude="$(ReleaseNeuteredBuildDir)\*.xml;$(ReleaseNeuteredBuildDir)\*.vshost.*;$(ReleaseNeuteredBuildDir)\*.config*">
+			</ReleaseFilesNeutered>
+		</ItemGroup>
+		<Copy SourceFiles="@(ReleaseFilesNeutered)" DestinationFolder="$(OutputDir)\mabicommerce-neutered\%(RecursiveDir)"/>
+	</Target>
+
+	<!-- create zip file with content of release\bin folder -->
+	<Target Name="ZipRelease">
+		<CreateItem Include="$(OutputDir)\mabicommerce\**\*.*" >
+			<Output ItemName="ZipFiles" TaskParameter="Include"/>
+		</CreateItem>
+		<Zip ZipFileName="$(OutputDir)\mabicommerce-$(VersionNumber).zip" WorkingDirectory="$(OutputDir)\mabicommerce" Files="@(ZipFiles)" />
+	</Target>
+
+	<!-- create zip file with content of release\bin folder -->
+	<Target Name="ZipReleaseNeutered">
+		<CreateItem Include="$(OutputDir)\mabicommerce-neutered\**\*.*" >
+			<Output ItemName="ZipFilesNeutered" TaskParameter="Include"/>
+		</CreateItem>
+		<Zip ZipFileName="$(OutputDir)\mabicommerce-$(VersionNumber)-neutered.zip" WorkingDirectory="$(OutputDir)\mabicommerce-neutered" Files="@(ZipFilesNeutered)" />
+	</Target>
+</Project>
