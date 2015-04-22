@@ -5,9 +5,7 @@
     "Image": "data/img/town/tir.png",
     "WaypointRegion" : "tir",
     "WaypointId" : "tir_commerce_post",
-    "NoProfits" : [
-
-    ],
+    "NoProfits" : [],
     "Weights" : {
        2 : 1.01 , // Dun
        3 : 1.08 , // Bangor
@@ -76,9 +74,7 @@
     "Image": "data/img/town/dun.png",
     "WaypointRegion" : "dunby",
     "WaypointId" : "dunby_commerce_post",
-    "NoProfits" : [
-    
-    ],
+    "NoProfits" : [],
     "Weights" : {
        1 : 1.01 , // Tir
        3 : 1.01 , // Bangor
@@ -147,9 +143,7 @@
     "Image": "data/img/town/bangor.png",
     "WaypointRegion" : "bangor",
     "WaypointId" : "bangor_commerce_post",
-    "NoProfits" : [
-    
-    ],
+    "NoProfits" : [],
     "Weights" : {
        1 : 1.08 , // Tir
        2 : 1.01 , // Dun
@@ -218,9 +212,7 @@
     "Image": "data/img/town/emain.png",
     "WaypointRegion" : "emain",
     "WaypointId" : "emain_commerce_post",
-    "NoProfits" : [
-    
-    ],
+    "NoProfits" : [],
     "Weights" : {
        1 : 1.03 , // Tir
        2 : 0.98 , // Dun
@@ -289,9 +281,7 @@
     "Image": "data/img/town/taill.png",
     "WaypointRegion" : "taill",
     "WaypointId" : "taill_commerce_post",
-    "NoProfits" : [
-      6,
-    ],
+    "NoProfits" : [],
     "Weights" : {
        1 : 1.0 , // Tir
        2 : 1.06 , // Dun
@@ -360,9 +350,7 @@
     "Image": "data/img/town/tara.png",
     "WaypointRegion" : "tara",
     "WaypointId" : "tara_commerce_post",
-    "NoProfits" : [
-      5, // Taill
-    ],
+    "NoProfits" : [],
     "Weights" : {
        1 : 1.1 , // Tir
        2 : 1.11 , // Dun
@@ -431,9 +419,7 @@
     "Image": "data/img/town/cobh.png",
     "WaypointRegion" : "cobh",
     "WaypointId" : "cobh_commerce_post",
-    "NoProfits" : [
-      8, // Belvast
-    ],
+    "NoProfits" : [],
     "Weights" : {
        1 : 1.01 , // Tir
        2 : 0.65 , // Dun
@@ -502,9 +488,7 @@
     "Image": "data/img/town/belvast.png",
     "WaypointRegion" : "belvast",
     "WaypointId" : "belvast_commerce_post",
-    "NoProfits" : [
-      7,
-    ],
+    "NoProfits" : [],
     "Weights" : {
        1 : 1.09 , // Tir
        2 : 0.7 , // Dun
