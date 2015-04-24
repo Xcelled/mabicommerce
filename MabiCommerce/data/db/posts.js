@@ -101,7 +101,7 @@
         "Image": "data/img/item/wool_boots.png",
         "Weight": 8,
         "QuantityPerSlot": 10,
-        "MerchantRating": 2,
+        "MerchantRating": 1,
         "MultiFactor": 1.15,
         "AddFactor": 18.05,
       },
