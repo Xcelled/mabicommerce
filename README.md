@@ -23,9 +23,9 @@ Once it's downloaded, simply extract it to a folder on your desktop, or somewher
 **If you wish to enable AutoDetect, you need to do the following:**
 
 1. Download (and extract) Morrighan from [the Aura project](http://aura-project.org/forum/index.php/topic/1082-morrighan-client-proxy-updated-2015-03-01-v121b/#entry8050).
-	***Note: Morrighan is still in a "beta" stage and does have some bugs.*** Check the Morrighan thread frequently for updates, especially if you randomly "freeze" or become unable to move!
-2. Copy `Morrighan.exe` (from Aura's website) and `MorriOneClick.exe` (from MabiCommerce's folder) to your client directory\*.
-3. Shut down Mabinogi if it is running.
+	Check the Morrighan thread frequently for updates, especially if you randomly "freeze" or become unable to move!
+2. Shut down Mabinogi if it is running.
+3. Copy `Morrighan.exe` (from Aura's website) and `MorriOneClick.exe` (from MabiCommerce's folder) to your client directory\*.
 4. Run MorriOneClick to start the game. You may create a shortcut to MorriOneClick on your desktop to make it easier.
 5. If you ever get a "HackShield" error, you simply need to patch your game by running Mabinogi normally (NOT through MorriOneClick!) and then re-opening it with MorriOneClick.
 
@@ -53,6 +53,20 @@ If you see a file called `client`, you're in the right place. Copy Morrighan and
 10. Optionally click "Map It" to have MabiCommerce show you the fastest route. Clicking a green region will bring up a minimap with the best route shown in blue.
 
 ***Note:*** If you talk to a goblin and then restart MabiCommerce, MabiCommerce will **not** detect profit information *for that trading post only* for approximately five minutes. This is due to client caching of prices. If it's a big deal for you, you can change channels to immediately restore AutoDetect.
+
+## Little-known Features
+
+Here are some things you might not know you could do with MabiCommerce:
+
+ - Use the `Tab` key to move around the interface. This is handy for manually typing in profits.
+ - Sort trade results by any column.
+ - Reorder the columns of trade results.
+ - Resize any column of the trade results.
+ - Hover over an item's picture in the `Selected Trade Information` section to see the name of the item, which is handy for items that look similar (Baby and Snore Prevention potions).
+ - Hover over the name of a modifier to see its effects.
+ - Click a green region on the World Map to view a detailed minimap.
+ - Change the color of the minimap-route by typing the color code in the box at the bottom of the minimap window.
+ - Disable autodetection of your transports by visiting the settings page.
 
 ## How does MabiCommerce work?
 
@@ -118,7 +132,7 @@ MabiCommerce will evaluate all combinations of enabled modifiers (the [power set
 
 **Note:** Because the size of the *n*th power set is `2^n`, enabling a large number of modifiers can drastically lengthen the time it takes to calculate trades. For example, while 2 modifiers only increases complexity by a factor of 4, enabling 9 modifiers will cause calculation to take **512** times as long. This is the difference between MabiCommerce doing its work in 4 seconds vs 8 minutes!
 
-For those of you wondering: Yes, I have optimized the power set algorithm. It will [short circuit](http://en.wikipedia.org/wiki/Short-circuit_evaluation) "illegal" states, such as multiple letters. This should severely reduce the amount of sets actually generated, but the above is still worth bearing in mind.
+For those of you wondering: Yes, I have optimized the power set algorithm. It will [short circuit](http://en.wikipedia.org/wiki/Short-circuit_evaluation) "illegal" states, such as multiple letters. This should severely reduce the amount of sets actually generated, but the above is still worth bearing in mind. For reference, 9 modifiers resulted in only 42 combinations, with short circuiting. However, when combined with 4 transportation methods, 5 items, and 7 destinations, MabiCommerce still calculated over *25,000* possible trades.
 
 #### Total Time
 
@@ -162,12 +176,7 @@ The current list of choke point maps is:
 
 Nexon, in an attempt to curb early botters, removed profit from certain routes. MabiCommerce flags these as **no profit** routes. If you embark on a no-profit trade, you will, at most, earn enough to cover what you paid for your items. This results in a **zero or negative** profit for the trade, and thus no earned gold, exp, or merchant rating. Avoid these routes.
 
-The current list of no-profit routes is:
-
- - Tir Chonaill <-> Taillteann
- - Cobh <-> Dunbarton
- - Cobh <-> Belvast
- - Taillteann <-> Tara
+There are currently no no-profit routes, as Nexon has apparently removed them.
 
 #### Mixed Loads
 
@@ -188,7 +197,33 @@ Here is an example of MabiCommerce advising a mixed load of `Highlander Ore` and
 Ever wanted to know how MabiCommerce does what it does, but you don't want to go spelunking through the source code? Then this section is for you. Following is the magic at MabiCommerce's heart, beautifully distilled and rendered as pseudo code:
 
 ````
-CODE GOES HERE.
+Generate Power Set of Enabled Modifiers
+For Each Modifier Set:
+	Add Commerce Mastery Modifier
+#end for
+
+For Each Enabled Transport:
+	For Each Modifier Set where transport is allowed
+		GetLoadsForTransport()
+		For Each Load:
+			For Each Possible Destination:
+				Add the route, load, etc, to this display
+			#end for
+		#end for
+	#end for
+#end for
+
+GetLoadsForTransport:
+
+	For Each Item where Item is not already in the load:
+		Calculate maximum that can be added
+		Add a new load with that amount added
+		Calculate the "slot overhang"
+		If Slot Overhang is not zero, add (Maximum - Overhang) items to a new load
+		Add this load to the load list
+		Repeat until load is full
+	#end for
+#end GetLoadsForTransport
 ````
 
 ## Acknowledgments
