@@ -49,6 +49,7 @@
 			<ReleaseFiles
 				Include="$(ReleaseBuildDir)\**\*.*;
 						*.md;
+						MorriOneClick.exe;
 						license"
 				Exclude="$(ReleaseBuildDir)\*.xml;$(ReleaseBuildDir)\*.vshost.*;$(ReleaseBuildDir)\*.config*">
 			</ReleaseFiles>
