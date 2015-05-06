@@ -52,7 +52,7 @@ If you see a file called `client`, you're in the right place. Copy Morrighan and
 ***It is highly recommended to put Mabinogi into Windowed mode when using MabiCommerce.***
 
 1. If you're using AutoDetect, make sure you started the game with MorriOneClick or PowerPatcher. You should see a black box with an `M` in it in the upper left corner of your screen.
-2. Run MabiCommerce by double clicking on it.
+2. Run MabiCommerce by double clicking on its file. Double clicking the Morrighan window instead will close your game, so watch out!
 3. If you're using AutoDetect, click connect. If not, enter your information like your transports.
 4. Select any modifiers you might have. Be warned, large numbers of modifiers may slow down the application! See the `Modifiers` section later in this document for details.
 5. Talk to a goblin and trade!
