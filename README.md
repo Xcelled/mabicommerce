@@ -24,7 +24,7 @@ Once it's downloaded, simply extract it to a folder on your desktop, or somewher
 
 #### Non [PowerPatcher](https://github.com/Xcelled/powerpatcher) Users:
 
-1. Download (and extract) Morrighan from [the Aura project](http://aura-project.org/forum/index.php/topic/1082-morrighan-client-proxy-updated-2015-03-01-v121b/#entry8050).
+1. Download (and extract) Morrighan from ~~[the Aura project](http://aura-project.org/forum/index.php/topic/1082-morrighan-client-proxy-updated-2015-03-01-v121b/#entry8050)~~(link is dead, use [Exec's Github](https://github.com/exectails/Morrighan/releases) instead).
 	Check the Morrighan thread frequently for updates, especially if you randomly "freeze" or become unable to move!
 2. Shut down Mabinogi if it is running.
 3. Copy `Morrighan.exe` (from Aura's website) and `MorriOneClick.exe` (from MabiCommerce's folder) to your client directory\*.
@@ -33,7 +33,7 @@ Once it's downloaded, simply extract it to a folder on your desktop, or somewher
 
 #### [PowerPatcher](https://github.com/Xcelled/powerpatcher) Users:
 
-1. Download (and extract) Morrighan from [the Aura project](http://aura-project.org/forum/index.php/topic/1082-morrighan-client-proxy-updated-2015-03-01-v121b/#entry8050).
+1. Download (and extract) Morrighan from ~~[the Aura project](http://aura-project.org/forum/index.php/topic/1082-morrighan-client-proxy-updated-2015-03-01-v121b/#entry8050)~~(link is dead, use [Exec's Github](https://github.com/exectails/Morrighan/releases) instead).
 	Check the Morrighan thread frequently for updates, especially if you randomly "freeze" or become unable to move!
 2. Shut down Mabinogi if it is running.
 3. Copy `Morrighan.exe` (from Aura's website) to your client directory\*.
