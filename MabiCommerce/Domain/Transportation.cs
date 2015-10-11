@@ -34,8 +34,6 @@ namespace MabiCommerce.Domain
 			get { return _enabled; }
 			set
 			{
-				if (IsRequired)
-					value = true;
 				_enabled = value;
 				RaisePropertyChanged();
 			}
