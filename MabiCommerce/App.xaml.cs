@@ -47,6 +47,27 @@ namespace MabiCommerce
 			{
 				Task.Factory.StartNew(CheckForUpdates);
 			}
+
+			Environment.CurrentDirectory = Path.GetDirectoryName(typeof(MainWindow).Assembly.Location);
+
+			Erinn erinn;
+
+			try
+			{
+				erinn = Erinn.Load(@"Data", Splash.ReportProgress);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(
+					$"Oops! It seems some bandits are interfering with MabiCommerce's data!\n\nThe following might help to catch them: {ex.Message}");
+
+				Shutdown();
+				return;
+			}
+
+			Splash.ReportProgress(1.0, "Loading main window...");
+			var mw = new MainWindow(erinn);
+			mw.Show();
 		}
 
 		private static async void CheckForUpdates()
