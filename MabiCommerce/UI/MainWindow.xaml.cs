@@ -32,17 +32,11 @@ namespace MabiCommerce.UI
 			}
 		}
 
-		public MainWindow()
+		public MainWindow(Erinn e)
 		{
 			InitializeComponent();
 
-			Environment.CurrentDirectory = Path.GetDirectoryName(GetType().Assembly.Location);
-
-			DataContext = Erinn = Erinn.Load(@"Data", App.Splash.ReportProgress);
-
-			App.Splash.ReportProgress(1.0, "Loading main window...");
-
-			App.Splash.Shutdown();
+			DataContext = Erinn = e;
 		}
 
 		private void WindowBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -137,8 +131,10 @@ namespace MabiCommerce.UI
 
 			if (newCm != null)
 				Erinn.CmRank = newCm;
+
+			App.Splash.Shutdown();
 		}
-		
+
 		void Window_Closing(object sender, CancelEventArgs e)
 		{
 #if AUTODETECT
