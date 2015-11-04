@@ -29,6 +29,8 @@ namespace MabiCommerce
 		private Thread _splashThread;
 		protected override void OnStartup(StartupEventArgs e)
 		{
+			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
 			// ManualResetEvent acts as a block.  It waits for a signal to be set.
 			_resetSplashCreated = new ManualResetEvent(false);
 
@@ -58,16 +60,20 @@ namespace MabiCommerce
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(
-					$"Oops! It seems some bandits are interfering with MabiCommerce's data!\n\nThe following might help to catch them: {ex.Message}");
-
-				Shutdown();
-				return;
+				throw new Exception("Failed to load MabiCommerce's data.", ex);
 			}
 
 			Splash.ReportProgress(1.0, "Loading main window...");
 			var mw = new MainWindow(erinn);
 			mw.Show();
+		}
+
+		private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+		{
+			var w = new UnhandledExceptionWindow(e.ExceptionObject as Exception);
+			w.ShowDialog();
+			Shutdown();
+			Environment.Exit(1);
 		}
 
 		private static async void CheckForUpdates()

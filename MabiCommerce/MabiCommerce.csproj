@@ -88,8 +88,9 @@
     <Compile Include="UI\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\UnhandledException.xaml.cs">
-      <DependentUpon>UnhandledException.xaml</DependentUpon>
+    <Compile Include="UI\TextPath.cs" />
+    <Compile Include="UI\UnhandledExceptionWindow.xaml.cs">
+      <DependentUpon>UnhandledExceptionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\WorldMapWindow.xaml.cs">
       <DependentUpon>WorldMapWindow.xaml</DependentUpon>
@@ -151,7 +152,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\UnhandledException.xaml">
+    <Page Include="UI\UnhandledExceptionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
