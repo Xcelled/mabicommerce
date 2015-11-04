@@ -88,6 +88,9 @@
     <Compile Include="UI\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UnhandledException.xaml.cs">
+      <DependentUpon>UnhandledException.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\WorldMapWindow.xaml.cs">
       <DependentUpon>WorldMapWindow.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\UnhandledException.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\WorldMapWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -182,6 +189,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\BanditAmbush.png" />
     <Resource Include="UI\Images\BtnBg.png" />
     <Resource Include="UI\Images\Close.png" />
     <Resource Include="UI\Images\Main.png" />
@@ -501,9 +509,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MabiCommerce.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Images\BanditAmbush.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
