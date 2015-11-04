@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 namespace MabiCommerce.UI
 {
 	/// <summary>
-	/// Interaction logic for UnhandledException.xaml
+	/// Interaction logic for UnhandledExceptionWindow.xaml
 	/// </summary>
-	public partial class UnhandledException : Window
+	public partial class UnhandledExceptionWindow : Window
 	{
-		public UnhandledException()
+		public UnhandledExceptionWindow(Exception ex)
 		{
 			InitializeComponent();
+			Details.Text = ex.ToString();
 		}
 	}
 }

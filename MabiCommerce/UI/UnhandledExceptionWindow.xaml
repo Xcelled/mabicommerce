@@ -1,0 +1,31 @@
+﻿<Window x:Class="MabiCommerce.UI.UnhandledExceptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MabiCommerce.UI"
+        mc:Ignorable="d"
+        Title="Oops!" Height="500" Width="750" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="0.683"/>
+            <GradientStop Color="#FFB6AEAE" Offset="0.867"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="10,5,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap">
+				Oh dear. It seems some <Run FontWeight="Bold">bandits</Run> have decided to raid your MabiCommerce! They've left you to clean up the pieces! Fortunately, help is close at hand. We were able to determine what happened. The details are in the box below. Show them to someone familiar with MabiCommerce and ask for their help in catching these evil buggers.
+        </TextBlock>
+		<TextBox Grid.Row="1" Name="Details" Margin="5" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" />
+        <Grid Grid.Row="2">
+            <Image Source="Images/BanditAmbush.png" Stretch="None" />
+            <local:TextPath Text="Bandit Ambush" Fill="Red" Stroke="Black" StrokeThickness="2" FontSize="25" FontWeight="Bold" VerticalAlignment="Bottom"
+						HorizontalAlignment="Center" Margin="0,0,0,75"/>
+        </Grid>
+    </Grid>
+</Window>
