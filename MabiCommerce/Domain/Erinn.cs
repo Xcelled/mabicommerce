@@ -85,28 +85,28 @@ namespace MabiCommerce.Domain
 
 			progress(done / total, "Loading transports...");
 			e.Transports = new ObservableCollection<Transportation>(
-				JsonConvert.DeserializeObject<List<Transportation>>(File.ReadAllText(Path.Combine(dataDir, "db/transports.js"))));
+				JsonConvert.DeserializeObject<List<Transportation>>(File.ReadAllText(Path.Combine(dataDir, "db/transports.json"))));
 			done++;
 			progress(done / total, "Loading modifiers...");
 			e.Modifiers = new ObservableCollection<Modifier>(
-				JsonConvert.DeserializeObject<List<Modifier>>(File.ReadAllText(Path.Combine(dataDir, "db/modifiers.js"))));
+				JsonConvert.DeserializeObject<List<Modifier>>(File.ReadAllText(Path.Combine(dataDir, "db/modifiers.json"))));
 			done++;
 			progress(done / total, "Loading commerce mastery ranks...");
-			e.CommerceMasteryRanks = JsonConvert.DeserializeObject<List<CommerceMasteryRank>>(File.ReadAllText(Path.Combine(dataDir, "db/commerce_mastery_ranks.js")));
+			e.CommerceMasteryRanks = JsonConvert.DeserializeObject<List<CommerceMasteryRank>>(File.ReadAllText(Path.Combine(dataDir, "db/commerce_mastery_ranks.json")));
 			done++;
 			progress(done / total, "Loading posts...");
 			e.Posts = new ObservableCollection<TradingPost>(
-				JsonConvert.DeserializeObject<List<TradingPost>>(File.ReadAllText(Path.Combine(dataDir, "db/posts.js"))));
+				JsonConvert.DeserializeObject<List<TradingPost>>(File.ReadAllText(Path.Combine(dataDir, "db/posts.json"))));
 			done++;
 
 			progress(done / total, "Loading regions...");
-			e.Regions = JsonConvert.DeserializeObject<List<Region>>(File.ReadAllText(Path.Combine(dataDir, "db/regions.js")));
+			e.Regions = JsonConvert.DeserializeObject<List<Region>>(File.ReadAllText(Path.Combine(dataDir, "db/regions.json")));
 			done++;
 			progress(done / total, "Loading portals...");
-			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.js")));
+			e.Portals = JsonConvert.DeserializeObject<List<Portal>>(File.ReadAllText(Path.Combine(dataDir, "db/portals.json")));
 			done++;
 			progress(done / total, "Loading merchant levels...");
-			e.MerchantLevels = JsonConvert.DeserializeObject<List<MerchantLevel>>(File.ReadAllText(Path.Combine(dataDir, "db/merchant_levels.js")));
+			e.MerchantLevels = JsonConvert.DeserializeObject<List<MerchantLevel>>(File.ReadAllText(Path.Combine(dataDir, "db/merchant_levels.json")));
 			done++;
 
 			progress(0, "Initializing data...");

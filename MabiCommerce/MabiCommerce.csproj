@@ -207,16 +207,16 @@
     <Resource Include="UI\Images\World.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\db\portals.js">
+    <None Include="data\db\portals.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\db\posts.js">
+    <None Include="data\db\posts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\db\commerce_mastery_ranks.js">
+    <None Include="data\db\commerce_mastery_ranks.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\db\merchant_levels.js">
+    <None Include="data\db\merchant_levels.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\img\worldmap\abb.png">
@@ -498,13 +498,13 @@
     <None Include="data\img\item\wool_boots.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\db\regions.js">
+    <None Include="data\db\regions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\db\transports.js">
+    <None Include="data\db\transports.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\db\modifiers.js">
+    <None Include="data\db\modifiers.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
