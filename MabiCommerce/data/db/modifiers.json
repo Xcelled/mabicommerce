@@ -54,17 +54,17 @@
 	{
 		"Id" : 7,
 		"Name": "Letter [Goblin, Fine]",
-		"ExpBonus": 2.2, 
-		"GoldBonus": 2.2, 
-		"ProfitBonus": 2.2, 
+		"ExpBonus": 1.2, 
+		"GoldBonus": 1.2, 
+		"ProfitBonus": 1.2, 
 		"ConflictsWith" : [3,4,5,6,8]
 	},
 	{
 		"Id" : 8,
 		"Name": "Letter [Imp, Fine]",
-		"ExpBonus": 2.5, 
-		"ProfitBonus": 2.5, 
-		"GoldBonus": 2.5, 
+		"ExpBonus": 1.5, 
+		"ProfitBonus": 1.5, 
+		"GoldBonus": 1.5, 
 		"ConflictsWith" : [3,4,5,6,7]
 	},
 ]
