@@ -17,7 +17,7 @@
 	{
 		"Id" : 2,
 		"Name": "Alpaca Robe",
-		"SpeedBonus": .2, 
+		"SpeedBonus": 0.2 
 	},
 	{
 		"Id" : 3,
@@ -66,5 +66,5 @@
 		"ProfitBonus": 1.5, 
 		"GoldBonus": 1.5, 
 		"ConflictsWith" : [3,4,5,6,7]
-	},
+	}
 ]
