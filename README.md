@@ -152,7 +152,7 @@ For those of you wondering: Yes, I have optimized the power set algorithm. It wi
 
 MabiCommerce, unlike nearly every other method of calculating commerce information, heeds the Goblin's advice. I spent an afternoon running around Erinn, marking down the coordinates of various waypoints. MabiCommerce loads these and connects them via a structure called a **directed graph**, to make a spiderweb of routes across Erinn. By using [Djikstra's Algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm), MabiCommerce knows the shortest way to get from point A to point B.
 
-Once it knows how far apart the posts are, it uses the game's human running speed (3.43 meters/second) to calculate the total time required to get there. Total profit of the route is divided by total time to run it, yielding `profit/second`, a measure of how efficient a given trade is. High efficiency trades earn you more Ducats faster, even though individually, they may give less profit. See also [the FAQ](/../FAQ.md).
+Once it knows how far apart the posts are, it uses the game's human running speed (3.43 meters/second) to calculate the total time required to get there. Total profit of the route is divided by total time to run it, yielding `profit/second`, a measure of how efficient a given trade is. High efficiency trades earn you more Ducats faster, even though individually, they may give less profit. See also [the FAQ](FAQ.md).
 
 Here is how MabiCommerce sees Dunbarton, with potential paths highlighted in blue:
 
