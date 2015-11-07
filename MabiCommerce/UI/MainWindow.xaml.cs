@@ -89,7 +89,9 @@ namespace MabiCommerce.UI
 						Erinn.Trades.Add(t);
 
 					CalculateTradesBtn.IsEnabled = true;
-					TradeSelect.ScrollIntoView(TradeSelect.Items[0]);
+
+					if (trades.Any())
+						TradeSelect.ScrollIntoView(TradeSelect.Items[0]);
 				});
 			});
 		}
