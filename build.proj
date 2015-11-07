@@ -11,6 +11,9 @@
 		<ReleaseBuildDir>MabiCommerce\bin\Release</ReleaseBuildDir>
 		<ReleaseNeuteredBuildDir>MabiCommerce\bin\Release-Neutered</ReleaseNeuteredBuildDir>
 
+		<DeployDir>$(OutputDir)\mabicommerce</DeployDir>
+		<DeployNeuteredDir>$(OutputDir)\mabicommerce-neutered</DeployNeuteredDir>
+
 		<!-- create zip file? -->
 		<CreateZip>1</CreateZip>
 
@@ -32,7 +35,8 @@
 
 	<!-- delete release folder -->
 	<Target Name="DeleteFolders">
-		<RemoveDir Directories="$(ReleaseDir)"/>
+		<RemoveDir Directories="$(DeployDir)"/>
+		<RemoveDir Directories="$(DeployNeuteredDir)"/>
 	</Target>
 
 
@@ -44,7 +48,7 @@
 
 	<!-- copy files to release folder -->
 	<Target Name="CopyRelease">
-		<MakeDir Directories="$(OutputDir)\mabicommerce"/>
+		<MakeDir Directories="$(DeployDir)"/>
 		<ItemGroup>
 			<ReleaseFiles
 				Include="$(ReleaseBuildDir)\**\*.*;
@@ -54,36 +58,36 @@
 				Exclude="$(ReleaseBuildDir)\*.xml;$(ReleaseBuildDir)\*.vshost.*;$(ReleaseBuildDir)\*.config*">
 			</ReleaseFiles>
 		</ItemGroup>
-		<Copy SourceFiles="@(ReleaseFiles)" DestinationFolder="$(OutputDir)\mabicommerce\%(RecursiveDir)"/>
+		<Copy SourceFiles="@(ReleaseFiles)" DestinationFolder="$(DeployDir)\%(RecursiveDir)"/>
 	</Target>
 
 	<!-- copy files to release folder -->
 	<Target Name="CopyReleaseNeutered">
-		<MakeDir Directories="$(OutputDir)\mabicommerce-neutered"/>
+		<MakeDir Directories="$(DeployNeuteredDir)"/>
 		<ItemGroup>
 			<ReleaseFilesNeutered
-				Include="$(ReleaseNeuteredBuildDir)\*.*;
+				Include="$(ReleaseNeuteredBuildDir)\**\*.*;
 						*.md;
 						license"
 				Exclude="$(ReleaseNeuteredBuildDir)\*.xml;$(ReleaseNeuteredBuildDir)\*.vshost.*;$(ReleaseNeuteredBuildDir)\*.config*">
 			</ReleaseFilesNeutered>
 		</ItemGroup>
-		<Copy SourceFiles="@(ReleaseFilesNeutered)" DestinationFolder="$(OutputDir)\mabicommerce-neutered\%(RecursiveDir)"/>
+		<Copy SourceFiles="@(ReleaseFilesNeutered)" DestinationFolder="$(DeployNeuteredDir)\%(RecursiveDir)"/>
 	</Target>
 
 	<!-- create zip file with content of release\bin folder -->
 	<Target Name="ZipRelease">
-		<CreateItem Include="$(OutputDir)\mabicommerce\**\*.*" >
+		<CreateItem Include="$$(DeployDir)\**\*.*" >
 			<Output ItemName="ZipFiles" TaskParameter="Include"/>
 		</CreateItem>
-		<Zip ZipFileName="$(OutputDir)\mabicommerce-$(VersionNumber).zip" WorkingDirectory="$(OutputDir)\mabicommerce" Files="@(ZipFiles)" />
+		<Zip ZipFileName="$(OutputDir)\mabicommerce-$(VersionNumber).zip" WorkingDirectory="$(DeployDir)" Files="@(ZipFiles)" />
 	</Target>
 
 	<!-- create zip file with content of release\bin folder -->
 	<Target Name="ZipReleaseNeutered">
-		<CreateItem Include="$(OutputDir)\mabicommerce-neutered\**\*.*" >
+		<CreateItem Include="$(DeployNeuteredDir)\**\*.*" >
 			<Output ItemName="ZipFilesNeutered" TaskParameter="Include"/>
 		</CreateItem>
-		<Zip ZipFileName="$(OutputDir)\mabicommerce-$(VersionNumber)-neutered.zip" WorkingDirectory="$(OutputDir)\mabicommerce-neutered" Files="@(ZipFilesNeutered)" />
+		<Zip ZipFileName="$(OutputDir)\mabicommerce-$(VersionNumber)-neutered.zip" WorkingDirectory="$(DeployNeuteredDir)" Files="@(ZipFilesNeutered)" />
 	</Target>
 </Project>
