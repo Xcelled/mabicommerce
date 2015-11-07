@@ -77,7 +77,7 @@
 
 	<!-- create zip file with content of release\bin folder -->
 	<Target Name="ZipRelease">
-		<CreateItem Include="$$(DeployDir)\**\*.*" >
+		<CreateItem Include="$(DeployDir)\**\*.*" >
 			<Output ItemName="ZipFiles" TaskParameter="Include"/>
 		</CreateItem>
 		<Zip ZipFileName="$(OutputDir)\mabicommerce-$(VersionNumber).zip" WorkingDirectory="$(DeployDir)" Files="@(ZipFiles)" />
