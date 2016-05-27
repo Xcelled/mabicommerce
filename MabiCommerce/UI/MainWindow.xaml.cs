@@ -146,5 +146,12 @@ namespace MabiCommerce.UI
 			Properties.Settings.Default.CommerceMasteryRankId = Erinn.CmRank.Id;
 			Properties.Settings.Default.Save();
 		}
+
+		private void PriceBox_Focused(object sender, KeyboardFocusChangedEventArgs e)
+		{
+			var txt = e.NewFocus as TextBox;
+			if (txt != null)
+				txt.SelectAll();
+		}
 	}
 }
