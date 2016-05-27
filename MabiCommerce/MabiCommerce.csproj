@@ -512,11 +512,7 @@
     <Resource Include="MabiCommerce.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'Release-Neutered' ">
+    <Exec Command="&quot;$(SolutionDir)confuser\Confuser.CLI.exe&quot; -o=&quot;$(TargetDir).&quot; &quot;$(TargetPath)&quot; &quot;$(SolutionDir)confuser\prog.crproj&quot;" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
