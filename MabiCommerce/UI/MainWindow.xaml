@@ -262,7 +262,7 @@
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<DockPanel Margin="5, 1">
-										<TextBox DockPanel.Dock="Right" TextAlignment="Right" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" MinWidth="50">
+										<TextBox DockPanel.Dock="Right" TextAlignment="Right" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" MinWidth="50" GotKeyboardFocus="PriceBox_Focused">
 											<TextBox.Style>
 												<Style TargetType="TextBox">
 													<Style.Triggers>
