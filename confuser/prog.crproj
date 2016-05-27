@@ -1,0 +1,8 @@
+<project outputDir="" baseDir="" xmlns="http://confuser.codeplex.com">
+  <rule preset="none" pattern="true">
+	<protection id="anti debug" />
+	<protection id="constants" />
+	<protection id="resources" />
+  </rule>
+  <packer id="compressor" />
+</project>
