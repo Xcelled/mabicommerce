@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="CommerceInfoRequestOp" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">43689</Value>
+      <Value Profile="(Default)">43702</Value>
     </Setting>
     <Setting Name="ProductListRequestOp" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">43677</Value>
+      <Value Profile="(Default)">44146</Value>
     </Setting>
     <Setting Name="CommerceInfoUpdateOp" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">43684</Value>
+      <Value Profile="(Default)">43690</Value>
     </Setting>
     <Setting Name="SniffTransports" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
