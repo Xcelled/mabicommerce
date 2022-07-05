@@ -31,5 +31,29 @@
     "Slots": 7,
     "Weight": 1700,
     "Id": 3
-  }
+  },
+  {
+    "Name": "Dog Sled",
+    "Icon": "data/img/transport/elephant.png",
+    "SpeedFactor": 1.88,
+    "Slots": 11,
+    "Weight": 700,
+    "Id": 4
+  },
+{
+    "Name": "Camel",
+    "Icon": "data/img/transport/elephant.png",
+    "SpeedFactor": 1.88,
+    "Slots": 7,
+    "Weight": 1400,
+    "Id": 5
+  },
+{
+    "Name": "Trader's Skiff",
+    "Icon": "data/img/transport/elephant.png",
+    "SpeedFactor": 1.99,
+    "Slots": 8,
+    "Weight": 1200,
+    "Id": 6
+  } 
 ]

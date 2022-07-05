@@ -11,7 +11,7 @@
 		"Name": "Alpaca",
 		"ExtraSlots" : 2,
 		"ExtraWeight" : 200,
-		"TransportationBlacklist" : [0, 1, 3],
+		"TransportationBlacklist" : [0,1,3,4,5,6],
 		"ConflictsWith" : [0]
 	},
 	{
@@ -21,50 +21,55 @@
 	},
 	{
 		"Id" : 3,
+		"Name": "(Seasonal)Gavin's Special Clothes",
+		"SpeedBonus": 0.6 
+	},
+	{
+		"Id" : 4,
 		"Name": "Letter [Ogre]",
 		"ExpBonus": 0.3, 
 		"GoldBonus": 0.3, 
 		"ProfitBonus": 0.3, 
-		"ConflictsWith" : [4,5,6,7,8]
+		"ConflictsWith" : [5,6,7,8,9]
 	},
 	{
-		"Id" : 4,
+		"Id" : 5,
 		"Name": "Letter [Goblin]",
 		"ExpBonus": 0.4, 
 		"GoldBonus": 0.4, 
 		"ProfitBonus": 0.4, 
-		"ConflictsWith" : [3,5,6,7,8]
+		"ConflictsWith" : [4,6,7,8,9]
 	},
 	{
-		"Id" : 5,
+		"Id" : 6,
 		"Name": "Letter [Imp]",
 		"ExpBonus": 0.5, 
 		"ProfitBonus": 0.5, 
 		"GoldBonus": 0.5, 
-		"ConflictsWith" : [3,4,6,7,8]
+		"ConflictsWith" : [4,5,7,8,9]
 	},
 	{
-		"Id" : 6,
+		"Id" : 7,
 		"Name": "Letter [Ogre, Fine]",
 		"ExpBonus": 0.9, 
 		"GoldBonus": 0.9, 
 		"ProfitBonus": 0.9, 
-		"ConflictsWith" : [3,4,5,7,8]
+		"ConflictsWith" : [4,5,6,8,9]
 	},
 	{
-		"Id" : 7,
+		"Id" : 8,
 		"Name": "Letter [Goblin, Fine]",
 		"ExpBonus": 1.2, 
 		"GoldBonus": 1.2, 
 		"ProfitBonus": 1.2, 
-		"ConflictsWith" : [3,4,5,6,8]
+		"ConflictsWith" : [4,5,6,7,9]
 	},
 	{
-		"Id" : 8,
+		"Id" : 9,
 		"Name": "Letter [Imp, Fine]",
 		"ExpBonus": 1.5, 
 		"ProfitBonus": 1.5, 
 		"GoldBonus": 1.5, 
-		"ConflictsWith" : [3,4,5,6,7]
+		"ConflictsWith" : [4,5,6,7,8]
 	}
 ]
