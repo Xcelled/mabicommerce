@@ -31,12 +31,22 @@ namespace MabiCommerce.Domain
 		public AdjacencyGraph<Waypoint, Connection> World { get; private set; }
 
 		private long _ducats = 1000;
+		private long _seasonalducats = 1001;
 		public long Ducats
 		{
 			get { return _ducats; }
 			set
 			{
 				_ducats = value;
+				RaisePropertyChanged();
+			}
+		}
+		public long SeasonalDucats
+		{
+			get { return _seasonalducats; }
+			set
+			{
+				_seasonalducats = value;
 				RaisePropertyChanged();
 			}
 		}
@@ -281,7 +291,7 @@ namespace MabiCommerce.Domain
 							t.Weight + m.Sum(i => i.ExtraWeight));
 
 						var loads = new ConcurrentBag<Load>();
-						GetLoads(loads, post, baseLoad, Ducats);
+						GetLoads(loads, post, baseLoad, SeasonalDucats);
 
 						foreach (var load in loads)
 							foreach (var dst in Posts.Where(p => p != post))

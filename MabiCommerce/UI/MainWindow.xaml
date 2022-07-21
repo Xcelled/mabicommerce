@@ -335,8 +335,8 @@
 				</Grid.RowDefinitions>
 				<DockPanel LastChildFill="False">
 					<StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-						<TextBlock Margin="0,0,5,0">Current<LineBreak/>Ducats</TextBlock>
-						<TextBox VerticalAlignment="Center" Text="{Binding Ducats, StringFormat=N0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+						<TextBlock Margin="0,0,5,0">Current<LineBreak/>Seasonal Ducats</TextBlock>
+						<TextBox VerticalAlignment="Center" Text="{Binding SeasonalDucats, StringFormat=N0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 					</StackPanel>
 					<Button DockPanel.Dock="Right" x:Name="CalculateTradesBtn" Click="CalculateTrades_Click">
 						<Button.Style>

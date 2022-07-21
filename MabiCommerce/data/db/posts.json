@@ -3,17 +3,21 @@
     "Id": 1,
     "Name": "Tir Chonaill",
     "Image": "data/img/town/tir.png",
-    "WaypointRegion" : "tir",
-    "WaypointId" : "tir_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       2 : 1.01 , // Dun
-       3 : 1.08 , // Bangor
-       4 : 1.03 , // Emain
-       5 : 1 , // Taill
-       6 : 1.1 , // Tara
-       7 : 1.01 , // Cobh
-       8 : 1.09 , // Belvast
+    "WaypointRegion": "tir",
+    "WaypointId": "tir_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      2: 1.12, // Dun
+      3: 1.25, // Bangor
+      4: 1.21, // Emain
+      5: 1.14, // Taill
+      6: 1.3, // Tara
+      7: 1.14, // Cobh
+      8: 1.37, // Belvast
+      101: 1.47, // Qilla
+      102: 1.79, // Filia
+      103: 1.93, // Cor
+      104: 1.78 // Vales
     },
     "Items": [
       {
@@ -23,8 +27,8 @@
         "Weight": 1,
         "QuantityPerSlot": 80,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 1.6,
+        "MultiFactor": 1.54,
+        "AddFactor": 5
       },
       {
         "Id": 102,
@@ -32,39 +36,39 @@
         "Image": "data/img/item/diet_potion.png",
         "Weight": 1,
         "QuantityPerSlot": 100,
-        "MerchantRating": 2,
-        "MultiFactor": 1.15,
-        "AddFactor": 2.1,
+        "MerchantRating": 1,
+        "MultiFactor": 1.16,
+        "AddFactor": 3
       },
       {
         "Id": 103,
         "Name": "Snore Prevention Potion",
         "Image": "data/img/item/snore_prevention_potion.png",
         "Weight": 2,
-        "QuantityPerSlot": 100,
+        "QuantityPerSlot": 60,
         "MerchantRating": 3,
-        "MultiFactor": 1.05,
-        "AddFactor": 2,
+        "MultiFactor": 1,
+        "AddFactor": 2
       },
       {
-       "Id": 104,
-       "Name": "Wild Ginseng Potion",
+        "Id": 104,
+        "Name": "Wild Ginseng Potion",
         "Image": "data/img/item/wild_ginseng_potion.png",
         "Weight": 3,
-        "QuantityPerSlot": 50,
+        "QuantityPerSlot": 40,
         "MerchantRating": 5,
-        "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "MultiFactor": 0.98,
+        "AddFactor": 0
       },
       {
         "Id": 105,
         "Name": "Lovely Potion",
         "Image": "data/img/item/lovely_potion.png",
         "Weight": 3,
-        "QuantityPerSlot": 100,
+        "QuantityPerSlot": 70,
         "MerchantRating": 7,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 0.92,
+        "AddFactor": 1
       }
     ]
   },
@@ -72,17 +76,21 @@
     "Id": 2,
     "Name": "Dunbarton",
     "Image": "data/img/town/dun.png",
-    "WaypointRegion" : "dunby",
-    "WaypointId" : "dunby_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       1 : 1.01 , // Tir
-       3 : 1.01 , // Bangor
-       4 : 0.98 , // Emain
-       5 : 1.06 , // Taill
-       6 : 1.11 , // Tara
-       7 : 0.65 , // Cobh
-       8 : 0.7 , // Belvast
+    "WaypointRegion": "dunby",
+    "WaypointId": "dunby_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      1: 1.12, // Tir
+      3: 1.13, // Bangor
+      4: 0.99, // Emain
+      5: 1.16, // Taill
+      6: 1.29, // Tara
+      7: 0.52, // Cobh
+      8: 0.65, // Belvast
+      101: 0.75, // Qilla
+      102: 1.67, // Filia
+      103: 1.81, // Cor
+      104: 1.66 // Vales
     },
     "Items": [
       {
@@ -92,8 +100,8 @@
         "Weight": 5,
         "QuantityPerSlot": 10,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 8,
+        "MultiFactor": 1.85,
+        "AddFactor": 8
       },
       {
         "Id": 202,
@@ -102,18 +110,18 @@
         "Weight": 8,
         "QuantityPerSlot": 10,
         "MerchantRating": 1,
-        "MultiFactor": 1.15,
-        "AddFactor": 18.05,
+        "MultiFactor": 1.19,
+        "AddFactor": 14
       },
       {
         "Id": 203,
         "Name": "Ogre Executioner Mask",
         "Image": "data/img/item/ogre_executioner_mask.png",
         "Weight": 4,
-        "QuantityPerSlot": 50,
+        "QuantityPerSlot": 45,
         "MerchantRating": 3,
-        "MultiFactor": 1.05,
-        "AddFactor": 5.02,
+        "MultiFactor": 1.08,
+        "AddFactor": 0
       },
       {
         "Id": 204,
@@ -122,8 +130,8 @@
         "Weight": 25,
         "QuantityPerSlot": 5,
         "MerchantRating": 6,
-        "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "MultiFactor": 0.98,
+        "AddFactor": 20
       },
       {
         "Id": 205,
@@ -132,8 +140,8 @@
         "Weight": 6,
         "QuantityPerSlot": 10,
         "MerchantRating": 7,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 1,
+        "AddFactor": 3
       }
     ]
   },
@@ -141,17 +149,21 @@
     "Id": 3,
     "Name": "Bangor",
     "Image": "data/img/town/bangor.png",
-    "WaypointRegion" : "bangor",
-    "WaypointId" : "bangor_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       1 : 1.08 , // Tir
-       2 : 1.01 , // Dun
-       4 : 1.02 , // Emain
-       5 : 1.13 , // Taill
-       6 : 1.16 , // Tara
-       7 : 1.01 , // Cobh
-       8 : 1.09 , // Belvast
+    "WaypointRegion": "bangor",
+    "WaypointId": "bangor_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      1: 1.25, // Tir
+      2: 1.13, // Dun
+      4: 1.19, // Emain
+      5: 1.3, // Taill
+      6: 1.4, // Tara
+      7: 1.12, // Cobh
+      8: 1.35, // Belvast
+      101: 1.46, // Qilla
+      102: 1.53, // Filia
+      103: 1.68, // Cor
+      104: 1.53 // Vales
     },
     "Items": [
       {
@@ -161,8 +173,8 @@
         "Weight": 8,
         "QuantityPerSlot": 10,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 9.6,
+        "MultiFactor": 2.01,
+        "AddFactor": 10
       },
       {
         "Id": 302,
@@ -171,38 +183,38 @@
         "Weight": 20,
         "QuantityPerSlot": 10,
         "MerchantRating": 1,
-        "MultiFactor": 1.15,
-        "AddFactor": 35.05,
+        "MultiFactor": 1.16,
+        "AddFactor": 35.05
       },
       {
         "Id": 303,
         "Name": "Topaz",
         "Image": "data/img/item/topaz.png",
-        "Weight": 25,
-        "QuantityPerSlot": 10,
+        "Weight": 20,
+        "QuantityPerSlot": 6,
         "MerchantRating": 4,
-        "MultiFactor": 1.05,
-        "AddFactor": 30,
+        "MultiFactor": 1.22,
+        "AddFactor": 0
       },
       {
         "Id": 304,
         "Name": "Highlander Ore",
         "Image": "data/img/item/highlander_ore.png",
-        "Weight": 30,
+        "Weight": 25,
         "QuantityPerSlot": 8,
         "MerchantRating": 5,
-        "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "MultiFactor": 0.89,
+        "AddFactor": 20
       },
       {
         "Id": 305,
         "Name": "Lead",
         "Image": "data/img/item/lead.png",
-        "Weight": 30,
+        "Weight": 35,
         "QuantityPerSlot": 10,
         "MerchantRating": 6,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 0.91,
+        "AddFactor": 10
       }
     ]
   },
@@ -210,17 +222,21 @@
     "Id": 4,
     "Name": "Emain Macha",
     "Image": "data/img/town/emain.png",
-    "WaypointRegion" : "emain",
-    "WaypointId" : "emain_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       1 : 1.03 , // Tir
-       2 : 0.98 , // Dun
-       3 : 1.02 , // Bangor
-       5 : 1.08 , // Taill
-       6 : 1.01 , // Tara
-       7 : 0.99 , // Cobh
-       8 : 1.06 , // Belvast
+    "WaypointRegion": "emain",
+    "WaypointId": "emain_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      1: 1.21, // Tir
+      2: 0.99, // Dun
+      3: 1.19, // Bangor
+      5: 1.22, // Taill
+      6: 1.2, // Tara
+      7: 1.11, // Cobh
+      8: 1.34, // Belvast
+      101: 1.45, // Qilla
+      102: 1.73, // Filia
+      103: 1.87, // Cor
+      104: 1.72 // Vales
     },
     "Items": [
       {
@@ -230,48 +246,48 @@
         "Weight": 3,
         "QuantityPerSlot": 40,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 2.4,
+        "MultiFactor": 1.93,
+        "AddFactor": 6
       },
       {
         "Id": 402,
         "Name": "Butter Beer",
         "Image": "data/img/item/butter_beer.png",
         "Weight": 4,
-        "QuantityPerSlot": 50,
+        "QuantityPerSlot": 30,
         "MerchantRating": 2,
-        "MultiFactor": 1.15,
-        "AddFactor": 5.55,
+        "MultiFactor": 1.22,
+        "AddFactor": 9
       },
       {
         "Id": 403,
         "Name": "Smoked Wild Animal",
         "Image": "data/img/item/smoked_wild_animal.png",
         "Weight": 3,
-        "QuantityPerSlot": 50,
+        "QuantityPerSlot": 40,
         "MerchantRating": 4,
         "MultiFactor": 1.05,
-        "AddFactor": 4,
+        "AddFactor": 4
       },
       {
         "Id": 404,
         "Name": "Triple Pasta",
         "Image": "data/img/item/triple_pasta.png",
-        "Weight": 5,
+        "Weight": 4,
         "QuantityPerSlot": 50,
         "MerchantRating": 5,
-        "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "MultiFactor": 0.95,
+        "AddFactor": 2
       },
       {
         "Id": 405,
         "Name": "Whole BBQ Bear",
         "Image": "data/img/item/whole_bbq_bear.png",
-        "Weight": 40,
-        "QuantityPerSlot": 10,
+        "Weight": 20,
+        "QuantityPerSlot": 5,
         "MerchantRating": 7,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 0.98,
+        "AddFactor": 0
       }
     ]
   },
@@ -279,17 +295,21 @@
     "Id": 5,
     "Name": "Taillteann",
     "Image": "data/img/town/taill.png",
-    "WaypointRegion" : "taill",
-    "WaypointId" : "taill_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       1 : 1.0 , // Tir
-       2 : 1.06 , // Dun
-       3 : 1.13 , // Bangor
-       4 : 1.08 , // Emain
-       6 : 1.01 , // Tara
-       7 : 1.08 , // Cobh
-       8 : 1.16 , // Belvast
+    "WaypointRegion": "taill",
+    "WaypointId": "taill_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      1: 1.14, // Tir
+      2: 1.16, // Dun
+      3: 1.3, // Bangor
+      4: 1.22, // Emain
+      6: 1.16, // Tara
+      7: 1.18, // Cobh
+      8: 1.41, // Belvast
+      101: 1.52, // Qilla
+      102: 1.83, // Filia
+      103: 1.98, // Cor
+      104: 1.83 // Vales
     },
     "Items": [
       {
@@ -299,18 +319,18 @@
         "Weight": 2,
         "QuantityPerSlot": 60,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 1.6,
+        "MultiFactor": 1.85,
+        "AddFactor": 4
       },
       {
         "Id": 502,
         "Name": "Music Box Preservation Stone",
         "Image": "data/img/item/music_box_preservation_stone.png",
         "Weight": 3,
-        "QuantityPerSlot": 50,
+        "QuantityPerSlot": 40,
         "MerchantRating": 2,
-        "MultiFactor": 1.15,
-        "AddFactor": 4.05,
+        "MultiFactor": 1.19,
+        "AddFactor": 6
       },
       {
         "Id": 503,
@@ -319,18 +339,18 @@
         "Weight": 2,
         "QuantityPerSlot": 100,
         "MerchantRating": 4,
-        "MultiFactor": 1.05,
-        "AddFactor": 2.81,
+        "MultiFactor": 0.97,
+        "AddFactor": 5
       },
       {
         "Id": 504,
         "Name": "Circle Barrier Spike Crystal",
         "Image": "data/img/item/circle_barrier_spike_crystal.png",
-        "Weight": 4,
-        "QuantityPerSlot": 100,
+        "Weight": 3,
+        "QuantityPerSlot": 60,
         "MerchantRating": 5,
-        "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "MultiFactor": 0.9,
+        "AddFactor": 0
       },
       {
         "Id": 505,
@@ -339,8 +359,8 @@
         "Weight": 5,
         "QuantityPerSlot": 10,
         "MerchantRating": 6,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 0.93,
+        "AddFactor": 0
       }
     ]
   },
@@ -348,28 +368,32 @@
     "Id": 6,
     "Name": "Tara",
     "Image": "data/img/town/tara.png",
-    "WaypointRegion" : "tara",
-    "WaypointId" : "tara_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       1 : 1.1 , // Tir
-       2 : 1.11 , // Dun
-       3 : 1.16 , // Bangor
-       4 : 1.01 , // Emain
-       5 : 1.01 , // Taill
-       7 : 1.13 , // Cobh
-       8 : 1.16 , // Belvast
+    "WaypointRegion": "tara",
+    "WaypointId": "tara_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      1: 1.3, // Tir
+      2: 1.29, // Dun
+      3: 1.4, // Bangor
+      4: 1.2, // Emain
+      5: 1.16, // Taill
+      7: 1.31, // Cobh
+      8: 1.54, // Belvast
+      101: 1.64, // Qilla
+      102: 1.94, // Filia
+      103: 2.08, // Cor
+      104: 1.93 // Vales
     },
     "Items": [
       {
         "Id": 601,
         "Name": "Mini Dressing Table",
         "Image": "data/img/item/mini_dressing_table.png",
-        "Weight": 20,
-        "QuantityPerSlot": 10,
+        "Weight": 9,
+        "QuantityPerSlot": 12,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 17.1,
+        "MultiFactor": 1.6,
+        "AddFactor": 18
       },
       {
         "Id": 602,
@@ -378,8 +402,8 @@
         "Weight": 25,
         "QuantityPerSlot": 5,
         "MerchantRating": 2,
-        "MultiFactor": 1.15,
-        "AddFactor": 60,
+        "MultiFactor": 1.13,
+        "AddFactor": 57
       },
       {
         "Id": 603,
@@ -388,18 +412,18 @@
         "Weight": 25,
         "QuantityPerSlot": 5,
         "MerchantRating": 4,
-        "MultiFactor": 1.05,
-        "AddFactor": 44,
+        "MultiFactor": 1,
+        "AddFactor": 0
       },
       {
         "Id": 604,
         "Name": "Bunk Bed",
         "Image": "data/img/item/bunk_bed.png",
-        "Weight": 75,
+        "Weight": 60,
         "QuantityPerSlot": 3,
         "MerchantRating": 6,
-        "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "MultiFactor": 0.84,
+        "AddFactor": 0
       },
       {
         "Id": 605,
@@ -408,8 +432,8 @@
         "Weight": 300,
         "QuantityPerSlot": 1,
         "MerchantRating": 7,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 0.7,
+        "AddFactor": 500
       }
     ]
   },
@@ -417,17 +441,21 @@
     "Id": 7,
     "Name": "Port Cobh",
     "Image": "data/img/town/cobh.png",
-    "WaypointRegion" : "cobh",
-    "WaypointId" : "cobh_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       1 : 1.01 , // Tir
-       2 : 0.65 , // Dun
-       3 : 1.01 , // Bangor
-       4 : 0.99 , // Emain
-       5 : 1.08 , // Taill
-       6 : 1.13 , // Tara
-       8 : 0.7 , // Belvast
+    "WaypointRegion": "cobh",
+    "WaypointId": "cobh_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      1: 1.14, // Tir
+      2: 0.52, // Dun
+      3: 1.12, // Bangor
+      4: 1.11, // Emain
+      5: 1.18, // Taill
+      6: 1.31, // Tara
+      8: 0.62, // Belvast
+      101: 0.73, // Qilla
+      102: 1.66, // Filia
+      103: 1.8, // Cor
+      104: 1.65 // Vales
     },
     "Items": [
       {
@@ -437,18 +465,18 @@
         "Weight": 2,
         "QuantityPerSlot": 50,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 2.4,
+        "MultiFactor": 1.65,
+        "AddFactor": 1
       },
       {
         "Id": 702,
         "Name": "Cobh Oyster",
         "Image": "data/img/item/cobh_oyster.png",
         "Weight": 3,
-        "QuantityPerSlot": 50,
+        "QuantityPerSlot": 40,
         "MerchantRating": 1,
-        "MultiFactor": 1.15,
-        "AddFactor": 6.05,
+        "MultiFactor": 1.3,
+        "AddFactor": 6
       },
       {
         "Id": 703,
@@ -457,8 +485,8 @@
         "Weight": 4,
         "QuantityPerSlot": 30,
         "MerchantRating": 3,
-        "MultiFactor": 1.05,
-        "AddFactor": 4,
+        "MultiFactor": 1.16,
+        "AddFactor": 2.0
       },
       {
         "Id": 704,
@@ -468,7 +496,7 @@
         "QuantityPerSlot": 30,
         "MerchantRating": 5,
         "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "AddFactor": 5.0
       },
       {
         "Id": 705,
@@ -477,8 +505,8 @@
         "Weight": 2,
         "QuantityPerSlot": 50,
         "MerchantRating": 7,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 0.95,
+        "AddFactor": 1.0
       }
     ]
   },
@@ -486,17 +514,21 @@
     "Id": 8,
     "Name": "Belvast",
     "Image": "data/img/town/belvast.png",
-    "WaypointRegion" : "belvast",
-    "WaypointId" : "belvast_commerce_post",
-    "NoProfits" : [],
-    "Weights" : {
-       1 : 1.09 , // Tir
-       2 : 0.7 , // Dun
-       3 : 1.09 , // Bangor
-       4 : 1.06 , // Emain
-       5 : 1.16 , // Taill
-       6 : 1.16 , // Tara
-       7 : 0.7 , // Cobh
+    "WaypointRegion": "belvast",
+    "WaypointId": "belvast_commerce_post",
+    "NoProfits": [],
+    "Weights": {
+      1: 1.37, // Tir
+      2: 0.65, // Dun
+      3: 1.35, // Bangor
+      4: 1.34, // Emain
+      5: 1.41, // Taill
+      6: 1.54, // Tara
+      7: 0.62, // Cobh
+      101: 0.86, // Qilla
+      102: 1.79, // Filia
+      103: 1.93, // Cor
+      104: 1.78 // Vales
     },
     "Items": [
       {
@@ -506,8 +538,8 @@
         "Weight": 8,
         "QuantityPerSlot": 15,
         "MerchantRating": 1,
-        "MultiFactor": 1.2,
-        "AddFactor": 8,
+        "MultiFactor": 1.92,
+        "AddFactor": 5
       },
       {
         "Id": 802,
@@ -516,39 +548,635 @@
         "Weight": 12,
         "QuantityPerSlot": 10,
         "MerchantRating": 1,
-        "MultiFactor": 1.15,
-        "AddFactor": 20,
+        "MultiFactor": 0.99,
+        "AddFactor": 5
       },
       {
         "Id": 803,
         "Name": "Safe",
         "Image": "data/img/item/safe.png",
-        "Weight": 220,
+        "Weight": 160,
         "QuantityPerSlot": 1,
         "MerchantRating": 3,
-        "MultiFactor": 1.05,
-        "AddFactor": 270.02,
+        "MultiFactor": 0.82,
+        "AddFactor": 50
       },
       {
         "Id": 804,
         "Name": "Skeleton Ogre Armor",
         "Image": "data/img/item/skeleton_ogre_armor.png",
-        "Weight": 180,
+        "Weight": 160,
         "QuantityPerSlot": 1,
         "MerchantRating": 5,
-        "MultiFactor": 1.02,
-        "AddFactor": 0,
+        "MultiFactor": 0.8,
+        "AddFactor": 0
       },
       {
         "Id": 805,
         "Name": "Fake Morgant Helmet",
         "Image": "data/img/item/fake_morgant_helmet.png",
-        "Weight": 40,
-        "QuantityPerSlot": 10,
+        "Weight": 30,
+        "QuantityPerSlot": 6,
         "MerchantRating": 7,
-        "MultiFactor": 1.1,
-        "AddFactor": 0,
+        "MultiFactor": 0.79,
+        "AddFactor": 30
       }
     ]
-  }
+  },
+  //{
+  //  "Id": 9,
+  //  "Name": "Scath Beach",
+  //  "Image": "data/img/town/scath_beach.png",
+  //  "WaypointRegion": "scath_beach",
+  //  "WaypointId": "scath_commerce_post",
+  //  "NoProfits": [],
+  //  "Weights": {
+  //    1: 1.14, // Tir
+  //    2: 0.98, // Dun
+  //    3: 1.14, // Bangor
+  //    4: 1.08, // Emain
+  //    5: 1.3, // Taill
+  //    6: 1.3, // Tara
+  //    7: 0.96, // Cobh
+  //    8: 0.43, // Belvast
+  //    101: 1.22, // Qilla
+  //    102: 1.27, // Filia
+  //    103: 1.35, // Cor
+  //    104: 1.31 // Vales
+  //  },
+  //  "Items": [
+  //    {
+  //      "Id": 901,
+  //      "Name": "Ocean Tear",
+  //      "Image": "data/img/item/ocean_tear.png",
+  //      "Weight": 7,
+  //      "QuantityPerSlot": 15,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 902,
+  //      "Name": "Allure Stem",
+  //      "Image": "data/img/item/allure_stem.png",
+  //      "Weight": 15,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 5
+  //    },
+  //    {
+  //      "Id": 903,
+  //      "Name": "Abyss Crystal",
+  //      "Image": "data/img/item/abyss_crystal.png",
+  //      "Weight": 5,
+  //      "QuantityPerSlot": 15,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 904,
+  //      "Name": "Sage Crystals",
+  //      "Image": "data/img/item/sage_crystals.png",
+  //      "Weight": 10,
+  //      "QuantityPerSlot": 15,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 905,
+  //      "Name": "River's Source",
+  //      "Image": "data/img/item/rivers_source.png",
+  //      "Weight": 25,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 906,
+  //      "Name": "Night Sky Leather",
+  //      "Image": "data/img/item/night_sky_leather.png",
+  //      "Weight": 4,
+  //      "QuantityPerSlot": 30,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 907,
+  //      "Name": "Unidentified Fish",
+  //      "Image": "data/img/item/unidentified_fish.png",
+  //      "Weight": 5,
+  //      "QuantityPerSlot": 20,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 908,
+  //      "Name": "Crystal Blade",
+  //      "Image": "data/img/item/crystal_blade.png",
+  //      "Weight": 15,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    }
+  //  ]
+  //},
+  //{
+  //  "Id": 101,
+  //  "Name": "Qilla",
+  //  "Image": "data/img/town/qilla.png",
+  //  "WaypointRegion": "qilla",
+  //  "WaypointId": "qilla_commerce_post",
+  //  "NoProfits": [],
+  //  "Weights": {
+  //    1: 1.47, // Tir
+  //    2: 0.75, // Dun
+  //    3: 1.46, // Bangor
+  //    4: 1.45, // Emain
+  //    5: 1.52, // Taill
+  //    6: 1.64, // Tara
+  //    7: 0.73, // Cobh
+  //    8: 0.86, // Belvast
+  //    102: 1.71, // Filia
+  //    103: 1.56, // Cor
+  //    104: 1.75 // Vales
+  //  },
+  //  "Items": [
+  //    {
+  //      "Id": 10101,
+  //      "Name": "Q1",
+  //      "Image": "data/img/item/q1.png",
+  //      "Weight": 1,
+  //      "QuantityPerSlot": 100,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.65,
+  //      "AddFactor": 1
+  //    },
+  //    {
+  //      "Id": 10102,
+  //      "Name": "Q2",
+  //      "Image": "data/img/item/q2.png",
+  //      "Weight": 1,
+  //      "QuantityPerSlot": 100,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 0.8,
+  //      "AddFactor": 5
+  //    },
+  //    {
+  //      "Id": 10103,
+  //      "Name": "Q3",
+  //      "Image": "data/img/item/q3.png",
+  //      "Weight": 2,
+  //      "QuantityPerSlot": 80,
+  //      "MerchantRating": 3,
+  //      "MultiFactor": 1,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10104,
+  //      "Name": "Q4",
+  //      "Image": "data/img/item/q4.png",
+  //      "Weight": 3,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 5,
+  //      "MultiFactor": 0.8,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10105,
+  //      "Name": "Q5",
+  //      "Image": "data/img/item/q5.png",
+  //      "Weight": 2,
+  //      "QuantityPerSlot": 60,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 0.69,
+  //      "AddFactor": 5
+  //    },
+  //    {
+  //      "Id": 10151,
+  //      "Name": "Q6",
+  //      "Image": "data/img/item/q6.png",
+  //      "Weight": 5,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.2,
+  //      "AddFactor": 8
+  //    },
+  //    {
+  //      "Id": 10152,
+  //      "Name": "Q7",
+  //      "Image": "data/img/item/q7.png",
+  //      "Weight": 8,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.15,
+  //      "AddFactor": 18.05
+  //    },
+  //    {
+  //      "Id": 10153,
+  //      "Name": "Q8",
+  //      "Image": "data/img/item/q8.png",
+  //      "Weight": 4,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 3,
+  //      "MultiFactor": 1.05,
+  //      "AddFactor": 5.02
+  //    },
+  //    {
+  //      "Id": 10154,
+  //      "Name": "Q9",
+  //      "Image": "data/img/item/q9.png",
+  //      "Weight": 25,
+  //      "QuantityPerSlot": 15,
+  //      "MerchantRating": 6,
+  //      "MultiFactor": 1.02,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10155,
+  //      "Name": "Q10",
+  //      "Image": "data/img/item/q10.png",
+  //      "Weight": 6,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 1.1,
+  //      "AddFactor": 0
+  //    }
+  //  ]
+  //},
+  //{
+  //  "Id": 102,
+  //  "Name": "Filia",
+  //  "Image": "data/img/town/filia.png",
+  //  "WaypointRegion": "filia",
+  //  "WaypointId": "filia_commerce_post",
+  //  "NoProfits": [],
+  //  "Weights": {
+  //    1: 1.79, // Tir
+  //    2: 1.67, // Dun
+  //    3: 1.53, // Bangor
+  //    4: 1.73, // Emain
+  //    5: 1.83, // Taill
+  //    6: 1.94, // Tara
+  //    7: 1.66, // Cobh
+  //    8: 1.79, // Belvast
+  //    101: 1.71, // Qilla
+  //    103: 1.33, // Cor
+  //    104: 1.62 // Vales
+  //  },
+  //  "Items": [
+  //    {
+  //      "Id": 10201,
+  //      "Name": "F1",
+  //      "Image": "data/img/item/f1.png",
+  //      "Weight": 10,
+  //      "QuantityPerSlot": 60,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.16,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10202,
+  //      "Name": "F2",
+  //      "Image": "data/img/item/f2.png",
+  //      "Weight": 30,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 0.95,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10203,
+  //      "Name": "F33",
+  //      "Image": "data/img/item/f3.png",
+  //      "Weight": 25,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 3,
+  //      "MultiFactor": 0.76,
+  //      "AddFactor": 25
+  //    },
+  //    {
+  //      "Id": 10204,
+  //      "Name": "F4",
+  //      "Image": "data/img/item/f4.png",
+  //      "Weight": 40,
+  //      "QuantityPerSlot": 5,
+  //      "MerchantRating": 5,
+  //      "MultiFactor": 0.73,
+  //      "AddFactor": 50
+  //    },
+  //    {
+  //      "Id": 10205,
+  //      "Name": "F5",
+  //      "Image": "data/img/item/f5.png",
+  //      "Weight": 25,
+  //      "QuantityPerSlot": 12,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 0.65,
+  //      "AddFactor": 30
+  //    },
+  //    {
+  //      "Id": 10251,
+  //      "Name": "F6",
+  //      "Image": "data/img/item/f6.png",
+  //      "Weight": 3,
+  //      "QuantityPerSlot": 40,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.2,
+  //      "AddFactor": 2.4
+  //    },
+  //    {
+  //      "Id": 10252,
+  //      "Name": "F7",
+  //      "Image": "data/img/item/f7.png",
+  //      "Weight": 4,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 2,
+  //      "MultiFactor": 1.15,
+  //      "AddFactor": 5.55
+  //    },
+  //    {
+  //      "Id": 10253,
+  //      "Name": "F8",
+  //      "Image": "data/img/item/f8.png",
+  //      "Weight": 3,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 4,
+  //      "MultiFactor": 1.05,
+  //      "AddFactor": 4
+  //    },
+  //    {
+  //      "Id": 10254,
+  //      "Name": "F9",
+  //      "Image": "data/img/item/f9.png",
+  //      "Weight": 5,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 5,
+  //      "MultiFactor": 1.02,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10255,
+  //      "Name": "F10",
+  //      "Image": "data/img/item/f10.png",
+  //      "Weight": 40,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 1.1,
+  //      "AddFactor": 0
+  //    }
+  //  ]
+  //},
+  //{
+  //  "Id": 103,
+  //  "Name": "Cor",
+  //  "Image": "data/img/town/cor.png",
+  //  "WaypointRegion": "cor",
+  //  "WaypointId": "cor_commerce_post",
+  //  "NoProfits": [],
+  //  "Weights": {
+  //    1: 1.93, // Tir
+  //    2: 1.81, // Dun
+  //    3: 1.68, // Bangor
+  //    4: 1.87, // Emain
+  //    5: 1.98, // Taill
+  //    6: 2.08, // Tara
+  //    7: 1.80, // Cobh
+  //    8: 1.93, // Belvast
+  //    101: 1.56, // Qilla
+  //    102: 1.33, // Filia
+  //    104: 1.28 // Vales
+  //  },
+  //  "Items": [
+  //    {
+  //      "Id": 10301,
+  //      "Name": "C1",
+  //      "Image": "data/img/item/c1.png",
+  //      "Weight": 2,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.91,
+  //      "AddFactor": 4
+  //    },
+  //    {
+  //      "Id": 10302,
+  //      "Name": "C2",
+  //      "Image": "data/img/item/c2.png",
+  //      "Weight": 3,
+  //      "QuantityPerSlot": 40,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.09,
+  //      "AddFactor": 2
+  //    },
+  //    {
+  //      "Id": 10303,
+  //      "Name": "C3",
+  //      "Image": "data/img/item/c3.png",
+  //      "Weight": 2,
+  //      "QuantityPerSlot": 60,
+  //      "MerchantRating": 3,
+  //      "MultiFactor": 0.99,
+  //      "AddFactor": 6
+  //    },
+  //    {
+  //      "Id": 10304,
+  //      "Name": "C4",
+  //      "Image": "data/img/item/c4.png",
+  //      "Weight": 2,
+  //      "QuantityPerSlot": 70,
+  //      "MerchantRating": 5,
+  //      "MultiFactor": 0.83,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10305,
+  //      "Name": "C5",
+  //      "Image": "data/img/item/c5.png",
+  //      "Weight": 5,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 0.64,
+  //      "AddFactor": 30
+  //    },
+  //    {
+  //      "Id": 10351,
+  //      "Name": "C6",
+  //      "Image": "data/img/item/c6.png",
+  //      "Weight": 20,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.2,
+  //      "AddFactor": 17.1
+  //    },
+  //    {
+  //      "Id": 10352,
+  //      "Name": "C7",
+  //      "Image": "data/img/item/c7.png",
+  //      "Weight": 25,
+  //      "QuantityPerSlot": 5,
+  //      "MerchantRating": 2,
+  //      "MultiFactor": 1.15,
+  //      "AddFactor": 60
+  //    },
+  //    {
+  //      "Id": 10353,
+  //      "Name": "C8",
+  //      "Image": "data/img/item/c8.png",
+  //      "Weight": 25,
+  //      "QuantityPerSlot": 5,
+  //      "MerchantRating": 4,
+  //      "MultiFactor": 1.05,
+  //      "AddFactor": 44
+  //    },
+  //    {
+  //      "Id": 10354,
+  //      "Name": "C9",
+  //      "Image": "data/img/item/c9.png",
+  //      "Weight": 75,
+  //      "QuantityPerSlot": 3,
+  //      "MerchantRating": 6,
+  //      "MultiFactor": 1.02,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10355,
+  //      "Name": "C10",
+  //      "Image": "data/img/item/c10.png",
+  //      "Weight": 300,
+  //      "QuantityPerSlot": 1,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 1.1,
+  //      "AddFactor": 0
+  //    }
+  //  ]
+  //},
+  //{
+  //  "Id": 104,
+  //  "Name": "Vales",
+  //  "Image": "data/img/town/vales.png",
+  //  "WaypointRegion": "vales",
+  //  "WaypointId": "vales_commerce_post",
+  //  "NoProfits": [],
+  //  "Weights": {
+  //    1: 1.78, // Tir
+  //    2: 1.66, // Dun
+  //    3: 1.53, // Bangor
+  //    4: 1.72, // Emain
+  //    5: 1.83, // Taill
+  //    6: 1.93, // Tara
+  //    7: 1.65, // Cobh
+  //    8: 1.78, // Belvast
+  //    101: 1.75, // Qilla
+  //    102: 1.62, // Filia
+  //    103: 1.28 // Cor
+  //  },
+  //  "Items": [
+  //    {
+  //      "Id": 10401,
+  //      "Name": "V1",
+  //      "Image": "data/img/item/v1.png",
+  //      "Weight": 1,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.23,
+  //      "AddFactor": 6
+  //    },
+  //    {
+  //      "Id": 10402,
+  //      "Name": "V2",
+  //      "Image": "data/img/item/V2.png",
+  //      "Weight": 2,
+  //      "QuantityPerSlot": 35,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.03,
+  //      "AddFactor": 1
+  //    },
+  //    {
+  //      "Id": 10403,
+  //      "Name": "V3",
+  //      "Image": "data/img/item/v3.png",
+  //      "Weight": 1,
+  //      "QuantityPerSlot": 50,
+  //      "MerchantRating": 3,
+  //      "MultiFactor": 0.74,
+  //      "AddFactor": 2
+  //    },
+  //    {
+  //      "Id": 10404,
+  //      "Name": "V4",
+  //      "Image": "data/img/item/v4.png",
+  //      "Weight": 3,
+  //      "QuantityPerSlot": 20,
+  //      "MerchantRating": 5,
+  //      "MultiFactor": 0.7,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10405,
+  //      "Name": "V5",
+  //      "Image": "data/img/item/v5.png",
+  //      "Weight": 2,
+  //      "QuantityPerSlot": 30,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 0.69,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10451,
+  //      "Name": "V6",
+  //      "Image": "data/img/item/v6.png",
+  //      "Weight": 8,
+  //      "QuantityPerSlot": 15,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.2,
+  //      "AddFactor": 8
+  //    },
+  //    {
+  //      "Id": 10452,
+  //      "Name": "V7",
+  //      "Image": "data/img/item/v7.png",
+  //      "Weight": 12,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 1,
+  //      "MultiFactor": 1.15,
+  //      "AddFactor": 20
+  //    },
+  //    {
+  //      "Id": 10453,
+  //      "Name": "V8",
+  //      "Image": "data/img/item/v8.png",
+  //      "Weight": 220,
+  //      "QuantityPerSlot": 1,
+  //      "MerchantRating": 3,
+  //      "MultiFactor": 1.05,
+  //      "AddFactor": 270.02
+  //    },
+  //    {
+  //      "Id": 10454,
+  //      "Name": "V9",
+  //      "Image": "data/img/item/v9.png",
+  //      "Weight": 180,
+  //      "QuantityPerSlot": 1,
+  //      "MerchantRating": 5,
+  //      "MultiFactor": 1.02,
+  //      "AddFactor": 0
+  //    },
+  //    {
+  //      "Id": 10455,
+  //      "Name": "V10",
+  //      "Image": "data/img/item/v10.png",
+  //      "Weight": 40,
+  //      "QuantityPerSlot": 10,
+  //      "MerchantRating": 7,
+  //      "MultiFactor": 1.1,
+  //      "AddFactor": 0
+  //    }
+  //  ]
+  //}
 ]

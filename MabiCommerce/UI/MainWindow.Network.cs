@@ -188,6 +188,7 @@ namespace MabiCommerce.UI
 			if (!packet.GetBool()) // Valid
 				return;
 
+			Erinn.SeasonalDucats = packet.GetLong();
 			Erinn.Ducats = packet.GetLong();
 			var transportFlags = packet.GetLong(); // Transport type flags (Bitfield)
 			packet.GetInt(); // Unknown
@@ -247,6 +248,8 @@ namespace MabiCommerce.UI
 			if (packet.GetString() != "GetProductList" || !packet.GetBool()) // Is valid
 				return;
 
+			packet.GetByte(); // Unk
+
 			var currentPostId = packet.GetInt();
 			var post = Erinn.Posts.FirstOrDefault(p => p.Id == currentPostId);
 
@@ -301,7 +304,7 @@ namespace MabiCommerce.UI
 						var sellPrice = (int)Math.Round(normalizedSellPrice * weight * item.MultiFactor + item.AddFactor,
 							MidpointRounding.AwayFromZero);
 
-						profit.Amount = sellPrice - item.Price;
+						profit.Amount = (sellPrice - item.Price);
 					}
 				}
 			}

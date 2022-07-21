@@ -33,25 +33,30 @@
     "Id": 3
   },
   {
-    "Name": "Dog Sled",
-    "Icon": "data/img/transport/elephant.png",
-    "SpeedFactor": 1.88,
+    "Name": "Dog Sled", 
+	//vehicle_desc id="80"
+    "Icon": "data/img/transport/dog_sled.png",
+    "SpeedFactor": 1.88, 
+	//region type="snow" speed="1.01"
     "Slots": 11,
     "Weight": 700,
     "Id": 4
   },
 {
     "Name": "Camel",
-    "Icon": "data/img/transport/elephant.png",
+	//vehicle_desc id="81"
+    "Icon": "data/img/transport/camel.png",
     "SpeedFactor": 1.88,
+	//region type="snow" speed="0.999" 
+	//region type="desert" speed="1.001"
     "Slots": 7,
     "Weight": 1400,
     "Id": 5
   },
 {
     "Name": "Trader's Skiff",
-    "Icon": "data/img/transport/elephant.png",
-    "SpeedFactor": 1.99,
+    "Icon": "data/img/transport/traders_skiff.png",
+    "SpeedFactor": 2.34,
     "Slots": 8,
     "Weight": 1200,
     "Id": 6
