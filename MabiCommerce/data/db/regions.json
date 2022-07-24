@@ -1202,112 +1202,133 @@
 		"MiniMapOffset": "17200, 10480",
 		"WorldMap": "data/img/worldmap/belvast.png",
 		"WorldMapOffset": "645, 318"
-	}//,
-	//{
-	//	"Id": "morva",
-	//	"WaypointList": [
-	//		{
-	//			"Id": "morva_portal_to_bangor",
-	//			"Location": "6166, 11933"
-	//		},
-	//		{
-	//			"Id": "morva_portal_to_ceann",
-	//			"Location": "6166, 1533"
-	//		}
-	//	],
-	//	"Connections": [
-	//		{
-	//			"Item1": "morva_portal_to_bangor",
-	//			"Item2": "morva_portal_to_ceann"
-	//		}
-	//	],
-	//	"Size": "10400, 14400",
-	//	"MiniMap": "data/img/minimap/morva.jpg",
-	//	"MiniMapOffset": "17200, 10480", //fix
-	//	"WorldMap": "data/img/worldmap/morva.png",
-	//	"WorldMapOffset": "645, 318"
-	//},
-	//{
-	//	"Id": "ceann",
-	//	"WaypointList": [
-	//		{
-	//			"Id": "ceann_portal_to_morva",
-	//			"Location": "10400, 17133"
-	//		},
-	//		{
-	//			"Id": "ceann_wp1", //morva_to_ceann drops you here
-	//			"Location": "10933, 16600"
-	//		},
-	//		{
-	//			"Id": "ceann_wp2",
-	//			"Location": "336, 403" //fix
-	//		},
-	//		{
-	//			"Id": "ceann_wp3",
-	//			"Location": "338, 348" //fix
-	//		},
-	//		{
-	//			"Id": "ceann_wp4",
-	//			"Location": "314, 348" //fix
-	//		},
-	//		{
-	//			"Id": "ceann_portal_to_vales",
-	//			"Location": "366, 348" //fix
-	//		},
-	//		{
-	//			"Id": "ceann_portal_to_connus",
-	//			"Location": "314, 324" //fix
-	//		},
-	//		{
-	//			"Id": "ceann_boatride_exit",
-	//			"Location": "343, 413" //fix
-	//		}
-	//	],
-	//	"Connections": [
-	//		{
-	//			"Item1": "ceann_portal_to_morva",
-	//			"Item2": "ceann_portal_to_vales",
-	//			"Item3": "ceann_portal_to_connus",
-	//			"Item4": "ceann_boatride_exit",
-	//			"Item5": "ceann_wp1"
-	//		}
-	//	],
-	//	"Size": "19200, 20267",
-	//	"MiniMap": "data/img/minimap/port_ceann.jpg",
-	//	"MiniMapOffset": "17200, 10480", //fix
-	//	"WorldMap": "data/img/worldmap/port_ceann.png",
-	//	"WorldMapOffset": "645, 318"
-	//},
-	//{
-	//	"Id": "belvast",
-	//	"WaypointList": [
-	//		{
-	//			"Id": "belvast_portal_to_cobh",
-	//			"Location": "58900, 26440"
-	//		},
-	//		{
-	//			"Id": "belvast_wp_1",
-	//			"Location": "54820, 26400"
-	//		},
-	//		{
-	//			"Id": "belvast_commerce_post",
-	//			"Location": "54190, 22040"
-	//		}
-	//	],
-	//	"Connections": [
-	//		{
-	//			"Item1": "belvast_portal_to_cobh",
-	//			"Item2": "belvast_wp_1"
-	//		},
-	//		{
-	//			"Item1": "belvast_commerce_post",
-	//			"Item2": "belvast_wp_1"
-	//		}
-	//	],
-	//	"Size": "64080, 40980",
-	//	"MiniMap": "data/img/minimap/belvast.jpg",
-	//	"MiniMapOffset": "17200, 10480",
-	//	"WorldMap": "data/img/worldmap/belvast.png",
-	//	"WorldMapOffset": "645, 318"
-	//}
+	},
+	{
+		"Id": "morva",
+		"WaypointList": [
+			{
+				"Id": "morva_portal_to_bangor",
+				"Location": "6166, 11933"
+			},
+			{
+				"Id": "morva_portal_to_ceann",
+				"Location": "6166, 1533"
+			}
+		],
+		"Connections": [
+			{
+				"Item1": "morva_portal_to_bangor",
+				"Item2": "morva_portal_to_ceann"
+			}
+		],
+		"Size": "10400, 14400",
+		"MiniMap": "data/img/minimap/morva.jpg",
+		"MiniMapOffset": "17200, 10480", //fix
+		"WorldMap": "data/img/worldmap/morva.png",
+		"WorldMapOffset": "645, 318"
+	},
+	{
+		"Id": "ceann",
+		"WaypointList": [
+			{
+				"Id": "ceann_portal_to_morva",
+				"Location": "10400, 17133"
+			},
+			{
+				"Id": "ceann_wp1", //morva_to_ceann drops you here
+				"Location": "10933, 16600"
+			},
+			{
+				"Id": "ceann_wp2",
+				"Location": "336, 403" //fix
+			},
+			{
+				"Id": "ceann_wp3",
+				"Location": "338, 348" //fix
+			},
+			{
+				"Id": "ceann_wp4",
+				"Location": "314, 348" //fix
+			},
+			{
+				"Id": "ceann_portal_to_vales",
+				"Location": "366, 348" //fix
+			},
+			{
+				"Id": "ceann_portal_to_connus",
+				"Location": "314, 324" //fix
+			},
+			{
+				"Id": "ceann_boatride_exit",
+				"Location": "343, 413" //fix
+			}
+		],
+		"Connections": [
+			{
+				"Item1": "ceann_wp1",
+				"Item2": "ceann_wp2"
+			},
+			{
+				"Item1": "ceann_wp2",
+				"Item2": "ceann_wp3"
+			},
+			{
+				"Item1": "ceann_wp3",
+				"Item2": "ceann_wp4"
+			},
+			{
+				"Item1": "ceann_wp4",
+				"Item2": "ceann_portal_to_connus"
+			},
+			{
+				"Item1": "ceann_wp3",
+				"Item2": "ceann_portal_to_vales",
+			},
+			{
+				"Item1": "ceann_boatride_exit",
+				"Item2": "ceann_portal_to_morva"
+			}
+		],
+		"Size": "19200, 20267",
+		"MiniMap": "data/img/minimap/port_ceann.jpg",
+		"MiniMapOffset": "17200, 10480", //fix
+		"WorldMap": "data/img/worldmap/port_ceann.png",
+		"WorldMapOffset": "645, 318"
+	},
+	{
+		"Id": "qilla",
+		"WaypointList": [
+			{
+				"Id": "qilla_portal_to_ceann",
+				"Location": ", "
+			},
+			{
+				"Id": "qilla_portal_to_rano",
+				"Location": ", "
+			},
+			{
+				"Id": "qilla_wp1",
+				"Location": ","
+			},
+			{
+				"Id": "qilla_wp2",
+				"Location": ","
+			}
+		],
+		"Connections": [
+			{
+				"Item1": "qilla_wp1",
+				"Item2": "qilla_portal_to_rano"
+			},
+			{
+				"Item1": "qilla_wp2",
+				"Item2": "qilla_portal_to_ceann"
+			}
+		],
+		"Size": "64080, 40980",
+		"MiniMap": "data/img/minimap/port_qilla.jpg",
+		"MiniMapOffset": "17200, 10480",
+		"WorldMap": "data/img/worldmap/qilla.png", //make
+		"WorldMapOffset": "645, 318"
+	}
 ]
